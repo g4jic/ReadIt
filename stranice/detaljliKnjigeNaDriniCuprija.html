@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - На Дрини ћуприја</title>
+  <link rel="icon" href="../slike/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../stilovi/glavni.css" />
+  <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/knjige.css" />
+  <link rel="stylesheet" href="../stilovi/responsive.css" />
+  <link rel="stylesheet" href="../stilovi/navbar.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbarSadrzaj">
+      <a href="../index.html" class="logo">
+        <img src="../slike/logo.png" alt="" class="logoSlika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="navLinkovi">
+          <li><a href="../index.html">Књиге</a></li>
+          <li><a href="Autori.html">Аутори</a></li>
+          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
+          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div id="knjiga-kontejner">
+      <div class="knjigaDetalj">
+        <div class="knjigaGalerija">
+          <img class="knjigaGlavnaSlika" src="../slike/knjigaNaDriniCuprija.png" alt="На Дрини ћуприја" />
+          <div class="knjigaGalerijaMale">
+            <img src="../slike/knjigaNaDriniCuprija.png" alt="" />
+          </div>
+        </div>
+        <div class="knjigaDetaljInfo">
+          <h1>На Дрини ћуприја</h1>
+          <p class="knjigaDetaljAutor">Аутор: <a href="detaljiAutoraIvoAndric.html">Иво Андрић</a></p>
+          <p class="knjigaOpis">Роман-хроника о мосту на Дрини у Вишеграду који спаја културе и судбине кроз векове. Кроз судбине људи различитих вера и народа, приповеда се о трајању, страдању и вези између истока и запада.</p>
+          <div class="knjigaMetaLista">
+            <div class="knjigaMetaStavka"><span class="label">Жанр</span><span class="vrednost">Историјски роман</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Формат</span><span class="vrednost">Тврди повез</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Број страна</span><span class="vrednost">384</span></div>
+            <div class="knjigaMetaStavka"><span class="label">ISBN</span><span class="vrednost">978-86-7543-123-4</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Цена</span><span class="vrednost">1.490 РСД</span></div>
+          </div>
+        </div>
+      </div>
+      <section class="recenzijeSekcija">
+        <h2>Рецензије</h2>
+        <div class="recenzijaListaOkvir">
+          <h3 class="recenzijaListaNaslov">Претходне рецензије</h3>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Марко Јовановић</span>
+              <span class="recenzijaDatum">08.02.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Епски обухват и миран, скоро хроничарски тон чине овај роман јединственим. Мост је као лик за себе – препорука за сваког ко воли историјску прозу.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Ана Стојановић</span>
+              <span class="recenzijaDatum">21.01.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Темпо је спорији, али свака страница гради атмосферу. Нисам жалила времена – Андрић заиста заслужује Нобелову награду.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Петар Васиљевић</span>
+              <span class="recenzijaDatum">03.12.2025.</span>
+            </div>
+            <p class="recenzijaTekst">Класик који повезује исток и запад кроз судбине људи око Вишеграда. Чита се полако, са паузама – и то је његова снага.</p>
+          </article>
+        </div>
+        <div class="recenzijaForma">
+          <form class="forma" action="#" method="get" onsubmit="return false;">
+            <div class="polje">
+              <label for="recenzija-tekst">Ваша рецензија</label>
+              <textarea id="recenzija-tekst" rows="4" placeholder="Поделите утиске..."></textarea>
+            </div>
+            <div class="formaAkcije">
+              <button type="button" class="dugme dugmePrimarno" disabled>Објави рецензију</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+</body>
+</html>

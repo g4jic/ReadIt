@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - Сеобе</title>
+  <link rel="icon" href="../slike/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../stilovi/glavni.css" />
+  <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/knjige.css" />
+  <link rel="stylesheet" href="../stilovi/responsive.css" />
+  <link rel="stylesheet" href="../stilovi/navbar.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbarSadrzaj">
+      <a href="../index.html" class="logo">
+        <img src="../slike/logo.png" alt="" class="logoSlika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="navLinkovi">
+          <li><a href="../index.html">Књиге</a></li>
+          <li><a href="Autori.html">Аутори</a></li>
+          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
+          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div id="knjiga-kontejner">
+      <div class="knjigaDetalj">
+        <div class="knjigaGalerija">
+          <img class="knjigaGlavnaSlika" src="../slike/knjigaSeobe.png" alt="Сеобе" />
+          <div class="knjigaGalerijaMale">
+            <img src="../slike/knjigaSeobe.png" alt="" />
+          </div>
+        </div>
+        <div class="knjigaDetaljInfo">
+          <h1>Сеобе</h1>
+          <p class="knjigaDetaljAutor">Аутор: <a href="detaljiAutoraMilosCrnjanski.html">Милош Црњански</a></p>
+          <p class="knjigaOpis">Епска сага о српским сеобама у 18. веку и судбини официра Вука Исаковића. Поетични роман о немиру, потрази и бескрајном плавом кругу.</p>
+          <div class="knjigaMetaLista">
+            <div class="knjigaMetaStavka"><span class="label">Жанр</span><span class="vrednost">Историјски роман</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Формат</span><span class="vrednost">Тврди повез</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Број страна</span><span class="vrednost">512</span></div>
+            <div class="knjigaMetaStavka"><span class="label">ISBN</span><span class="vrednost">978-86-1234-567-8</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Цена</span><span class="vrednost">1.690 РСД</span></div>
+          </div>
+        </div>
+      </div>
+      <section class="recenzijeSekcija">
+        <h2>Рецензије</h2>
+        <div class="recenzijaListaOkvir">
+          <h3 class="recenzijaListaNaslov">Претходне рецензије</h3>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Душан Павловић</span>
+              <span class="recenzijaDatum">27.02.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Поетичан језик и слика „плавог круга“ – Црњански ме је одувао. Тешка, али лепа књига.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Тамара Лукић</span>
+              <span class="recenzijaDatum">05.01.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Сеобе као тема и унутрашње немири Вука Исаковића – чита се споро, али вреди сваке странице.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Лука Митић</span>
+              <span class="recenzijaDatum">10.10.2025.</span>
+            </div>
+            <p class="recenzijaTekst">Епски роман који не личи на ништа друго у српској књижевности. За љубитеље историје и слике.</p>
+          </article>
+        </div>
+        <div class="recenzijaForma">
+          <form class="forma" action="#" method="get" onsubmit="return false;">
+            <div class="polje">
+              <label for="recenzija-tekst">Ваша рецензија</label>
+              <textarea id="recenzija-tekst" rows="4" placeholder="Поделите утиске..."></textarea>
+            </div>
+            <div class="formaAkcije">
+              <button type="button" class="dugme dugmePrimarno" disabled>Објави рецензију</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+</body>
+</html>

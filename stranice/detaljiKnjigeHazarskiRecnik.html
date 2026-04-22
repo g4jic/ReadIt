@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - Хазарски речник</title>
+  <link rel="icon" href="../slike/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../stilovi/glavni.css" />
+  <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/knjige.css" />
+  <link rel="stylesheet" href="../stilovi/responsive.css" />
+  <link rel="stylesheet" href="../stilovi/navbar.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbarSadrzaj">
+      <a href="../index.html" class="logo">
+        <img src="../slike/logo.png" alt="" class="logoSlika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="navLinkovi">
+          <li><a href="../index.html">Књиге</a></li>
+          <li><a href="Autori.html">Аутори</a></li>
+          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
+          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div id="knjiga-kontejner">
+      <div class="knjigaDetalj">
+        <div class="knjigaGalerija">
+          <img class="knjigaGlavnaSlika" src="../slike/knjigaHazarskiRecnik.png" alt="Хазарски речник" />
+          <div class="knjigaGalerijaMale">
+            <img src="../slike/knjigaHazarskiRecnik.png" alt="" />
+          </div>
+        </div>
+        <div class="knjigaDetaljInfo">
+          <h1>Хазарски речник</h1>
+          <p class="knjigaDetaljAutor">Аутор: <a href="detaljiAutoraMiloradPavic.html">Милорад Павић</a></p>
+          <p class="knjigaOpis">Лексикон-роман у три књиге (црвена, зелена, жута) о несталом народу Хазара. Постмодерно ремек-дело које може да се чита било којим редоследом.</p>
+          <div class="knjigaMetaLista">
+            <div class="knjigaMetaStavka"><span class="label">Жанр</span><span class="vrednost">Постмодерни роман</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Формат</span><span class="vrednost">Тврди повез</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Број страна</span><span class="vrednost">336</span></div>
+            <div class="knjigaMetaStavka"><span class="label">ISBN</span><span class="vrednost">978-86-7102-456-1</span></div>
+            <div class="knjigaMetaStavka"><span class="label">Цена</span><span class="vrednost">1.890 РСД</span></div>
+          </div>
+        </div>
+      </div>
+      <section class="recenzijeSekcija">
+        <h2>Рецензије</h2>
+        <div class="recenzijaListaOkvir">
+          <h3 class="recenzijaListaNaslov">Претходне рецензије</h3>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Нина Гавриловић</span>
+              <span class="recenzijaDatum">18.03.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Интелектуална игра и речник уместо класичног сјужета – прво сам била збуњена, па одушевљена. Треба пажње.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Богдан Томић</span>
+              <span class="recenzijaDatum">07.01.2026.</span>
+            </div>
+            <p class="recenzijaTekst">Три боје књига, више начина читања – Павић је направио дело које се може враћати годинама.</p>
+          </article>
+          <article class="recenzija">
+            <div class="recenzijaZaglavlje">
+              <span class="recenzijaAutor">Ирина Димитријевић</span>
+              <span class="recenzijaDatum">22.09.2025.</span>
+            </div>
+            <p class="recenzijaTekst">Постмодерни класик. Није за свакога, али ако волите експеримент и митологију, ово је морати прочитати.</p>
+          </article>
+        </div>
+        <div class="recenzijaForma">
+          <form class="forma" action="#" method="get" onsubmit="return false;">
+            <div class="polje">
+              <label for="recenzija-tekst">Ваша рецензија</label>
+              <textarea id="recenzija-tekst" rows="4" placeholder="Поделите утиске..."></textarea>
+            </div>
+            <div class="formaAkcije">
+              <button type="button" class="dugme dugmePrimarno" disabled>Објави рецензију</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+</body>
+</html>

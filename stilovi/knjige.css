@@ -1,0 +1,230 @@
+.mrezaKnjiga {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: var(--razmak-l);
+  width: 100%;
+  min-width: 0;
+}
+
+.knjigaKartica {
+  display: flex;
+  flex-direction: column;
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  overflow: hidden;
+  transition: transform var(--prelaz), box-shadow var(--prelaz);
+  text-decoration: none;
+  color: var(--boja-tekst);
+}
+
+.knjigaKartica:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--senka-vel);
+  text-decoration: none;
+  color: var(--boja-tekst);
+}
+
+.knjigaSlika {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background: var(--boja-pozadina-alt);
+}
+
+.knjigaSadrzaj {
+  padding: var(--razmak-m);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.knjigaSadrzaj h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: var(--boja-primarna-tamna);
+}
+
+.knjigaAutor {
+  color: var(--boja-tekst-slab);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.knjigaMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--razmak-s);
+  border-top: 1px solid var(--boja-linija);
+  font-size: 0.9rem;
+}
+
+.knjigaZanr {
+  background: var(--boja-pozadina-alt);
+  color: var(--boja-primarna-tamna);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.knjigaCena {
+  font-weight: 700;
+  color: var(--boja-primarna);
+}
+
+.knjigaDetalj {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--razmak-xl);
+  background: var(--boja-kartica);
+  padding: var(--razmak-xl);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  margin-bottom: var(--razmak-xl);
+}
+
+.knjigaGalerija img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-s);
+}
+
+.knjigaGalerijaMale {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--razmak-s);
+}
+
+.knjigaGalerijaMale img {
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity var(--prelaz);
+}
+.knjigaGalerijaMale img:hover { opacity: 1; }
+
+.knjigaDetaljInfo h1 {
+  margin-bottom: var(--razmak-s);
+}
+
+.knjigaDetaljAutor {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--boja-tekst-slab);
+  margin-bottom: var(--razmak-l);
+}
+
+.knjigaDetaljAutor a {
+  color: var(--boja-primarna);
+  font-weight: 600;
+}
+
+.knjigaOpis {
+  line-height: 1.7;
+  margin-bottom: var(--razmak-l);
+}
+
+.knjigaMetaLista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--razmak-m);
+  background: var(--boja-pozadina-alt);
+  padding: var(--razmak-m);
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-l);
+}
+
+.knjigaMetaStavka {
+  display: flex;
+  flex-direction: column;
+}
+
+.knjigaMetaStavka .label {
+  font-size: 0.8rem;
+  color: var(--boja-tekst-slab);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.knjigaMetaStavka .vrednost {
+  font-weight: 600;
+  color: var(--boja-tekst);
+}
+
+.recenzijeSekcija {
+  background: var(--boja-kartica);
+  padding: var(--razmak-xl);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+}
+
+.recenzijaListaOkvir {
+  background: var(--boja-pozadina-alt);
+  padding: var(--razmak-l);
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-l);
+}
+
+.recenzijaListaNaslov {
+  font-family: var(--font-naslov);
+  font-size: 1.15rem;
+  color: var(--boja-primarna-tamna);
+  margin: 0 0 var(--razmak-m);
+}
+
+.recenzijaForma {
+  background: var(--boja-pozadina-alt);
+  padding: var(--razmak-l);
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-l);
+}
+
+.recenzija {
+  padding: var(--razmak-m) 0;
+  border-bottom: 1px solid var(--boja-linija);
+}
+
+.recenzija:last-child { border-bottom: none; }
+
+.recenzijaZaglavlje {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--razmak-s);
+  flex-wrap: wrap;
+  gap: var(--razmak-s);
+}
+
+.recenzijaAutor {
+  font-weight: 600;
+  color: var(--boja-primarna-tamna);
+}
+
+.recenzijaDatum {
+  font-size: 0.85rem;
+  color: var(--boja-tekst-slab);
+}
+
+.recenzijaZaglavljeDesno {
+  display: flex;
+  align-items: center;
+  gap: var(--razmak-s);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.recenzijaTekst {
+  line-height: 1.6;
+  color: var(--boja-tekst);
+}
+
+.recenzijaLinkKnjiga {
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: var(--razmak-xs);
+}
