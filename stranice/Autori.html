@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="../stilovi/glavni.css" />
   <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/autori.css" />
   <link rel="stylesheet" href="../stilovi/responsive.css" />
   <link rel="stylesheet" href="../stilovi/navbar.css" />
 </head>
@@ -37,6 +38,37 @@
   <main>
     <div class="naslovSekcije">
       <h1>Аутори</h1>
+    </div>
+
+    <div class="pretragaTraka">
+      <input type="text" readonly placeholder="Претражи по имену или презимену..." />
+      <select disabled><option>Сви статуси</option></select>
+      <button type="button" class="dugme dugmePrimarno" disabled>Претражи</button>
+      <button type="button" class="dugme dugmeOutline" disabled>Ресетуј</button>
+    </div>
+
+    <div class="mrezaAutora">
+      <a href="detaljiAutoraIvoAndric.html" class="autorKartica">
+        <img src="../slike/autorIvoAndric.png" alt="" class="autorSlika" />
+        <div class="autorSadrzaj">
+          <h3>Иво Андрић</h3>
+          <span class="autorStatus">Преминуо</span>
+        </div>
+      </a>
+      <a href="detaljiAutoraMilosCrnjanski.html" class="autorKartica">
+        <img src="../slike/autorMilosCrnjanski.png" alt="" class="autorSlika" />
+        <div class="autorSadrzaj">
+          <h3>Милош Црњански</h3>
+          <span class="autorStatus">Преминуо</span>
+        </div>
+      </a>
+      <a href="detaljiAutoraMiloradPavic.html" class="autorKartica">
+        <img src="../slike/autorMiloradPavic.png" alt="" class="autorSlika" />
+        <div class="autorSadrzaj">
+          <h3>Милорад Павић</h3>
+          <span class="autorStatus">Преминуо</span>
+        </div>
+      </a>
     </div>
   </main>
 

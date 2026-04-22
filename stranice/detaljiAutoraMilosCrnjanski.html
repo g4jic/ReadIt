@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../stilovi/glavni.css" />
   <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/autori.css" />
   <link rel="stylesheet" href="../stilovi/knjige.css" />
   <link rel="stylesheet" href="../stilovi/responsive.css" />
   <link rel="stylesheet" href="../stilovi/navbar.css" />
@@ -32,8 +33,38 @@
     </div>
   </header>
   <main>
-    <div class="naslovSekcije">
-      <h1>Милош Црњански</h1>
+    <div class="autorDetalj">
+      <div class="autorHero">
+        <img src="../slike/autorMilosCrnjanski.png" alt="" class="autorHeroAvatar" />
+        <div class="autorHeroInfo">
+          <h1>Милош Црњански</h1>
+          <p>Статус: <span class="autorStatus">Преминуо</span></p>
+          <p>Рођен(а): <span>26.10.1893.</span></p>
+          <p>Број награда: <strong>7</strong></p>
+          <p>Продати примерци: <strong>1.800.000</strong></p>
+          <p>Контакт менаџера: <strong>+381 21 765-4321</strong></p>
+        </div>
+      </div>
+      <div class="autorDetaljTelo">
+        <h2>Биографија</h2>
+        <p class="autorBiografija">Један од највећих српских писаца XX века, песник, романсијер и путописац. Аутор Сеоба и Романа о Лондону. Живот му је био обележен сеобама, ратовима и изгнанством.</p>
+        <div class="ocenaKutija">
+          <div class="ocenaPrikaz" style="justify-content:center;">
+            <span class="ocenaBroj">4,5</span>
+            <span class="ocenaInfo">од 85 оцена</span>
+          </div>
+          <div class="zvezdice samoCitanje" style="justify-content:center;">
+            <span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span>
+          </div>
+        </div>
+        <h2>Књиге овог аутора</h2>
+        <div class="autorKnjigeLista">
+          <a href="detaljiKnjigeSeobe.html" class="knjigaKartica" style="text-decoration:none;color:inherit;">
+            <img src="../slike/knjigaSeobe.png" alt="" class="knjigaSlika" style="max-height:120px;object-fit:cover;" />
+            <div class="knjigaSadrzaj"><h3 style="margin:0;font-size:1rem;">Сеобе</h3></div>
+          </a>
+        </div>
+      </div>
     </div>
   </main>
   <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>

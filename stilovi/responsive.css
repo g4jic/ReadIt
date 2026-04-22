@@ -9,6 +9,15 @@
     padding: var(--razmak-l);
     gap: var(--razmak-l);
   }
+
+  .autorHero {
+    padding: var(--razmak-l);
+    gap: var(--razmak-l);
+  }
+  .autorHeroAvatar {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -168,6 +177,34 @@
 
   .recenzijeSekcija { padding: var(--razmak-m); }
 
+  .mrezaAutora {
+    grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+    gap: var(--razmak-m);
+    min-width: 0;
+    width: 100%;
+  }
+
+  .autorAvatar { width: 100px; height: 100px; }
+  .autorKartica { padding: var(--razmak-m); }
+
+  .autorHero {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--razmak-l) var(--razmak-m);
+  }
+
+  .autorHeroAvatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .autorDetaljTelo { padding: var(--razmak-m); }
+
+  .autorKnjigeLista {
+    grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
+    min-width: 0;
+  }
+
   .tabela { font-size: 0.85rem; }
   .tabela th, .tabela td { padding: 8px 10px; }
 
@@ -184,6 +221,8 @@
   .formaAkcije .dugme { width: 100%; }
 
   .naslovSekcije { flex-direction: column; align-items: flex-start; }
+
+  .zvezdice { font-size: 1.4rem; }
 }
 
 @media (max-width: 480px) {
@@ -198,6 +237,11 @@
   }
 
   .mrezaKnjiga {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--razmak-s);
+  }
+
+  .mrezaAutora {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--razmak-s);
   }

@@ -1,0 +1,315 @@
+.mrezaAutora {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: var(--razmak-l);
+  width: 100%;
+  min-width: 0;
+}
+
+.autorKartica {
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  padding: var(--razmak-l);
+  text-align: center;
+  text-decoration: none;
+  color: var(--boja-tekst);
+  transition: transform var(--prelaz), box-shadow var(--prelaz);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--razmak-s);
+}
+
+.autorKartica:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--senka-vel);
+  text-decoration: none;
+  color: var(--boja-tekst);
+}
+
+.autorKartica .autorSlika {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: var(--radijus);
+  flex-shrink: 0;
+}
+
+.autorKartica .autorSadrzaj {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--razmak-xs);
+  width: 100%;
+}
+
+.autorAvatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--boja-pozadina-alt);
+  border: 4px solid var(--boja-akcent);
+  box-shadow: var(--senka);
+}
+
+.autorIme {
+  font-family: var(--font-naslov);
+  font-size: 1.2rem;
+  color: var(--boja-primarna-tamna);
+  margin: 0;
+}
+
+.autorStatus {
+  font-size: 0.85rem;
+  padding: 2px 12px;
+  border-radius: 12px;
+  background: var(--boja-pozadina-alt);
+  color: var(--boja-tekst-slab);
+}
+
+.autorStatus.aktivan { background: #d7f0e0; color: var(--boja-uspeh); }
+.autorStatus.penzija { background: #fdf2d0; color: #8a6a20; }
+.autorStatus.preminuo { background: #e8dede; color: #5a4a45; }
+
+.autorProsek {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.95rem;
+  color: var(--boja-tekst-slab);
+}
+
+.autorProsek .broj {
+  font-weight: 700;
+  color: var(--boja-primarna);
+  font-size: 1.1rem;
+}
+
+.autorDetalj {
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  overflow: hidden;
+  margin-bottom: var(--razmak-xl);
+}
+
+.autorHero {
+  background: linear-gradient(135deg, var(--boja-primarna) 0%, var(--boja-primarna-tamna) 100%);
+  color: #fff;
+  padding: var(--razmak-xl);
+  display: flex;
+  gap: var(--razmak-xl);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.autorHeroAvatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid var(--boja-akcent);
+  box-shadow: var(--senka-vel);
+  flex-shrink: 0;
+}
+
+.autorHeroInfo h1 {
+  color: #fff;
+  margin-bottom: var(--razmak-s);
+}
+
+.autorHeroInfo p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+}
+
+.autorDetaljTelo {
+  padding: var(--razmak-xl);
+}
+
+.autorBiografija {
+  line-height: 1.8;
+  margin-bottom: var(--razmak-l);
+}
+
+.autorMetaLista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--razmak-m);
+  background: var(--boja-pozadina-alt);
+  padding: var(--razmak-m);
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-l);
+}
+
+#kutija-ocena {
+  min-height: 3.5rem;
+  margin-top: var(--razmak-m);
+  padding-top: var(--razmak-s);
+  border-top: 1px solid var(--boja-linija);
+}
+
+#kutija-ocena h3 {
+  font-family: var(--font-telo);
+  font-size: 1.05rem;
+  margin: 0 0 var(--razmak-s);
+  color: var(--boja-tekst);
+}
+
+#kutija-ocena .ocenaObjasnjenje {
+  font-size: 0.9rem;
+  color: var(--boja-tekst-slab);
+  margin: 0 0 var(--razmak-s);
+}
+
+.zvezdice {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 1.6rem;
+
+  color: #6b4f42;
+  user-select: none;
+  line-height: 1;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6));
+}
+
+.zvezdice .zvezdica {
+  cursor: pointer;
+  transition: transform 0.1s ease, color var(--prelaz);
+  padding: 0 1px;
+}
+
+.zvezdice .zvezdica.aktivna,
+.zvezdice .zvezdica.hover {
+  color: #c9a24d;
+}
+
+.zvezdice.samoCitanje .zvezdica { cursor: default; }
+
+.zvezdice.samoCitanje .zvezdica.aktivna {
+  color: #c9a24d;
+}
+
+.zvezdice .zvezdica:hover { transform: scale(1.1); }
+
+.brojcaniciOcena {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  max-width: 9rem;
+  margin: 0 auto;
+  font-size: 0.75rem;
+  color: var(--boja-tekst-slab);
+  letter-spacing: 0.02em;
+}
+.brojcaniciOcena span { flex: 1; text-align: center; }
+
+.ocenaPrikaz {
+  display: flex;
+  align-items: center;
+  gap: var(--razmak-s);
+  flex-wrap: wrap;
+}
+
+.ocenaBroj {
+  font-family: var(--font-naslov);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--boja-primarna);
+}
+
+.ocenaInfo {
+  color: var(--boja-tekst-slab);
+  font-size: 0.9rem;
+}
+
+.ocenaKutija {
+  background: var(--boja-pozadina-alt);
+  padding: var(--razmak-l);
+  border-radius: var(--radijus);
+  margin-bottom: var(--razmak-l);
+  text-align: center;
+}
+
+.autorKnjigeLista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--razmak-m);
+}
+
+.autorKnjigaMini {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: var(--razmak-m);
+  background: var(--boja-pozadina-alt);
+  border-radius: var(--radijus);
+  text-decoration: none;
+  color: var(--boja-tekst);
+  transition: transform var(--prelaz);
+}
+
+.autorKnjigaMini:hover {
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: var(--boja-primarna-tamna);
+}
+
+.autorKnjigaMini img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: var(--razmak-s);
+}
+
+.autorKnjigaMini .miniNaslov {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.autorKnjigaMini .miniZanr {
+  font-size: 0.8rem;
+  color: var(--boja-tekst-slab);
+}
+
+.ocenaStavka {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--razmak-m);
+  border-bottom: 1px solid var(--boja-linija);
+  gap: var(--razmak-m);
+  flex-wrap: wrap;
+}
+
+.ocenaStavka:last-child { border-bottom: none; }
+
+.ocenaStavkaLevo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ocenaStavkaDesno {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--razmak-s);
+  flex-shrink: 0;
+}
+
+.ocenaStavkaAutor a {
+  font-weight: 600;
+  color: var(--boja-primarna);
+}
+
+.ocenaStavkaDatum {
+  font-size: 0.85rem;
+  color: var(--boja-tekst-slab);
+}
