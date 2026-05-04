@@ -1,0 +1,36 @@
+@media (max-width: 768px) {
+  .navbar-sadrzaj > nav {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+  }
+
+  .navbar-sadrzaj > .hamburger {
+    display: none !important;
+  }
+
+  .nav-linkovi {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: var(--razmak-xs) !important;
+    justify-content: flex-start !important;
+  }
+
+  .nav-linkovi a {
+    padding: 6px 10px;
+    border-radius: var(--radijus);
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 0.78rem;
+  }
+}

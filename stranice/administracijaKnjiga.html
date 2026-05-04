@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - Администрација књига</title>
+  <link rel="icon" href="../slike/logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../stilovi/glavni.css" />
+  <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/knjige.css" />
+  <link rel="stylesheet" href="../stilovi/responsive.css" />
+  <link rel="stylesheet" href="../stilovi/navbar.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-sadrzaj">
+      <a href="../index.html" class="logo">
+        <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="nav-linkovi">
+          <li><a href="../index.html">Књиге</a></li>
+          <li><a href="Autori.html">Аутори</a></li>
+          <li><a href="administracijaKnjiga.html" class="aktivan">Админ књиге</a></li>
+          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="naslov-sekcije">
+      <h1>Администрација књига</h1>
+      <button type="button" class="dugme dugme-primarno" disabled>+ Нова књига</button>
+    </div>
+
+    <div class="tabela-wrapper">
+      <table class="tabela">
+        <thead>
+          <tr>
+            <th>Слика</th>
+            <th>Назив</th>
+            <th>Аутор</th>
+            <th>Жанр</th>
+            <th>Стр.</th>
+            <th>ISBN</th>
+            <th>Акције</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="../slike/knjigaNaDriniCuprija.png" alt="" class="slicica" /></td>
+            <td>На Дрини ћуприја</td>
+            <td>Иво Андрић</td>
+            <td>Историјски роман</td>
+            <td>384</td>
+            <td>978-86-7543-123-4</td>
+            <td>
+              <div class="tabela-akcije">
+                <button type="button" class="dugme dugme-outline dugme-malo" disabled>Измени</button>
+                <button type="button" class="dugme dugme-opasno dugme-malo" disabled>Обриши</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="../slike/knjigaProkletaAvlija.png" alt="" class="slicica" /></td>
+            <td>Проклета авлија</td>
+            <td>Иво Андрић</td>
+            <td>Роман</td>
+            <td>128</td>
+            <td>9788675431234</td>
+            <td>
+              <div class="tabela-akcije">
+                <button type="button" class="dugme dugme-outline dugme-malo" disabled>Измени</button>
+                <button type="button" class="dugme dugme-opasno dugme-malo" disabled>Обриши</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="../slike/knjigaSeobe.png" alt="" class="slicica" /></td>
+            <td>Сеобе</td>
+            <td>Милош Црњански</td>
+            <td>Историјски роман</td>
+            <td>512</td>
+            <td>978-86-1234-567-8</td>
+            <td>
+              <div class="tabela-akcije">
+                <button type="button" class="dugme dugme-outline dugme-malo" disabled>Измени</button>
+                <button type="button" class="dugme dugme-opasno dugme-malo" disabled>Обриши</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="../slike/knjigaHazarskiRecnik.png" alt="" class="slicica" /></td>
+            <td>Хазарски речник</td>
+            <td>Милорад Павић</td>
+            <td>Постмодерни роман</td>
+            <td>336</td>
+            <td>978-86-7102-456-1</td>
+            <td>
+              <div class="tabela-akcije">
+                <button type="button" class="dugme dugme-outline dugme-malo" disabled>Измени</button>
+                <button type="button" class="dugme dugme-opasno dugme-malo" disabled>Обриши</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section class="recenzije-sekcija" style="margin-top:var(--razmak-xl);">
+      <h2>Форма за унос / измену књиге</h2>
+      <div class="kartica"><div class="kartica-telo">
+        <form class="forma" action="#" method="get" onsubmit="return false;">
+          <div class="polje">
+            <label for="knjiga-naziv-input">Назив</label>
+            <input type="text" id="knjiga-naziv-input" />
+          </div>
+          <div class="polje">
+            <label for="knjiga-opis-input">Опис</label>
+            <textarea id="knjiga-opis-input"></textarea>
+          </div>
+          <div class="polje">
+            <label for="knjiga-slike-input">URL-ови слика</label>
+            <input type="text" id="knjiga-slike-input" placeholder="https://..." />
+          </div>
+          <div class="forma-red">
+            <div class="polje">
+              <label for="knjiga-zanr-input">Жанр</label>
+              <input type="text" id="knjiga-zanr-input" />
+            </div>
+            <div class="polje">
+              <label for="knjiga-format-input">Формат</label>
+              <select id="knjiga-format-input">
+                <option>Тврди повез</option>
+                <option>Меки повез</option>
+              </select>
+            </div>
+          </div>
+          <div class="polje">
+            <label for="knjiga-strana-input">Број страна</label>
+            <input type="number" id="knjiga-strana-input" min="1" />
+          </div>
+          <div class="polje">
+            <label for="knjiga-autor-input">Аутор</label>
+            <select id="knjiga-autor-input">
+              <option>Иво Андрић</option>
+              <option>Милош Црњански</option>
+              <option>Милорад Павић</option>
+            </select>
+          </div>
+          <div class="polje">
+            <label for="knjiga-isbn-input">ISBN</label>
+            <input type="text" id="knjiga-isbn-input" placeholder="978-..." />
+          </div>
+          <div class="forma-akcije">
+            <button type="button" class="dugme dugme-primarno" disabled>Сачувај</button>
+          </div>
+        </form>
+      </div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+</body>
+</html>

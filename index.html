@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - Каталог књига</title>
+  <link rel="icon" href="slike/logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="stilovi/glavni.css" />
+  <link rel="stylesheet" href="stilovi/komponente.css" />
+  <link rel="stylesheet" href="stilovi/knjige.css" />
+  <link rel="stylesheet" href="stilovi/responsive.css" />
+  <link rel="stylesheet" href="stilovi/navbar.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-sadrzaj">
+      <a href="index.html" class="logo">
+        <img src="slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="nav-linkovi" id="nav-linkovi">
+          <li><a href="index.html" class="aktivan">Књиге</a></li>
+          <li><a href="stranice/Autori.html">Аутори</a></li>
+          <li><a href="stranice/administracijaKnjiga.html">Админ књиге</a></li>
+          <li><a href="stranice/administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="naslov-sekcije">
+      <h1>Каталог књига</h1>
+    </div>
+
+    <div class="pretraga-traka">
+      <input type="text" readonly placeholder="Претражи по називу..." aria-label="Претрага по називу" />
+      <select disabled aria-label="Жанр">
+        <option>Сви жанрови</option>
+      </select>
+      <button type="button" class="dugme dugme-primarno" disabled>Претражи</button>
+      <button type="button" class="dugme dugme-outline" disabled>Ресетуј</button>
+    </div>
+
+    <div class="mreza-knjiga">
+      <a href="stranice/detaljliKnjigeNaDriniCuprija.html" class="knjiga-kartica">
+        <img src="slike/knjigaNaDriniCuprija.png" alt="" class="knjiga-slika" />
+        <div class="knjiga-sadrzaj">
+          <h3>На Дрини ћуприја</h3>
+          <span class="knjiga-autor">Иво Андрић</span>
+          <div class="knjiga-meta">
+            <span class="knjiga-zanr">Историјски роман</span>
+          </div>
+        </div>
+      </a>
+      <a href="stranice/detaljiKnjigeProkletaAvlija.html" class="knjiga-kartica">
+        <img src="slike/knjigaProkletaAvlija.png" alt="" class="knjiga-slika" />
+        <div class="knjiga-sadrzaj">
+          <h3>Проклета авлија</h3>
+          <span class="knjiga-autor">Иво Андрић</span>
+          <div class="knjiga-meta">
+            <span class="knjiga-zanr">Роман</span>
+          </div>
+        </div>
+      </a>
+      <a href="stranice/detaljiKnjigeSeobe.html" class="knjiga-kartica">
+        <img src="slike/knjigaSeobe.png" alt="" class="knjiga-slika" />
+        <div class="knjiga-sadrzaj">
+          <h3>Сеобе</h3>
+          <span class="knjiga-autor">Милош Црњански</span>
+          <div class="knjiga-meta">
+            <span class="knjiga-zanr">Историјски роман</span>
+          </div>
+        </div>
+      </a>
+      <a href="stranice/detaljiKnjigeHazarskiRecnik.html" class="knjiga-kartica">
+        <img src="slike/knjigaHazarskiRecnik.png" alt="" class="knjiga-slika" />
+        <div class="knjiga-sadrzaj">
+          <h3>Хазарски речник</h3>
+          <span class="knjiga-autor">Милорад Павић</span>
+          <div class="knjiga-meta">
+            <span class="knjiga-zanr">Постмодерни роман</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 <strong><a href="index.html">Ридит</a></strong></p>
+  </footer>
+</body>
+</html>

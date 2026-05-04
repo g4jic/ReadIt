@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="sr-Cyrl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ридит - Милорад Павић</title>
+  <link rel="icon" href="../slike/logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../stilovi/glavni.css" />
+  <link rel="stylesheet" href="../stilovi/komponente.css" />
+  <link rel="stylesheet" href="../stilovi/autori.css" />
+  <link rel="stylesheet" href="../stilovi/knjige.css" />
+  <link rel="stylesheet" href="../stilovi/responsive.css" />
+  <link rel="stylesheet" href="../stilovi/navbar.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-sadrzaj">
+      <a href="../index.html" class="logo">
+        <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
+        <span>Ридит</span>
+      </a>
+      <button class="hamburger" type="button" aria-hidden="true" tabindex="-1">☰</button>
+      <nav>
+        <ul class="nav-linkovi">
+          <li><a href="../index.html">Књиге</a></li>
+          <li><a href="Autori.html">Аутори</a></li>
+          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
+          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="autor-detalj">
+      <div class="autor-hero">
+        <img src="../slike/autorMiloradPavic.png" alt="" class="autor-hero-avatar" />
+        <div class="autor-hero-info">
+          <h1>Милорад Павић</h1>
+          <p>Статус: <span class="autor-status">Преминуо</span></p>
+          <p>Рођен(а): <span>15.10.1929.</span></p>
+          <p>Број награда: <strong>9</strong></p>
+          <p>Продати примерци: <strong>3.200.000</strong></p>
+          <p>Контакт менаџера: <strong>+381 11 234-5678</strong></p>
+        </div>
+      </div>
+      <div class="autor-detalj-telo">
+        <h2>Биографија</h2>
+        <p class="autor-biografija">Писац, историчар књижевности и академик. Аутор Хазарског речника, једног од најпревођенијих дела српске књижевности. Његова дела одликују се иновативном формом и постмодерним приступом.</p>
+        <div class="ocena-kutija">
+          <div class="ocena-prikaz" style="justify-content:center;">
+            <span class="ocena-broj">4,8</span>
+            <span class="ocena-info">од 200 оцена</span>
+          </div>
+          <div class="zvezdice samo-citanje" style="justify-content:center;">
+            <span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span><span class="zvezdica aktivna">★</span>
+          </div>
+        </div>
+        <h2>Књиге овог аутора</h2>
+        <div class="autor-knjige-lista">
+          <a href="detaljiKnjigeHazarskiRecnik.html" class="knjiga-kartica" style="text-decoration:none;color:inherit;">
+            <img src="../slike/knjigaHazarskiRecnik.png" alt="" class="knjiga-slika" style="max-height:120px;object-fit:cover;" />
+            <div class="knjiga-sadrzaj"><h3 style="margin:0;font-size:1rem;">Хазарски речник</h3></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+</body>
+</html>

@@ -1,0 +1,445 @@
+.navbar {
+  background: var(--boja-primarna);
+  color: #fff;
+  box-shadow: var(--senka);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.navbar-sadrzaj {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--razmak-m) var(--razmak-l);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--razmak-m);
+  box-sizing: border-box;
+}
+
+.logo {
+  font-family: var(--font-naslov);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--razmak-s);
+}
+
+.logo:hover {
+  color: var(--boja-akcent);
+  text-decoration: none;
+}
+
+.logo-slika {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+}
+
+.nav-linkovi {
+  display: flex;
+  gap: var(--razmak-l);
+  list-style: none;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-linkovi a {
+  color: #fff;
+  font-weight: 500;
+  padding: var(--razmak-s) var(--razmak-m);
+  border-radius: var(--radijus);
+  transition: background var(--prelaz);
+}
+
+.nav-linkovi a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-linkovi a.aktivan {
+  background: var(--boja-primarna-tamna);
+  color: var(--boja-akcent);
+}
+
+.nav-akcije {
+  display: flex;
+  gap: var(--razmak-s);
+  align-items: center;
+
+  min-height: 2.75rem;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--razmak-s);
+}
+
+.dugme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--razmak-s);
+  padding: var(--razmak-s) var(--razmak-m);
+  border: none;
+  border-radius: var(--radijus);
+  font-family: var(--font-telo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--prelaz);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.dugme-primarno {
+  background: var(--boja-primarna);
+  color: #fff;
+}
+.dugme-primarno:hover {
+  background: var(--boja-primarna-tamna);
+  color: #fff;
+  text-decoration: none;
+}
+
+.dugme-sekundarno {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.dugme-sekundarno:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-decoration: none;
+}
+
+.dugme-akcent {
+  background: var(--boja-akcent);
+  color: var(--boja-tekst);
+}
+.dugme-akcent:hover {
+  background: #c08b5a;
+  text-decoration: none;
+}
+
+.dugme-opasno {
+  background: var(--boja-greska);
+  color: #fff;
+}
+.dugme-opasno:hover {
+  background: #a03020;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dugme-outline {
+  background: transparent;
+  color: var(--boja-primarna);
+  border: 1px solid var(--boja-primarna);
+}
+.dugme-outline:hover {
+  background: var(--boja-primarna);
+  color: #fff;
+  text-decoration: none;
+}
+
+.dugme-malo {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+
+.dugme:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.kartica {
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  overflow: hidden;
+  transition: transform var(--prelaz), box-shadow var(--prelaz);
+}
+
+.kartica:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--senka-vel);
+}
+
+.kartica-telo {
+  padding: var(--razmak-l);
+}
+
+.forma {
+  display: flex;
+  flex-direction: column;
+  gap: var(--razmak-m);
+}
+
+.polje {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.polje label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--boja-tekst);
+}
+
+.polje input,
+.polje textarea,
+.polje select {
+  font-family: var(--font-telo);
+  font-size: 1rem;
+  padding: 10px 14px;
+  border: 1px solid var(--boja-linija);
+  border-radius: var(--radijus);
+  background: #fff;
+  color: var(--boja-tekst);
+  transition: border-color var(--prelaz), box-shadow var(--prelaz);
+}
+
+.polje input:focus,
+.polje textarea:focus,
+.polje select:focus {
+  outline: none;
+  border-color: var(--boja-primarna);
+  box-shadow: 0 0 0 3px rgba(123, 30, 43, 0.15);
+}
+
+.polje textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.polje input.netacno,
+.polje textarea.netacno,
+.polje select.netacno {
+  border-color: var(--boja-greska);
+  background: #fff5f3;
+}
+
+.polje .greska {
+  color: var(--boja-greska);
+  font-size: 0.85rem;
+  min-height: 1em;
+}
+
+.polje .pomoc {
+  color: var(--boja-tekst-slab);
+  font-size: 0.85rem;
+}
+
+.forma-akcije {
+  display: flex;
+  gap: var(--razmak-s);
+  justify-content: flex-end;
+  margin-top: var(--razmak-s);
+  flex-wrap: wrap;
+}
+
+.forma-red {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--razmak-m);
+}
+
+.modal-pozadina {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 10, 5, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--razmak-m);
+  animation: modal-ulaz 0.18s ease-out;
+}
+
+.modal-pozadina.otvoren {
+  display: flex;
+}
+
+.modal {
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--senka-vel);
+  animation: modal-zoom 0.18s ease-out;
+}
+
+.modal-veliki { max-width: 720px; }
+
+.modal-zaglavlje {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--razmak-l);
+  border-bottom: 1px solid var(--boja-linija);
+}
+
+.modal-zaglavlje h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.modal-zatvori {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--boja-tekst-slab);
+  padding: 4px 12px;
+  border-radius: var(--radijus);
+  transition: background var(--prelaz);
+}
+.modal-zatvori:hover { background: var(--boja-pozadina); }
+
+.modal-telo { padding: var(--razmak-l); }
+
+.modal-podnozje {
+  padding: var(--razmak-m) var(--razmak-l);
+  border-top: 1px solid var(--boja-linija);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--razmak-s);
+  flex-wrap: wrap;
+}
+
+@keyframes modal-ulaz {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modal-zoom {
+  from { opacity: 0; transform: translateY(-15px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.tabela thead {
+  background: var(--boja-primarna);
+  color: #fff;
+}
+
+.tabela th,
+.tabela td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--boja-linija);
+  vertical-align: middle;
+}
+
+.tabela tbody tr:hover {
+  background: var(--boja-pozadina-alt);
+}
+
+.tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela-akcije {
+  display: flex;
+  gap: var(--razmak-xs);
+  flex-wrap: wrap;
+}
+
+.tabela img.slicica {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--radijus);
+}
+
+.tabela img.slicica-kruzna {
+  border-radius: 50%;
+}
+
+.pretraga-traka {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--razmak-s);
+  margin-bottom: var(--razmak-l);
+  background: var(--boja-kartica);
+  padding: var(--razmak-m);
+  border-radius: var(--radijus);
+  box-shadow: var(--senka);
+}
+
+.pretraga-traka input,
+.pretraga-traka select {
+  flex: 1;
+  min-width: 160px;
+  padding: 10px 14px;
+  border: 1px solid var(--boja-linija);
+  border-radius: var(--radijus);
+  font-family: var(--font-telo);
+  font-size: 0.95rem;
+}
+
+.footer {
+  background: var(--boja-primarna-tamna);
+  color: #f1e7d8;
+  text-align: center;
+  padding: var(--razmak-m) var(--razmak-l);
+  margin-top: var(--razmak-xl);
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer strong {
+  color: var(--boja-akcent);
+  font-weight: 600;
+}
+
+.footer strong a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer strong a:hover {
+  color: #fff;
+}
