@@ -443,3 +443,9 @@
 .footer strong a:hover {
   color: #fff;
 }
+
+.pomeri {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 125px;
+}

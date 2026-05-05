@@ -1,0 +1,104 @@
+.profil-karta {
+  background: var(--boja-kartica);
+  border-radius: var(--radijus-vel);
+  box-shadow: var(--senka);
+  padding: var(--razmak-l);
+  margin-bottom: var(--razmak-l);
+}
+
+.profil-karta-podaci {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--razmak-xl);
+}
+
+.profil-avatar {
+  flex-shrink: 0;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: #d2b48c;
+  color: #fff;
+  font-family: var(--font-telo);
+  font-size: 2.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.profil-telo-podaci {
+  flex: 1;
+  min-width: 0;
+}
+
+.profil-ime {
+  font-family: var(--font-naslov);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--boja-primarna-tamna);
+  margin: 0 0 var(--razmak-xs);
+}
+
+.profil-korisnicko {
+  color: var(--boja-tekst-slab);
+  font-size: 0.95rem;
+  margin: 0 0 var(--razmak-m);
+}
+
+.profil-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--boja-tekst);
+  line-height: 1.85;
+}
+
+.profil-lista li {
+  margin-bottom: 2px;
+}
+
+.profil-oznaka {
+  font-weight: 500;
+}
+
+.profil-karta-stub {
+  min-height: 14rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profil-karta-stub .profil-podnaslov-karte {
+  font-family: var(--font-naslov);
+  font-size: 1.35rem;
+  color: var(--boja-primarna-tamna);
+  margin: 0 0 var(--razmak-m);
+}
+
+.profil-karta-stub .poruka-prazno {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: var(--razmak-l);
+}
+
+@media (max-width: 600px) {
+  .profil-karta-podaci {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profil-telo-podaci {
+    width: 100%;
+  }
+
+  .profil-lista {
+    text-align: left;
+  }
+}
