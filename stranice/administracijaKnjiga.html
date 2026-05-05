@@ -50,6 +50,7 @@
             <th>Аутор</th>
             <th>Жанр</th>
             <th>Стр.</th>
+            <th>Цена</th>
             <th>ISBN</th>
             <th>Акције</th>
           </tr>
@@ -61,6 +62,7 @@
             <td>Иво Андрић</td>
             <td>Историјски роман</td>
             <td>384</td>
+            <td>1.490 РСД</td>
             <td>978-86-7543-123-4</td>
             <td>
               <div class="tabela-akcije">
@@ -75,6 +77,7 @@
             <td>Иво Андрић</td>
             <td>Роман</td>
             <td>128</td>
+            <td>890 РСД</td>
             <td>9788675431234</td>
             <td>
               <div class="tabela-akcije">
@@ -89,6 +92,7 @@
             <td>Милош Црњански</td>
             <td>Историјски роман</td>
             <td>512</td>
+            <td>1.690 РСД</td>
             <td>978-86-1234-567-8</td>
             <td>
               <div class="tabela-akcije">
@@ -103,6 +107,7 @@
             <td>Милорад Павић</td>
             <td>Постмодерни роман</td>
             <td>336</td>
+            <td>1.890 РСД</td>
             <td>978-86-7102-456-1</td>
             <td>
               <div class="tabela-akcije">
@@ -144,9 +149,15 @@
               </select>
             </div>
           </div>
-          <div class="polje">
-            <label for="knjiga-strana-input">Број страна</label>
-            <input type="number" id="knjiga-strana-input" min="1" />
+          <div class="forma-red">
+            <div class="polje">
+              <label for="knjiga-cena-input">Цена</label>
+              <input type="number" id="knjiga-cena-input" min="0" />
+            </div>
+            <div class="polje">
+              <label for="knjiga-strana-input">Број страна</label>
+              <input type="number" id="knjiga-strana-input" min="1" />
+            </div>
           </div>
           <div class="polje">
             <label for="knjiga-autor-input">Аутор</label>
