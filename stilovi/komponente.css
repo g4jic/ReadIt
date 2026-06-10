@@ -84,6 +84,25 @@
   min-height: 2.75rem;
 }
 
+.nav-korisnik {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.navbar .nav-akcije .dugme-primarno {
+  background: transparent;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+}
+
+.navbar .nav-akcije .dugme-primarno:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
 .hamburger {
   display: none;
   background: none;

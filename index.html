@@ -34,6 +34,10 @@
           <li><a href="stranice/administracijaAutora.html">Админ аутори</a></li>
         </ul>
       </nav>
+      <div class="nav-akcije" id="nav-akcije">
+        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Пријава</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Регистрација</button>
+      </div>
     </div>
   </header>
 
@@ -51,56 +55,20 @@
       <button type="button" class="dugme dugme-outline" disabled>Ресетуј</button>
     </div>
 
-    <div class="mreza-knjiga">
-      <a href="stranice/detaljliKnjigeNaDriniCuprija.html" class="knjiga-kartica">
-        <img src="slike/knjigaNaDriniCuprija.png" alt="" class="knjiga-slika" />
-        <div class="knjiga-sadrzaj">
-          <h3>На Дрини ћуприја</h3>
-          <span class="knjiga-autor">Иво Андрић</span>
-          <div class="knjiga-meta">
-            <span class="knjiga-zanr">Историјски роман</span>
-            <span class="knjiga-cena">1.490 РСД</span>
-          </div>
-        </div>
-      </a>
-      <a href="stranice/detaljiKnjigeProkletaAvlija.html" class="knjiga-kartica">
-        <img src="slike/knjigaProkletaAvlija.png" alt="" class="knjiga-slika" />
-        <div class="knjiga-sadrzaj">
-          <h3>Проклета авлија</h3>
-          <span class="knjiga-autor">Иво Андрић</span>
-          <div class="knjiga-meta">
-            <span class="knjiga-zanr">Роман</span>
-            <span class="knjiga-cena">890 РСД</span>
-          </div>
-        </div>
-      </a>
-      <a href="stranice/detaljiKnjigeSeobe.html" class="knjiga-kartica">
-        <img src="slike/knjigaSeobe.png" alt="" class="knjiga-slika" />
-        <div class="knjiga-sadrzaj">
-          <h3>Сеобе</h3>
-          <span class="knjiga-autor">Милош Црњански</span>
-          <div class="knjiga-meta">
-            <span class="knjiga-zanr">Историјски роман</span>
-            <span class="knjiga-cena">1.690 РСД</span>
-          </div>
-        </div>
-      </a>
-      <a href="stranice/detaljiKnjigeHazarskiRecnik.html" class="knjiga-kartica">
-        <img src="slike/knjigaHazarskiRecnik.png" alt="" class="knjiga-slika" />
-        <div class="knjiga-sadrzaj">
-          <h3>Хазарски речник</h3>
-          <span class="knjiga-autor">Милорад Павић</span>
-          <div class="knjiga-meta">
-            <span class="knjiga-zanr">Постмодерни роман</span>
-            <span class="knjiga-cena">1.890 РСД</span>
-          </div>
-        </div>
-      </a>
+    <div class="mreza-knjiga" id="katalog-kontejner">
+      <p class="poruka-prazno">Учитавање књига...</p>
     </div>
   </main>
 
   <footer class="footer">
     <p>© 2026 <strong><a href="index.html">Ридит</a></strong></p>
   </footer>
+
+  <div id="modali-kontejner"></div>
+
+  <script src="skripte/firebase.js"></script>
+  <script src="skripte/pomocne.js"></script>
+  <script src="skripte/modali.js"></script>
+  <script src="skripte/knjige.js"></script>
 </body>
 </html>
