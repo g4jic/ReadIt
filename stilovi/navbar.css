@@ -1,36 +1,51 @@
-@media (max-width: 768px) {
-  .navbar-sadrzaj > nav {
-    position: static !important;
-    width: auto !important;
-    height: auto !important;
-    pointer-events: auto !important;
-    overflow: visible !important;
+@media (max-width: 1024px) {
+  body.nav-meni-otvoren {
+    overflow: hidden;
   }
 
-  .navbar-sadrzaj > .hamburger {
-    display: none !important;
+  body.nav-meni-otvoren::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 99;
   }
 
   .nav-linkovi {
-    position: static !important;
-    transform: none !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    gap: var(--razmak-xs) !important;
-    justify-content: flex-start !important;
+    z-index: 101;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-linkovi a {
-    padding: 6px 10px;
+    display: block;
+    padding: var(--razmak-m) var(--razmak-s);
+    font-size: 0.95rem;
     border-radius: var(--radijus);
+  }
+
+  .nav-linkovi a:hover,
+  .nav-linkovi a.aktivan {
     background: rgba(255, 255, 255, 0.12);
-    font-size: 0.78rem;
+  }
+
+  .hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radijus);
+    transition: background var(--prelaz);
+  }
+
+  .hamburger:hover,
+  .hamburger:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+  }
+
+  .hamburger.otvoren {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
