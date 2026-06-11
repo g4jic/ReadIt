@@ -115,8 +115,11 @@ function validirajRegistraciju() {
   if (!korisnicko || !lozinka || !ime || !prezime || !email) {
     return "Сва поља су обавезна.";
   }
-  if (email.indexOf("@") === -1) {
-    return "E-mail није исправан.";
+  if (!validirajLozinku(lozinka)) {
+    return "Лозинка мора имати најмање 6 карактера.";
+  }
+  if (!validirajEmail(email)) {
+    return "E-mail није исправан (нпр. korisnik@example.com).";
   }
   return "";
 }

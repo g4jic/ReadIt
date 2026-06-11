@@ -136,13 +136,20 @@
 }
 
 .autor-meta-lista {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   gap: var(--razmak-m);
   background: var(--boja-pozadina-alt);
   padding: var(--razmak-m);
   border-radius: var(--radijus);
   margin-bottom: var(--razmak-l);
+}
+
+.autor-meta-lista > div:last-child {
+  text-align: right;
+  margin-left: auto;
 }
 
 #kutija-ocena {
@@ -210,8 +217,10 @@
 .ocena-prikaz {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--razmak-s);
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .ocena-broj {
@@ -224,6 +233,9 @@
 .ocena-info {
   color: var(--boja-tekst-slab);
   font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .ocena-kutija {
@@ -231,6 +243,10 @@
   padding: var(--razmak-l);
   border-radius: var(--radijus);
   margin-bottom: var(--razmak-l);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--razmak-s);
   text-align: center;
 }
 

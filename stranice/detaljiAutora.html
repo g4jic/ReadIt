@@ -1,22 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sr-Cyrl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ридит - Мој профил</title>
+  <title>Ридит - Детаљи аутора</title>
   <link rel="icon" href="../slike/logo.png" type="image/png" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="../stilovi/glavni.css" />
   <link rel="stylesheet" href="../stilovi/komponente.css" />
-  <link rel="stylesheet" href="../stilovi/profil.css" />
+  <link rel="stylesheet" href="../stilovi/autori.css" />
   <link rel="stylesheet" href="../stilovi/responsive.css" />
   <link rel="stylesheet" href="../stilovi/navbar.css" />
 </head>
 <body>
-
   <header class="navbar">
     <div class="navbar-sadrzaj">
       <a href="../index.html" class="logo">
@@ -28,7 +25,7 @@
         <ul class="nav-linkovi" id="nav-linkovi">
           <li><a href="../index.html">Књиге</a></li>
           <li><a href="Autori.html">Аутори</a></li>
-          <li><a href="profil.html" class="aktivan">Мој профил</a></li>
+          <li><a href="profil.html">Мој профил</a></li>
           <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
           <li><a href="administracijaAutora.html">Админ аутори</a></li>
         </ul>
@@ -39,40 +36,12 @@
       </div>
     </div>
   </header>
-
   <main>
-    <div class="naslov-sekcije">
-      <h1>Мој профил</h1>
+    <div id="autor-kontejner">
+      <p class="poruka-prazno">Учитавање...</p>
     </div>
-
-    <section class="profil-karta profil-karta-podaci" aria-label="Подаци о кориснику">
-      <div class="profil-avatar" aria-hidden="true">НЂ</div>
-      <div class="profil-telo-podaci">
-        <p class="profil-ime">Новак Ђоковић</p>
-        <p class="profil-korisnicko">@djokernole</p>
-        <ul class="profil-lista">
-          <li><span class="profil-oznaka">E-mail:</span> djokernole@goat.com</li>
-          <li><span class="profil-oznaka">Рођен(а):</span> 02.05.1987.</li>
-          <li><span class="profil-oznaka">Адреса:</span> Београд, Србија</li>
-          <li><span class="profil-oznaka">Занимање:</span> Највећи спортиста свих времена</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="profil-karta profil-karta-stub" aria-label="Рецензије">
-      <h2 class="profil-podnaslov-karte">Моје рецензије</h2>
-      <p class="poruka-prazno">Још нисте написали ниједну рецензију.</p>
-    </section>
-
-    <section class="profil-karta profil-karta-stub" aria-label="Оцене аутора">
-      <h2 class="profil-podnaslov-karte">Моје оцене аутора</h2>
-      <p class="poruka-prazno">Још нисте оценили ниједног аутора.</p>
-    </section>
   </main>
-
-  <footer class="footer">
-    <p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p>
-  </footer>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
 
   <div id="modali-kontejner"></div>
 
@@ -80,5 +49,6 @@
   <script src="../skripte/pomocne.js"></script>
   <script src="../skripte/navbar.js"></script>
   <script src="../skripte/modali.js"></script>
+  <script src="../skripte/autori.js"></script>
 </body>
 </html>

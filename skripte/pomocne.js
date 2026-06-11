@@ -1,4 +1,7 @@
-var ISBN_REGEX = /^97[89](?:-?\d){10}$/;
+var ISBN_REGEX = /^978(?:-?\d){10}$|^979(?:-?\d){10}$/;
+var TELEFON_REGEX = /^\+381 \d{2} \d{3}-\d{3,4}$/;
+var URL_REGEX = /^https?:\/\/.+/;
+var EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function escapeHtml(tekst) {
   if (tekst === null || tekst === undefined) {
@@ -39,8 +42,78 @@ function validirajIsbn(isbn) {
   if (!isbn) {
     return false;
   }
-  var ociscen = isbn.replace(/-/g, "");
-  return ISBN_REGEX.test(ociscen);
+  return ISBN_REGEX.test(isbn.trim());
+}
+
+function validirajTelefon(telefon) {
+  if (!telefon) {
+    return false;
+  }
+  return TELEFON_REGEX.test(telefon.trim());
+}
+
+function validirajUrl(url) {
+  if (!url) {
+    return false;
+  }
+  return URL_REGEX.test(url.trim());
+}
+
+function validirajSlike(slike) {
+  if (!slike || slike.length === 0 || !slike[0]) {
+    return false;
+  }
+  for (var i = 0; i < slike.length; i++) {
+    if (!validirajUrl(slike[i])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function validirajEmail(email) {
+  if (!email) {
+    return false;
+  }
+  return EMAIL_REGEX.test(email.trim());
+}
+
+function validirajLozinku(lozinka) {
+  if (!lozinka) {
+    return false;
+  }
+  return lozinka.length >= 6;
+}
+
+function validirajAutora(podatak) {
+  if (!podatak.ime || !podatak.ime.trim()) {
+    return "Име аутора је обавезно.";
+  }
+  if (!podatak.prezime || !podatak.prezime.trim()) {
+    return "Презиме аутора је обавезно.";
+  }
+  if (!podatak.biografija || !podatak.biografija.trim()) {
+    return "Биографија је обавезна.";
+  }
+  if (!podatak.status || !podatak.status.trim()) {
+    return "Статус је обавезан.";
+  }
+  if (!podatak.datumRodjenja) {
+    return "Датум рођења је обавезан.";
+  }
+  if (podatak.brojOsvojenihNagrada === "" || Number(podatak.brojOsvojenihNagrada) < 0) {
+    return "Број награда мора бити нула или већи.";
+  }
+  if (podatak.brojProdatihPrimeraka === "" || Number(podatak.brojProdatihPrimeraka) < 0) {
+    return "Број продатих примерака мора бити нула или већи.";
+  }
+  if (!validirajSlike(podatak.slike)) {
+    return "Унесите бар један исправан URL слике (нпр. https://...).";
+  }
+  if (!validirajTelefon(podatak.kontaktTelefonMenadzera)) {
+    return "Телефон менаџера мора бити у формату +381 XX XXX-XXXX (нпр. +381 64 123-4567).";
+  }
+  return "";
 }
 
 function validirajKnjigu(podatak) {
@@ -65,8 +138,8 @@ function validirajKnjigu(podatak) {
   if (!podatak.idAutora) {
     return "Морате изабрати аутора.";
   }
-  if (!podatak.slike || podatak.slike.length === 0 || !podatak.slike[0]) {
-    return "Унесите бар један URL слике.";
+  if (!validirajSlike(podatak.slike)) {
+    return "Унесите бар један исправан URL слике (нпр. https://...).";
   }
   if (!validirajIsbn(podatak.isbn)) {
     return "ISBN мора имати 13 цифара и почињати са 978 или 979 (нпр. 978-86-7543-123-4).";
@@ -91,8 +164,39 @@ function imeAutora(autori, idAutora) {
   if (!autori || !idAutora || !autori[idAutora]) {
     return "Непознат аутор";
   }
-  var autor = autori[idAutora];
-  return autor.ime + " " + autor.prezime;
+  return punoImeAutora(autori[idAutora]);
+}
+
+function punoImeAutora(autor) {
+  if (!autor) {
+    return "";
+  }
+  return (autor.ime || "") + " " + (autor.prezime || "");
+}
+
+function klasaStatusaAutora(status) {
+  if (!status) {
+    return "";
+  }
+  var lower = status.toLowerCase();
+  if (lower.indexOf("актив") !== -1) {
+    return "aktivan";
+  }
+  if (lower.indexOf("пенз") !== -1) {
+    return "penzija";
+  }
+  if (lower.indexOf("премин") !== -1) {
+    return "preminuo";
+  }
+  return "";
+}
+
+function formatirajBroj(broj) {
+  var vrednost = Number(broj);
+  if (isNaN(vrednost)) {
+    return "0";
+  }
+  return vrednost.toLocaleString("sr-RS");
 }
 
 function imeKorisnika(korisnici, idKorisnika) {
