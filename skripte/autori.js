@@ -1,3 +1,5 @@
+var katalogAutoriCache = null;
+
 function ucitajKatalogAutora() {
   var kontejner = document.getElementById("katalog-autora-kontejner");
   if (!kontejner) {
@@ -7,14 +9,15 @@ function ucitajKatalogAutora() {
   kontejner.innerHTML = "<p class=\"poruka-prazno\">Учитавање аутора...</p>";
 
   ucitajSaFirebase("autori", function (autori) {
-    prikaziKatalogAutora(autori, kontejner);
+    katalogAutoriCache = autori || {};
+    prikaziKatalogAutora(katalogAutoriCache, kontejner, "");
   }, function () {
     kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању аутора. Проверите Firebase URL.</p>";
   });
 }
 
-function prikaziKatalogAutora(autori, kontejner) {
-  var lista = pretvoriUListu(autori);
+function prikaziKatalogAutora(autori, kontejner, terminZaPretragu) {
+  var lista = typeof autori.length === "number" ? autori : pretvoriUListu(autori);
 
   lista.sort(function (a, b) {
     var imeA = punoImeAutora(a.podaci);
@@ -23,7 +26,7 @@ function prikaziKatalogAutora(autori, kontejner) {
   });
 
   if (lista.length === 0) {
-    kontejner.innerHTML = "<p class=\"poruka-prazno\">Нема аутора у бази.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-prazno\">Нема аутора који одговарају претрази.</p>";
     return;
   }
 
@@ -33,11 +36,14 @@ function prikaziKatalogAutora(autori, kontejner) {
     var autor = stavka.podaci;
     var slika = autor.slike && autor.slike[0] ? autor.slike[0] : "";
     var statusKlasa = klasaStatusaAutora(autor.status);
+    
+    var punoIme = punoImeAutora(autor);
+    var imeZaPrikaz = escapeHtml(punoIme);
 
     html += "<a href=\"detaljiAutora.html?id=" + escapeHtml(stavka.id) + "\" class=\"autor-kartica\">";
     html += "<img src=\"" + escapeHtml(slika) + "\" alt=\"\" class=\"autor-slika\" />";
     html += "<div class=\"autor-sadrzaj\">";
-    html += "<h3>" + escapeHtml(punoImeAutora(autor)) + "</h3>";
+    html += "<h3>" + imeZaPrikaz + "</h3>";
     html += "<span class=\"autor-status " + escapeHtml(statusKlasa) + "\">" + escapeHtml(autor.status || "") + "</span>";
     html += "</div></a>";
   }
@@ -135,6 +141,21 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
 
   document.title = "Ридит - " + punoImeAutora(autor);
 
+  var prijavljenId = localStorage.getItem("prijavljenKorisnik");
+  var postojecaOcenaId = null;
+  var trenutnaVrednostOcene = 0;
+
+  if (prijavljenId) {
+    var listaOcena = pretvoriUListu(ocene);
+    for (var j = 0; j < listaOcena.length; j++) {
+      if (listaOcena[j].podaci.idAutora === idAutora && listaOcena[j].podaci.idKorisnika === prijavljenId) {
+        postojecaOcenaId = listaOcena[j].id;
+        trenutnaVrednostOcene = Number(listaOcena[j].podaci.vrednost);
+        break;
+      }
+    }
+  }
+
   var html = "";
   html += "<div class=\"autor-detalj\">";
   html += "<div class=\"autor-hero\">";
@@ -164,15 +185,30 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
 
   html += "<div id=\"kutija-ocena\">";
   html += "<h3>Оцените аутора</h3>";
-  html += "<p class=\"ocena-objasnjenje\">Морате бити пријављени да бисте оставили оцену. Користите дугме „Пријава“ у менију.</p>";
-  html += "<div class=\"zvezdice\" aria-hidden=\"true\">";
-  for (var z = 1; z <= 5; z++) {
-    html += "<span class=\"zvezdica\">★</span>";
+  
+  if (!prijavljenId) {
+    html += "<p class=\"ocena-objasnjenje\">Морате бити пријављени да бисте оставили оцену. Користите дугме „Пријава“ у менију.</p>";
+    html += "<div class=\"zvezdice\" aria-hidden=\"true\">";
+    for (var z = 1; z <= 5; z++) {
+      html += "<span class=\"zvezdica\">★</span>";
+    }
+    html += "</div>";
+    html += "<div class=\"forma-akcije\" style=\"margin-top:var(--razmak-m);\">";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Сачувај оцену</button>";
+    html += "</div>";
+  } else {
+    html += "<p class=\"ocena-objasnjenje\" id=\"poruka-za-ocenu\">Изаберите број звездица:</p>";
+    html += "<div class=\"zvezdice interaktivne\" id=\"kontejner-zvezdica\" aria-hidden=\"true\">";
+    for (var v = 1; v <= 5; v++) {
+      var klasaZvezdice = v <= trenutnaVrednostOcene ? "zvezdica aktivna" : "zvezdica";
+      html += "<span class=\"" + klasaZvezdice + "\" data-vrednost=\"" + v + "\">★</span>";
+    }
+    html += "</div>";
+    html += "<div class=\"forma-akcije\" style=\"margin-top:var(--razmak-m);\">";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-sacuvaj-ocenu\">Сачувај оцену</button>";
+    html += "</div>";
   }
   html += "</div>";
-  html += "<div class=\"forma-akcije\" style=\"margin-top:var(--razmak-m);\">";
-  html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Сачувај оцену</button>";
-  html += "</div></div>";
 
   html += "<section style=\"margin-top:var(--razmak-xl);\">";
   html += "<h2>Књиге аутора</h2>";
@@ -182,9 +218,174 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
   html += "</div></div>";
 
   kontejner.innerHTML = html;
+
+  if (prijavljenId) {
+    poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVrednostOcene);
+  }
+}
+
+function poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVrednostOcene) {
+  var kontejnerZvezdica = document.getElementById("kontejner-zvezdica");
+  var dugmeSacuvaj = document.getElementById("dugme-sacuvaj-ocenu");
+  var poruka = document.getElementById("poruka-za-ocenu");
+  
+  if (!kontejnerZvezdica || !dugmeSacuvaj) {
+    return;
+  }
+
+  var zvezdice = kontejnerZvezdica.querySelectorAll(".zvezdica");
+  var izabranaOcena = trenutnaVrednostOcene;
+
+  function osveziPrikazZvezdica(vrednost) {
+    for (var i = 0; i < zvezdice.length; i++) {
+      var trenutnaZvezdica = zvezdice[i];
+      var zvezdicaVrednost = Number(trenutnaZvezdica.getAttribute("data-vrednost"));
+      if (zvezdicaVrednost <= vrednost) {
+        trenutnaZvezdica.classList.add("aktivna");
+      } else {
+        trenutnaZvezdica.classList.remove("aktivna");
+      }
+    }
+  }
+
+  for (var k = 0; k < zvezdice.length; k++) {
+    var zvezda = zvezdice[k];
+    
+    zvezda.addEventListener("mouseenter", function (e) {
+      var vrednost = Number(e.target.getAttribute("data-vrednost"));
+      osveziPrikazZvezdica(vrednost);
+    });
+    
+    zvezda.addEventListener("mouseleave", function () {
+      osveziPrikazZvezdica(izabranaOcena);
+    });
+    
+    zvezda.addEventListener("click", function (e) {
+      izabranaOcena = Number(e.target.getAttribute("data-vrednost"));
+      osveziPrikazZvezdica(izabranaOcena);
+    });
+  }
+
+  dugmeSacuvaj.addEventListener("click", function () {
+    if (izabranaOcena === 0) {
+      if (poruka) {
+        poruka.textContent = "Морате изабрати број звездица пре чувања.";
+        poruka.style.color = "red";
+      }
+      return;
+    }
+
+    var dugmeTekst = dugmeSacuvaj.textContent;
+    dugmeSacuvaj.textContent = "Чување...";
+    dugmeSacuvaj.disabled = true;
+
+    var datum = new Date();
+    var isoDatum = datum.toISOString().split("T")[0];
+
+    var novaOcena = {
+      vrednost: izabranaOcena,
+      datum: isoDatum,
+      idAutora: idAutora,
+      idKorisnika: prijavljenId
+    };
+
+    if (postojecaOcenaId) {
+      izmeniUFirebase("ocene", postojecaOcenaId, novaOcena, function () {
+        ucitajDetaljAutora();
+      }, function () {
+        if (poruka) {
+          poruka.textContent = "Грешка при измени оцене.";
+          poruka.style.color = "red";
+        }
+        dugmeSacuvaj.textContent = dugmeTekst;
+        dugmeSacuvaj.disabled = false;
+      });
+    } else {
+      dodajUFirebase("ocene", novaOcena, function () {
+        ucitajDetaljAutora();
+      }, function () {
+        if (poruka) {
+          poruka.textContent = "Грешка при чувању оцене.";
+          poruka.style.color = "red";
+        }
+        dugmeSacuvaj.textContent = dugmeTekst;
+        dugmeSacuvaj.disabled = false;
+      });
+    }
+  });
+}
+
+function primeniPretraguAutora() {
+  if (!katalogAutoriCache) {
+    return;
+  }
+
+  var imeInput = document.getElementById("pretraga-ime");
+  var statusInput = document.getElementById("pretraga-status");
+  var kontejner = document.getElementById("katalog-autora-kontejner");
+
+  if (!imeInput || !statusInput || !kontejner) {
+    return;
+  }
+
+  var trazenoIme = imeInput.value.trim().toLowerCase();
+  var trazeniStatus = statusInput.value.toLowerCase();
+
+  var listaSva = pretvoriUListu(katalogAutoriCache);
+  var filtriranaLista = [];
+
+  for (var i = 0; i < listaSva.length; i++) {
+    var autor = listaSva[i].podaci;
+    var punoIme = punoImeAutora(autor).toLowerCase();
+    var status = (autor.status || "").toLowerCase();
+
+    var odgovaraIme = true;
+    if (trazenoIme !== "") {
+      odgovaraIme = punoIme.indexOf(trazenoIme) !== -1;
+    }
+
+    var odgovaraStatus = true;
+    if (trazeniStatus !== "") {
+      odgovaraStatus = status === trazeniStatus;
+    }
+
+    if (odgovaraIme && odgovaraStatus) {
+      filtriranaLista.push(listaSva[i]);
+    }
+  }
+
+  prikaziKatalogAutora(filtriranaLista, kontejner, trazenoIme);
+}
+
+function poveziPretraguAutora() {
+  var imeInput = document.getElementById("pretraga-ime");
+  var statusInput = document.getElementById("pretraga-status");
+  var dugmePretrazi = document.getElementById("dugme-pretrazi");
+  var dugmeResetuj = document.getElementById("dugme-resetuj");
+
+  if (imeInput) {
+    imeInput.addEventListener("input", primeniPretraguAutora);
+  }
+
+  if (statusInput) {
+    statusInput.addEventListener("change", primeniPretraguAutora);
+  }
+
+  if (dugmePretrazi) {
+    dugmePretrazi.addEventListener("click", primeniPretraguAutora);
+  }
+
+  if (dugmeResetuj) {
+    dugmeResetuj.addEventListener("click", function () {
+      if (imeInput) imeInput.value = "";
+      if (statusInput) statusInput.value = "";
+      primeniPretraguAutora();
+    });
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function () {
   ucitajKatalogAutora();
   ucitajDetaljAutora();
+  poveziPretraguAutora();
 });

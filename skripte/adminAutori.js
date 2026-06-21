@@ -87,6 +87,7 @@ function popuniFormuAutora(id) {
   sakrijPoruku("admin-modal-poruka");
   sakrijPoruku("admin-poruka");
 
+
   document.getElementById("autor-ime-input").value = autor.ime || "";
   document.getElementById("autor-prezime-input").value = autor.prezime || "";
   document.getElementById("autor-biografija-input").value = autor.biografija || "";
@@ -170,8 +171,36 @@ function sacuvajFormuAutora() {
     return;
   }
 
-  prikaziPoruku("admin-poruka", "Подаци су исправни.", "uspeh");
-  zatvoriModalAutora();
+  var dugme = document.getElementById("dugme-sacuvaj-autor");
+  var stariTekst = dugme.textContent;
+  dugme.textContent = "Чување...";
+  dugme.disabled = true;
+
+  if (izabraniAutorId) {
+    izmeniUFirebase("autori", izabraniAutorId, podatak, function () {
+      prikaziPoruku("admin-poruka", "Аутор је успешно измењен.", "uspeh");
+      zatvoriModalAutora();
+      ucitajAdminAutore();
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }, function () {
+      prikaziPoruku("admin-modal-poruka", "Грешка при измени аутора.", "greska");
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    });
+  } else {
+    dodajUFirebase("autori", podatak, function () {
+      prikaziPoruku("admin-poruka", "Аутор је успешно додат.", "uspeh");
+      zatvoriModalAutora();
+      ucitajAdminAutore();
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }, function () {
+      prikaziPoruku("admin-modal-poruka", "Грешка при додавању аутора.", "greska");
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    });
+  }
 }
 
 function otvoriDijalogBrisanjaAutora(id) {
@@ -192,9 +221,32 @@ function zatvoriDijalogBrisanjaAutora() {
 }
 
 function potvrdiBrisanjeAutora() {
-  zatvoriDijalogBrisanjaAutora();
-  prikaziPoruku("admin-poruka", "Брисање је потврђено.", "uspeh");
-  izabraniAutorId = null;
+  var idZaBrisanje = izabraniAutorId;
+  var dugme = document.getElementById("modal-brisanje-potvrdi");
+  var stariTekst = dugme ? dugme.textContent : "Обриши";
+  if (dugme) {
+    dugme.textContent = "Брисање...";
+    dugme.disabled = true;
+  }
+
+  obrisiIzFirebase("autori", idZaBrisanje, function () {
+    prikaziPoruku("admin-poruka", "Аутор је успешно обрисан.", "uspeh");
+    izabraniAutorId = null;
+    zatvoriDijalogBrisanjaAutora();
+    ucitajAdminAutore();
+    if (dugme) {
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }
+  }, function () {
+    prikaziPoruku("admin-poruka", "Грешка при брисању аутора.", "greska");
+    izabraniAutorId = null;
+    zatvoriDijalogBrisanjaAutora();
+    if (dugme) {
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }
+  });
 }
 
 function poveziAdminAutorDogadjaje() {

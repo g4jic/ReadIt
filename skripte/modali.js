@@ -53,20 +53,48 @@ function zatvoriModal(id) {
   }
 }
 
-function azurirajNavigaciju() {
-  var prijava = document.getElementById("dugme-prijava");
-  var registracija = document.getElementById("dugme-registracija");
+function odjaviKorisnika() {
+  localStorage.removeItem("prijavljenKorisnik");
+  azurirajNavigaciju();
+}
 
-  if (!prijava || !registracija) {
+function azurirajNavigaciju() {
+  var navAkcije = document.getElementById("nav-akcije");
+  if (!navAkcije) {
     return;
   }
 
-  prijava.addEventListener("click", function () {
-    otvoriModal("modal-prijava");
-  });
-  registracija.addEventListener("click", function () {
-    otvoriModal("modal-registracija");
-  });
+  var prijavljenId = localStorage.getItem("prijavljenKorisnik");
+
+  if (prijavljenId) {
+    var htmlUlogovan = "";
+    htmlUlogovan += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-odjava\">Одјава</button>";
+    navAkcije.innerHTML = htmlUlogovan;
+
+    var dugmeOdjava = document.getElementById("dugme-odjava");
+    if (dugmeOdjava) {
+      dugmeOdjava.addEventListener("click", odjaviKorisnika);
+    }
+  } else {
+    var htmlGost = "";
+    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-prijava\">Пријава</button>";
+    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-registracija\">Регистрација</button>";
+    navAkcije.innerHTML = htmlGost;
+
+    var dugmePrijava = document.getElementById("dugme-prijava");
+    var dugmeRegistracija = document.getElementById("dugme-registracija");
+
+    if (dugmePrijava) {
+      dugmePrijava.addEventListener("click", function () {
+        otvoriModal("modal-prijava");
+      });
+    }
+    if (dugmeRegistracija) {
+      dugmeRegistracija.addEventListener("click", function () {
+        otvoriModal("modal-registracija");
+      });
+    }
+  }
 }
 
 function prijaviKorisnika() {
@@ -98,6 +126,10 @@ function prijaviKorisnika() {
       greskaEl.classList.remove("sakriveno");
       document.getElementById("prijava-korisnicko").value = "";
       document.getElementById("prijava-lozinka").value = "";
+      
+      localStorage.setItem("prijavljenKorisnik", pronadjenId);
+      zatvoriModal("modal-prijava");
+      azurirajNavigaciju();
     } else {
       greskaEl.textContent = "Погрешно корисничко име или лозинка.";
       greskaEl.classList.remove("sakriveno");
@@ -147,9 +179,30 @@ function registrujKorisnika() {
       }
     }
 
-    greskaEl.textContent = "Подаци за регистрацију су исправни.";
-    greskaEl.className = "poruka-uspeh";
-    greskaEl.classList.remove("sakriveno");
+    var noviKorisnik = {
+      korisnickoIme: korisnicko,
+      lozinka: document.getElementById("reg-lozinka").value,
+      ime: document.getElementById("reg-ime").value.trim(),
+      prezime: document.getElementById("reg-prezime").value.trim(),
+      email: document.getElementById("reg-email").value.trim()
+    };
+
+    dodajUFirebase("korisnici", noviKorisnik, function (odgovor) {
+      if (odgovor && odgovor.name) {
+        localStorage.setItem("prijavljenKorisnik", odgovor.name);
+      }
+      document.getElementById("reg-korisnicko").value = "";
+      document.getElementById("reg-lozinka").value = "";
+      document.getElementById("reg-ime").value = "";
+      document.getElementById("reg-prezime").value = "";
+      document.getElementById("reg-email").value = "";
+      
+      zatvoriModal("modal-registracija");
+      azurirajNavigaciju();
+    }, function () {
+      greskaEl.textContent = "Грешка приликом регистрације.";
+      greskaEl.classList.remove("sakriveno");
+    });
   });
 }
 
