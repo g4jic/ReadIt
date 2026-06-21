@@ -6,6 +6,11 @@
   min-width: 0;
 }
 
+.mreza-autora > .poruka-prazno,
+.mreza-autora > .poruka-greska {
+  grid-column: 1 / -1;
+}
+
 .autor-kartica {
   background: var(--boja-kartica);
   border-radius: var(--radijus-vel);

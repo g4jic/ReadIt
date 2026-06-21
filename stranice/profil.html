@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="sr-Cyrl">
 <head>
   <meta charset="UTF-8" />
@@ -45,18 +45,8 @@
       <h1>Мој профил</h1>
     </div>
 
-    <section class="profil-karta profil-karta-podaci" aria-label="Подаци о кориснику">
-      <div class="profil-avatar" aria-hidden="true">НЂ</div>
-      <div class="profil-telo-podaci">
-        <p class="profil-ime">Новак Ђоковић</p>
-        <p class="profil-korisnicko">@djokernole</p>
-        <ul class="profil-lista">
-          <li><span class="profil-oznaka">E-mail:</span> djokernole@goat.com</li>
-          <li><span class="profil-oznaka">Рођен(а):</span> 02.05.1987.</li>
-          <li><span class="profil-oznaka">Адреса:</span> Београд, Србија</li>
-          <li><span class="profil-oznaka">Занимање:</span> Највећи спортиста свих времена</li>
-        </ul>
-      </div>
+    <section class="profil-karta profil-karta-podaci" aria-label="Подаци о кориснику" id="profil-osnovni-podaci">
+      <p class="poruka-prazno">Учитавање профила...</p>
     </section>
 
     <section class="profil-karta profil-karta-stub" aria-label="Рецензије">
@@ -64,9 +54,9 @@
       <p class="poruka-prazno">Још нисте написали ниједну рецензију.</p>
     </section>
 
-    <section class="profil-karta profil-karta-stub" aria-label="Оцене аутора">
+    <section class="profil-karta profil-karta-stub" aria-label="Оцене аутора" id="moje-ocene-kontejner">
       <h2 class="profil-podnaslov-karte">Моје оцене аутора</h2>
-      <p class="poruka-prazno">Још нисте оценили ниједног аутора.</p>
+      <p class="poruka-prazno">Учитавање оцена...</p>
     </section>
   </main>
 
@@ -80,5 +70,6 @@
   <script src="../skripte/pomocne.js"></script>
   <script src="../skripte/navbar.js"></script>
   <script src="../skripte/modali.js"></script>
+  <script src="../skripte/profil.js"></script>
 </body>
 </html>
