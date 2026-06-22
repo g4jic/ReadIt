@@ -32,6 +32,10 @@ function napraviModale() {
     "<div class=\"polje\"><label for=\"reg-ime\">Име</label><input type=\"text\" id=\"reg-ime\" /></div>" +
     "<div class=\"polje\"><label for=\"reg-prezime\">Презиме</label><input type=\"text\" id=\"reg-prezime\" /></div>" +
     "</div><div class=\"polje\"><label for=\"reg-email\">E-mail</label><input type=\"email\" id=\"reg-email\" /></div>" +
+    "<div class=\"forma-red\">" +
+    "<div class=\"polje\"><label for=\"reg-datum\">Датум рођења</label><input type=\"date\" id=\"reg-datum\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-zanimanje\">Занимање</label><input type=\"text\" id=\"reg-zanimanje\" /></div>" +
+    "</div><div class=\"polje\"><label for=\"reg-adresa\">Адреса</label><input type=\"text\" id=\"reg-adresa\" /></div>" +
     "<p class=\"greska sakriveno\" id=\"registracija-greska\"></p>" +
     "</form></div><div class=\"modal-podnozje\">" +
     "<button type=\"button\" class=\"dugme dugme-outline\" data-zatvori=\"modal-registracija\">Откажи</button>" +
@@ -143,8 +147,11 @@ function validirajRegistraciju() {
   var ime = document.getElementById("reg-ime").value.trim();
   var prezime = document.getElementById("reg-prezime").value.trim();
   var email = document.getElementById("reg-email").value.trim();
+  var datumRodjenja = document.getElementById("reg-datum").value;
+  var adresa = document.getElementById("reg-adresa").value.trim();
+  var zanimanje = document.getElementById("reg-zanimanje").value.trim();
 
-  if (!korisnicko || !lozinka || !ime || !prezime || !email) {
+  if (!korisnicko || !lozinka || !ime || !prezime || !email || !datumRodjenja || !adresa || !zanimanje) {
     return "Сва поља су обавезна.";
   }
   if (!validirajLozinku(lozinka)) {
@@ -184,7 +191,10 @@ function registrujKorisnika() {
       lozinka: document.getElementById("reg-lozinka").value,
       ime: document.getElementById("reg-ime").value.trim(),
       prezime: document.getElementById("reg-prezime").value.trim(),
-      email: document.getElementById("reg-email").value.trim()
+      email: document.getElementById("reg-email").value.trim(),
+      datumRodjenja: document.getElementById("reg-datum").value,
+      adresa: document.getElementById("reg-adresa").value.trim(),
+      zanimanje: document.getElementById("reg-zanimanje").value.trim()
     };
 
     dodajUFirebase("korisnici", noviKorisnik, function (odgovor) {
@@ -196,6 +206,9 @@ function registrujKorisnika() {
       document.getElementById("reg-ime").value = "";
       document.getElementById("reg-prezime").value = "";
       document.getElementById("reg-email").value = "";
+      document.getElementById("reg-datum").value = "";
+      document.getElementById("reg-adresa").value = "";
+      document.getElementById("reg-zanimanje").value = "";
       
       zatvoriModal("modal-registracija");
       azurirajNavigaciju();

@@ -47,12 +47,12 @@
     </div>
 
     <div class="pretraga-traka">
-      <input type="text" readonly placeholder="Претражи по називу..." aria-label="Претрага по називу" />
-      <select disabled aria-label="Жанр">
-        <option>Сви жанрови</option>
+      <input type="text" id="pretraga-naziv" placeholder="Претражи по називу..." aria-label="Претрага по називу" />
+      <select id="pretraga-zanr" aria-label="Жанр">
+        <option value="">Сви жанрови</option>
       </select>
-      <button type="button" class="dugme dugme-primarno" disabled>Претражи</button>
-      <button type="button" class="dugme dugme-outline" disabled>Ресетуј</button>
+      <button type="button" class="dugme dugme-primarno" id="dugme-pretrazi-knjige">Претражи</button>
+      <button type="button" class="dugme dugme-outline" id="dugme-resetuj-knjige">Ресетуј</button>
     </div>
 
     <div class="mreza-knjiga" id="katalog-kontejner">

@@ -38,7 +38,7 @@ function prikaziKatalogAutora(autori, kontejner, terminZaPretragu) {
     var statusKlasa = klasaStatusaAutora(autor.status);
     
     var punoIme = punoImeAutora(autor);
-    var imeZaPrikaz = escapeHtml(punoIme);
+    var imeZaPrikaz = terminZaPretragu ? oznaciTekst(punoIme, terminZaPretragu) : escapeHtml(punoIme);
 
     html += "<a href=\"detaljiAutora.html?id=" + escapeHtml(stavka.id) + "\" class=\"autor-kartica\">";
     html += "<img src=\"" + escapeHtml(slika) + "\" alt=\"\" class=\"autor-slika\" />";
@@ -279,12 +279,11 @@ function poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVredno
     dugmeSacuvaj.textContent = "Чување...";
     dugmeSacuvaj.disabled = true;
 
-    var datum = new Date();
-    var isoDatum = datum.toISOString().split("T")[0];
+    var datum = danasnjiDatum();
 
     var novaOcena = {
       vrednost: izabranaOcena,
-      datum: isoDatum,
+      datum: datum,
       idAutora: idAutora,
       idKorisnika: prijavljenId
     };

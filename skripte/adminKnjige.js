@@ -195,8 +195,36 @@ function sacuvajFormuKnjige() {
     return;
   }
 
-  prikaziPoruku("admin-poruka", "Подаци су исправни.", "uspeh");
-  zatvoriModalKnjige();
+  var dugme = document.getElementById("dugme-sacuvaj-knjiga");
+  var stariTekst = dugme.textContent;
+  dugme.textContent = "Чување...";
+  dugme.disabled = true;
+
+  if (izabranaKnjigaId) {
+    izmeniUFirebase("knjige", izabranaKnjigaId, podatak, function () {
+      prikaziPoruku("admin-poruka", "Књига је успешно измењена.", "uspeh");
+      zatvoriModalKnjige();
+      ucitajAdminKnjige();
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }, function () {
+      prikaziPoruku("admin-modal-poruka", "Грешка при измени књиге.", "greska");
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    });
+  } else {
+    dodajUFirebase("knjige", podatak, function () {
+      prikaziPoruku("admin-poruka", "Књига је успешно додата.", "uspeh");
+      zatvoriModalKnjige();
+      ucitajAdminKnjige();
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }, function () {
+      prikaziPoruku("admin-modal-poruka", "Грешка при додавању књиге.", "greska");
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    });
+  }
 }
 
 function otvoriDijalogBrisanja(id) {
@@ -217,9 +245,33 @@ function zatvoriDijalogBrisanja() {
 }
 
 function potvrdiBrisanjeKnjige() {
-  zatvoriDijalogBrisanja();
-  prikaziPoruku("admin-poruka", "Брисање је потврђено.", "uspeh");
-  izabranaKnjigaId = null;
+  var idZaBrisanje = izabranaKnjigaId;
+  var dugme = document.getElementById("modal-brisanje-potvrdi");
+  var stariTekst = dugme ? dugme.textContent : "Обриши";
+
+  if (dugme) {
+    dugme.textContent = "Брисање...";
+    dugme.disabled = true;
+  }
+
+  obrisiIzFirebase("knjige", idZaBrisanje, function () {
+    prikaziPoruku("admin-poruka", "Књига је успешно обрисана.", "uspeh");
+    izabranaKnjigaId = null;
+    zatvoriDijalogBrisanja();
+    ucitajAdminKnjige();
+    if (dugme) {
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }
+  }, function () {
+    prikaziPoruku("admin-poruka", "Грешка при брисању књиге.", "greska");
+    izabranaKnjigaId = null;
+    zatvoriDijalogBrisanja();
+    if (dugme) {
+      dugme.textContent = stariTekst;
+      dugme.disabled = false;
+    }
+  });
 }
 
 function poveziAdminDogadjaje() {

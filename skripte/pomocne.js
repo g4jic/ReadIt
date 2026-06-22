@@ -98,6 +98,17 @@ function validirajAutora(podatak) {
   if (!podatak.status || !podatak.status.trim()) {
     return "Статус је обавезан.";
   }
+  var dozvoljeniStatusi = ["Активан", "У пензији", "Преминуо"];
+  var statusIspravan = false;
+  for (var s = 0; s < dozvoljeniStatusi.length; s++) {
+    if (podatak.status === dozvoljeniStatusi[s]) {
+      statusIspravan = true;
+      break;
+    }
+  }
+  if (!statusIspravan) {
+    return "Статус мора бити Активан, У пензији или Преминуо.";
+  }
   if (!podatak.datumRodjenja) {
     return "Датум рођења је обавезан.";
   }
@@ -222,4 +233,35 @@ function sakrijPoruku(elementId) {
   if (element) {
     element.classList.add("sakriveno");
   }
+}
+
+function oznaciTekst(tekst, termin) {
+  if (!tekst) {
+    return "";
+  }
+  if (!termin || termin.trim() === "") {
+    return escapeHtml(tekst);
+  }
+
+  var trazeno = termin.toLowerCase();
+  var original = String(tekst);
+  var lower = original.toLowerCase();
+  var html = "";
+  var pos = 0;
+  var index = lower.indexOf(trazeno, pos);
+
+  while (index !== -1) {
+    html += escapeHtml(original.substring(pos, index));
+    html += "<mark class=\"mark\">" + escapeHtml(original.substring(index, index + trazeno.length)) + "</mark>";
+    pos = index + trazeno.length;
+    index = lower.indexOf(trazeno, pos);
+  }
+
+  html += escapeHtml(original.substring(pos));
+  return html;
+}
+
+function danasnjiDatum() {
+  var datum = new Date();
+  return datum.toISOString().split("T")[0];
 }

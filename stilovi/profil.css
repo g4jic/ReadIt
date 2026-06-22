@@ -87,6 +87,65 @@
   padding: var(--razmak-l);
 }
 
+.profil-lista-stavki {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profil-stavka {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--razmak-m);
+  padding: var(--razmak-m) 0;
+  border-bottom: 1px solid var(--boja-linija);
+  flex-wrap: wrap;
+}
+
+.profil-stavka:last-child {
+  border-bottom: none;
+}
+
+.profil-stavka-levo {
+  flex: 1;
+  min-width: 0;
+}
+
+.profil-stavka-desno {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--razmak-s);
+  flex-shrink: 0;
+}
+
+.profil-stavka-naslov {
+  font-weight: 600;
+  color: var(--boja-primarna);
+  text-decoration: none;
+}
+
+.profil-stavka-naslov:hover {
+  text-decoration: underline;
+}
+
+.profil-stavka-tekst {
+  margin: var(--razmak-s) 0 0;
+  color: var(--boja-tekst);
+  line-height: 1.5;
+}
+
+.profil-stavka-datum {
+  font-size: 0.85rem;
+  color: var(--boja-tekst-slab);
+}
+
+.profil-stavka-levo .zvezdice {
+  margin-bottom: var(--razmak-s);
+  font-size: 1rem;
+}
+
 @media (max-width: 600px) {
   .profil-karta-podaci {
     flex-direction: column;

@@ -146,3 +146,11 @@ img {
 .sakriveno { display: none !important; }
 .centar { text-align: center; }
 .puna-sirina { width: 100%; }
+
+.mark {
+  background: var(--boja-akcent);
+  color: var(--boja-tekst);
+  padding: 0 3px;
+  border-radius: 3px;
+  font-weight: 600;
+}

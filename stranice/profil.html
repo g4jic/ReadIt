@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../stilovi/glavni.css" />
   <link rel="stylesheet" href="../stilovi/komponente.css" />
   <link rel="stylesheet" href="../stilovi/profil.css" />
+  <link rel="stylesheet" href="../stilovi/autori.css" />
   <link rel="stylesheet" href="../stilovi/responsive.css" />
   <link rel="stylesheet" href="../stilovi/navbar.css" />
 </head>
@@ -49,13 +50,11 @@
       <p class="poruka-prazno">Учитавање профила...</p>
     </section>
 
-    <section class="profil-karta profil-karta-stub" aria-label="Рецензије">
-      <h2 class="profil-podnaslov-karte">Моје рецензије</h2>
-      <p class="poruka-prazno">Још нисте написали ниједну рецензију.</p>
+    <section class="profil-karta profil-karta-stub" aria-label="Рецензије" id="moje-recenzije-kontejner">
+      <p class="poruka-prazno">Учитавање рецензија...</p>
     </section>
 
     <section class="profil-karta profil-karta-stub" aria-label="Оцене аутора" id="moje-ocene-kontejner">
-      <h2 class="profil-podnaslov-karte">Моје оцене аутора</h2>
       <p class="poruka-prazno">Учитавање оцена...</p>
     </section>
   </main>
@@ -63,6 +62,23 @@
   <footer class="footer">
     <p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p>
   </footer>
+
+  <div class="modal-pozadina" id="modal-brisanje-profil">
+    <div class="modal">
+      <div class="modal-zaglavlje">
+        <h2>Потврда брисања</h2>
+        <button type="button" class="modal-zatvori" id="modal-brisanje-profil-zatvori">&times;</button>
+      </div>
+      <div class="modal-telo">
+        <p id="modal-brisanje-profil-tekst">Да ли сте сигурни?</p>
+        <p id="modal-brisanje-profil-greska" class="poruka-greska sakriveno" style="margin-top:var(--razmak-m);"></p>
+      </div>
+      <div class="modal-podnozje">
+        <button type="button" class="dugme dugme-outline" id="modal-brisanje-profil-otkazi">Откажи</button>
+        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-profil-potvrdi">Обриши</button>
+      </div>
+    </div>
+  </div>
 
   <div id="modali-kontejner"></div>
 
