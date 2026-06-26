@@ -362,14 +362,6 @@ function poveziPretraguAutora() {
   var dugmePretrazi = document.getElementById("dugme-pretrazi");
   var dugmeResetuj = document.getElementById("dugme-resetuj");
 
-  if (imeInput) {
-    imeInput.addEventListener("input", primeniPretraguAutora);
-  }
-
-  if (statusInput) {
-    statusInput.addEventListener("change", primeniPretraguAutora);
-  }
-
   if (dugmePretrazi) {
     dugmePretrazi.addEventListener("click", primeniPretraguAutora);
   }

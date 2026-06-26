@@ -130,14 +130,6 @@ function poveziPretraguKnjiga() {
   var dugmePretrazi = document.getElementById("dugme-pretrazi-knjige");
   var dugmeResetuj = document.getElementById("dugme-resetuj-knjige");
 
-  if (nazivInput) {
-    nazivInput.addEventListener("input", primeniPretraguKnjiga);
-  }
-
-  if (zanrInput) {
-    zanrInput.addEventListener("change", primeniPretraguKnjiga);
-  }
-
   if (dugmePretrazi) {
     dugmePretrazi.addEventListener("click", primeniPretraguKnjiga);
   }

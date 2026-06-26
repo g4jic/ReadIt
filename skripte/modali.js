@@ -59,7 +59,7 @@ function zatvoriModal(id) {
 
 function odjaviKorisnika() {
   localStorage.removeItem("prijavljenKorisnik");
-  azurirajNavigaciju();
+  location.reload();
 }
 
 function azurirajNavigaciju() {
@@ -133,7 +133,7 @@ function prijaviKorisnika() {
       
       localStorage.setItem("prijavljenKorisnik", pronadjenId);
       zatvoriModal("modal-prijava");
-      azurirajNavigaciju();
+      location.reload();
     } else {
       greskaEl.textContent = "Погрешно корисничко име или лозинка.";
       greskaEl.classList.remove("sakriveno");
@@ -211,7 +211,7 @@ function registrujKorisnika() {
       document.getElementById("reg-zanimanje").value = "";
       
       zatvoriModal("modal-registracija");
-      azurirajNavigaciju();
+      location.reload();
     }, function () {
       greskaEl.textContent = "Грешка приликом регистрације.";
       greskaEl.classList.remove("sakriveno");

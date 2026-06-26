@@ -22,16 +22,13 @@ function ucitajPodatkeKorisnika(prijavljenId) {
     html += "<p class=\"profil-ime\">" + escapeHtml(imeStr) + " " + escapeHtml(prezimeStr) + "</p>";
     html += "<p class=\"profil-korisnicko\">@" + escapeHtml(korisnik.korisnickoIme || "korisnik") + "</p>";
     html += "<ul class=\"profil-lista\">";
-    html += "<li><span class=\"profil-oznaka\">E-mail:</span> " + escapeHtml(korisnik.email) + "</li>";
-    if (korisnik.datumRodjenja) {
-      html += "<li><span class=\"profil-oznaka\">Рођен(а):</span> " + escapeHtml(formatirajDatum(korisnik.datumRodjenja)) + "</li>";
-    }
-    if (korisnik.adresa) {
-      html += "<li><span class=\"profil-oznaka\">Адреса:</span> " + escapeHtml(korisnik.adresa) + "</li>";
-    }
-    if (korisnik.zanimanje) {
-      html += "<li><span class=\"profil-oznaka\">Занимање:</span> " + escapeHtml(korisnik.zanimanje) + "</li>";
-    }
+    html += "<li><span class=\"profil-oznaka\">Корисничко име:</span> " + escapeHtml(korisnik.korisnickoIme || "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">Име:</span> " + escapeHtml(imeStr || "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">Презиме:</span> " + escapeHtml(prezimeStr || "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">E-mail:</span> " + escapeHtml(korisnik.email || "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">Рођен(а):</span> " + escapeHtml(korisnik.datumRodjenja ? formatirajDatum(korisnik.datumRodjenja) : "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">Адреса:</span> " + escapeHtml(korisnik.adresa || "—") + "</li>";
+    html += "<li><span class=\"profil-oznaka\">Занимање:</span> " + escapeHtml(korisnik.zanimanje || "—") + "</li>";
     html += "</ul>";
     html += "</div>";
 
