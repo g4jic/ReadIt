@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sr-Cyrl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ридит - Каталог аутора</title>
+  <title>Ridit - Author Catalog</title>
   <link rel="icon" href="../slike/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,48 +21,48 @@
     <div class="navbar-sadrzaj">
       <a href="../index.html" class="logo">
         <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
-        <span>Ридит</span>
+        <span>Ridit</span>
       </a>
-      <button class="hamburger" type="button" aria-label="Отвори мени" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
       <nav>
         <ul class="nav-linkovi" id="nav-linkovi">
-          <li><a href="../index.html">Књиге</a></li>
-          <li><a href="Autori.html" class="aktivan">Аутори</a></li>
-          <li><a href="profil.html">Мој профил</a></li>
-          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
-          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="Autori.html" class="aktivan">Authors</a></li>
+          <li><a href="profil.html">My Profile</a></li>
+          <li><a href="administracijaKnjiga.html">Admin Books</a></li>
+          <li><a href="administracijaAutora.html">Admin Authors</a></li>
         </ul>
       </nav>
       <div class="nav-akcije" id="nav-akcije">
-        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Пријава</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Регистрација</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Log In</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Register</button>
       </div>
     </div>
   </header>
 
   <main>
     <div class="naslov-sekcije">
-      <h1>Аутори</h1>
+      <h1>Authors</h1>
     </div>
 
     <div class="pretraga-traka">
-      <input type="text" id="pretraga-ime" placeholder="Претражи по имену или презимену..." />
+      <input type="text" id="pretraga-ime" placeholder="Search by first or last name..." />
       <select id="pretraga-status">
-        <option value="">Сви статуси</option>
-        <option value="активан">Активан</option>
-        <option value="преминуо">Преминуо</option>
-        <option value="у пензији">У пензији</option>
+        <option value="">All statuses</option>
+        <option value="active">Active</option>
+        <option value="retired">Retired</option>
+        <option value="deceased">Deceased</option>
       </select>
-      <button type="button" class="dugme dugme-primarno" id="dugme-pretrazi">Претражи</button>
-      <button type="button" class="dugme dugme-outline" id="dugme-resetuj">Ресетуј</button>
+      <button type="button" class="dugme dugme-primarno" id="dugme-pretrazi">Search</button>
+      <button type="button" class="dugme dugme-outline" id="dugme-resetuj">Reset</button>
     </div>
 
     <div class="mreza-autora" id="katalog-autora-kontejner">
-      <p class="poruka-prazno">Учитавање аутора...</p>
+      <p class="poruka-prazno">Loading authors...</p>
     </div>
   </main>
 
-  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p></footer>
 
   <div id="modali-kontejner"></div>
 

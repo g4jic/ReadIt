@@ -8,7 +8,7 @@ function ucitajAdminKnjige() {
     return;
   }
 
-  tbody.innerHTML = "<tr><td colspan=\"8\">Учитавање...</td></tr>";
+  tbody.innerHTML = "<tr><td colspan=\"8\">Loading...</td></tr>";
 
   ucitajSaFirebase("knjige", function (knjige) {
     adminKnjigeCache = knjige || {};
@@ -30,7 +30,7 @@ function popuniSelectAutora() {
   lista.sort(function (a, b) {
     var imeA = a.podaci.ime + a.podaci.prezime;
     var imeB = b.podaci.ime + b.podaci.prezime;
-    return imeA.localeCompare(imeB, "sr");
+    return imeA.localeCompare(imeB, "en");
   });
 
   select.innerHTML = "";
@@ -47,7 +47,7 @@ function prikaziAdminTabelu() {
   var lista = pretvoriUListu(adminKnjigeCache);
 
   if (lista.length === 0) {
-    tbody.innerHTML = "<tr><td colspan=\"8\">Нема књига.</td></tr>";
+    tbody.innerHTML = "<tr><td colspan=\"8\">No books found.</td></tr>";
     return;
   }
 
@@ -67,8 +67,8 @@ function prikaziAdminTabelu() {
     html += "<td>" + escapeHtml(formatirajCenu(knjiga.cena)) + "</td>";
     html += "<td>" + escapeHtml(knjiga.isbn) + "</td>";
     html += "<td><div class=\"tabela-akcije\">";
-    html += "<button type=\"button\" class=\"dugme dugme-outline dugme-malo\" data-akcija=\"izmeni\" data-id=\"" + escapeHtml(stavka.id) + "\">Измени</button>";
-    html += "<button type=\"button\" class=\"dugme dugme-opasno dugme-malo\" data-akcija=\"obrisi\" data-id=\"" + escapeHtml(stavka.id) + "\">Обриши</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-outline dugme-malo\" data-akcija=\"izmeni\" data-id=\"" + escapeHtml(stavka.id) + "\">Edit</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-opasno dugme-malo\" data-akcija=\"obrisi\" data-id=\"" + escapeHtml(stavka.id) + "\">Delete</button>";
     html += "</div></td></tr>";
   }
 
@@ -113,7 +113,7 @@ function popuniFormuKnjige(id) {
   document.getElementById("knjiga-naziv-input").value = knjiga.naziv || "";
   document.getElementById("knjiga-opis-input").value = knjiga.opis || "";
   document.getElementById("knjiga-zanr-input").value = knjiga.zanr || "";
-  document.getElementById("knjiga-format-input").value = knjiga.format || "Тврди повез";
+  document.getElementById("knjiga-format-input").value = knjiga.format || "Hardcover";
   document.getElementById("knjiga-cena-input").value = knjiga.cena || "";
   document.getElementById("knjiga-strana-input").value = knjiga.brojStrana || "";
   document.getElementById("knjiga-isbn-input").value = knjiga.isbn || "";
@@ -127,7 +127,7 @@ function popuniFormuKnjige(id) {
 
   var naslovForme = document.getElementById("admin-forma-naslov");
   if (naslovForme) {
-    naslovForme.textContent = "Измена књиге: " + knjiga.naziv;
+    naslovForme.textContent = "Edit Book: " + knjiga.naziv;
   }
 
   otvoriModalKnjige();
@@ -137,7 +137,7 @@ function otvoriNovuKnjigu() {
   isprazniFormuKnjige();
   var naslovForme = document.getElementById("admin-forma-naslov");
   if (naslovForme) {
-    naslovForme.textContent = "Нова књига";
+    naslovForme.textContent = "New Book";
   }
   otvoriModalKnjige();
 }
@@ -150,7 +150,7 @@ function isprazniFormuKnjige() {
   document.getElementById("knjiga-naziv-input").value = "";
   document.getElementById("knjiga-opis-input").value = "";
   document.getElementById("knjiga-zanr-input").value = "";
-  document.getElementById("knjiga-format-input").value = "Тврди повез";
+  document.getElementById("knjiga-format-input").value = "Hardcover";
   document.getElementById("knjiga-cena-input").value = "";
   document.getElementById("knjiga-strana-input").value = "";
   document.getElementById("knjiga-isbn-input").value = "";
@@ -197,30 +197,30 @@ function sacuvajFormuKnjige() {
 
   var dugme = document.getElementById("dugme-sacuvaj-knjiga");
   var stariTekst = dugme.textContent;
-  dugme.textContent = "Чување...";
+  dugme.textContent = "Saving...";
   dugme.disabled = true;
 
   if (izabranaKnjigaId) {
     izmeniUFirebase("knjige", izabranaKnjigaId, podatak, function () {
-      prikaziPoruku("admin-poruka", "Књига је успешно измењена.", "uspeh");
+      prikaziPoruku("admin-poruka", "Book updated successfully.", "uspeh");
       zatvoriModalKnjige();
       ucitajAdminKnjige();
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     }, function () {
-      prikaziPoruku("admin-modal-poruka", "Грешка при измени књиге.", "greska");
+      prikaziPoruku("admin-modal-poruka", "Error updating book.", "greska");
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     });
   } else {
     dodajUFirebase("knjige", podatak, function () {
-      prikaziPoruku("admin-poruka", "Књига је успешно додата.", "uspeh");
+      prikaziPoruku("admin-poruka", "Book added successfully.", "uspeh");
       zatvoriModalKnjige();
       ucitajAdminKnjige();
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     }, function () {
-      prikaziPoruku("admin-modal-poruka", "Грешка при додавању књиге.", "greska");
+      prikaziPoruku("admin-modal-poruka", "Error adding book.", "greska");
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     });
@@ -235,7 +235,7 @@ function otvoriDijalogBrisanja(id) {
 
   izabranaKnjigaId = id;
   var tekst = document.getElementById("modal-brisanje-tekst");
-  tekst.textContent = "Да ли сте сигурни да желите да обришете књигу „" + knjiga.naziv + "“?";
+  tekst.textContent = "Are you sure you want to delete the book \"" + knjiga.naziv + "\"?";
 
   document.getElementById("modal-brisanje-knjige").classList.add("otvoren");
 }
@@ -247,15 +247,15 @@ function zatvoriDijalogBrisanja() {
 function potvrdiBrisanjeKnjige() {
   var idZaBrisanje = izabranaKnjigaId;
   var dugme = document.getElementById("modal-brisanje-potvrdi");
-  var stariTekst = dugme ? dugme.textContent : "Обриши";
+  var stariTekst = dugme ? dugme.textContent : "Delete";
 
   if (dugme) {
-    dugme.textContent = "Брисање...";
+    dugme.textContent = "Deleting...";
     dugme.disabled = true;
   }
 
   obrisiIzFirebase("knjige", idZaBrisanje, function () {
-    prikaziPoruku("admin-poruka", "Књига је успешно обрисана.", "uspeh");
+    prikaziPoruku("admin-poruka", "Book deleted successfully.", "uspeh");
     izabranaKnjigaId = null;
     zatvoriDijalogBrisanja();
     ucitajAdminKnjige();
@@ -264,7 +264,7 @@ function potvrdiBrisanjeKnjige() {
       dugme.disabled = false;
     }
   }, function () {
-    prikaziPoruku("admin-poruka", "Грешка при брисању књиге.", "greska");
+    prikaziPoruku("admin-poruka", "Error deleting book.", "greska");
     izabranaKnjigaId = null;
     zatvoriDijalogBrisanja();
     if (dugme) {

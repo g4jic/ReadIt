@@ -7,7 +7,7 @@ function ucitajKatalog() {
     return;
   }
 
-  kontejner.innerHTML = "<p class=\"poruka-prazno\">Учитавање књига...</p>";
+  kontejner.innerHTML = "<p class=\"poruka-prazno\">Loading books...</p>";
 
   ucitajSaFirebase("knjige", function (knjige) {
     katalogKnjigeCache = knjige || {};
@@ -16,10 +16,10 @@ function ucitajKatalog() {
       popuniZanrove(katalogKnjigeCache);
       prikaziKatalog(katalogKnjigeCache, katalogAutoriCache, kontejner, "");
     }, function () {
-      kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању аутора.</p>";
+      kontejner.innerHTML = "<p class=\"poruka-greska\">Error loading authors.</p>";
     });
   }, function () {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању књига. Проверите Firebase URL.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Error loading books. Check the Firebase URL.</p>";
   });
 }
 
@@ -39,10 +39,10 @@ function popuniZanrove(knjige) {
     }
   }
 
-  select.innerHTML = "<option value=\"\">Сви жанрови</option>";
+  select.innerHTML = "<option value=\"\">All genres</option>";
   var nazivi = Object.keys(zanrovi);
   nazivi.sort(function (a, b) {
-    return a.localeCompare(b, "sr");
+    return a.localeCompare(b, "en");
   });
 
   for (var j = 0; j < nazivi.length; j++) {
@@ -57,7 +57,7 @@ function prikaziKatalog(knjige, autori, kontejner, terminNaziva) {
   var lista = typeof knjige.length === "number" ? knjige : pretvoriUListu(knjige);
 
   if (lista.length === 0) {
-    kontejner.innerHTML = "<p class=\"poruka-prazno\">Нема књига које одговарају претрази.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-prazno\">No books match your search.</p>";
     return;
   }
 
@@ -155,37 +155,41 @@ function ucitajDetaljKnjige() {
 
   var idKnjige = uzmiParametarIzUrl("id");
   if (!idKnjige) {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Није пронађен ID књиге у адреси (?id=...).</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Book ID not found in the URL (?id=...).</p>";
     return;
   }
 
-  kontejner.innerHTML = "<p class=\"poruka-prazno\">Учитавање...</p>";
+  kontejner.innerHTML = "<p class=\"poruka-prazno\">Loading...</p>";
 
   ucitajSaFirebase("knjige/" + idKnjige, function (knjiga) {
     if (!knjiga) {
-      kontejner.innerHTML = "<p class=\"poruka-greska\">Књига не постоји у бази.</p>";
+      kontejner.innerHTML = "<p class=\"poruka-greska\">Book not found in the database.</p>";
       return;
     }
 
     ucitajSaFirebase("autori", function (autori) {
       ucitajSaFirebase("recenzije", function (recenzije) {
-        ucitajSaFirebase("korisnici", function (korisnici) {
-          prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, korisnici, kontejner);
+        ucitajSaFirebase("oceneKnjiga", function (oceneKnjiga) {
+          ucitajSaFirebase("korisnici", function (korisnici) {
+            prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, oceneKnjiga, korisnici, kontejner);
+          });
         });
       });
     });
   }, function () {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању књиге.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Error loading book.</p>";
   });
 }
 
-function prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, korisnici, kontejner) {
+function prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, oceneKnjiga, korisnici, kontejner) {
   var slika = knjiga.slike && knjiga.slike[0] ? knjiga.slike[0] : "";
   var autorIme = imeAutora(autori, knjiga.idAutora);
   var idAutora = knjiga.idAutora || "";
   var prijavljenId = localStorage.getItem("prijavljenKorisnik");
   var postojecaRecenzijaId = null;
   var postojeciTekst = "";
+  var postojecaOcenaKnjigeId = null;
+  var postojecaOcenaKnjige = "";
 
   if (prijavljenId) {
     var listaRecenzija = pretvoriUListu(recenzije);
@@ -196,9 +200,18 @@ function prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, korisnici, kon
         break;
       }
     }
+
+    var listaOcenaKnjiga = pretvoriUListu(oceneKnjiga);
+    for (var o = 0; o < listaOcenaKnjiga.length; o++) {
+      if (listaOcenaKnjiga[o].podaci.idKnjige === idKnjige && listaOcenaKnjiga[o].podaci.idKorisnika === prijavljenId) {
+        postojecaOcenaKnjigeId = listaOcenaKnjiga[o].id;
+        postojecaOcenaKnjige = listaOcenaKnjiga[o].podaci.vrednost || "";
+        break;
+      }
+    }
   }
 
-  document.title = "Ридит - " + knjiga.naziv;
+  document.title = "Ridit - " + knjiga.naziv;
 
   var html = "";
   html += "<div class=\"knjiga-detalj\">";
@@ -213,18 +226,20 @@ function prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, korisnici, kon
   html += "</div></div>";
   html += "<div class=\"knjiga-detalj-info\">";
   html += "<h1>" + escapeHtml(knjiga.naziv) + "</h1>";
-  html += "<p class=\"knjiga-detalj-autor\">Аутор: <a href=\"detaljiAutora.html?id=" + escapeHtml(idAutora) + "\">" + escapeHtml(autorIme) + "</a></p>";
+  html += "<p class=\"knjiga-detalj-autor\">Author: <a href=\"detaljiAutora.html?id=" + escapeHtml(idAutora) + "\">" + escapeHtml(autorIme) + "</a></p>";
   html += "<p class=\"knjiga-opis\">" + escapeHtml(knjiga.opis) + "</p>";
   html += "<div class=\"knjiga-meta-lista\">";
-  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Жанр</span><span class=\"vrednost\">" + escapeHtml(knjiga.zanr) + "</span></div>";
-  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Формат</span><span class=\"vrednost\">" + escapeHtml(knjiga.format) + "</span></div>";
-  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Број страна</span><span class=\"vrednost\">" + escapeHtml(knjiga.brojStrana) + "</span></div>";
+  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Genre</span><span class=\"vrednost\">" + escapeHtml(knjiga.zanr) + "</span></div>";
+  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Format</span><span class=\"vrednost\">" + escapeHtml(knjiga.format) + "</span></div>";
+  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Pages</span><span class=\"vrednost\">" + escapeHtml(knjiga.brojStrana) + "</span></div>";
   html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">ISBN</span><span class=\"vrednost\">" + escapeHtml(knjiga.isbn) + "</span></div>";
-  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Цена</span><span class=\"vrednost\">" + escapeHtml(formatirajCenu(knjiga.cena)) + "</span></div>";
+  html += "<div class=\"knjiga-meta-stavka\"><span class=\"label\">Price</span><span class=\"vrednost\">" + escapeHtml(formatirajCenu(knjiga.cena)) + "</span></div>";
   html += "</div></div></div>";
 
   html += "<section class=\"recenzije-sekcija\">";
-  html += "<h2>Рецензије</h2>";
+  html += "<h2>Reviews & Ratings</h2>";
+  html += prikaziOceneZaKnjigu(idKnjige, oceneKnjiga, korisnici);
+  html += prikaziFormuOceneKnjige(prijavljenId, postojecaOcenaKnjige);
   html += prikaziRecenzijeZaKnjigu(idKnjige, recenzije, korisnici);
   html += prikaziFormuRecenzije(prijavljenId, postojeciTekst);
   html += "</section>";
@@ -232,8 +247,138 @@ function prikaziDetaljKnjige(idKnjige, knjiga, autori, recenzije, korisnici, kon
   kontejner.innerHTML = html;
 
   if (prijavljenId) {
+    poveziFormuOceneKnjige(idKnjige, prijavljenId, postojecaOcenaKnjigeId);
     poveziFormuRecenzije(idKnjige, prijavljenId, postojecaRecenzijaId);
   }
+}
+
+function prikaziOceneZaKnjigu(idKnjige, oceneKnjiga, korisnici) {
+  var lista = pretvoriUListu(oceneKnjiga);
+  var filtrirane = [];
+  
+  for (var i = 0; i < lista.length; i++) {
+    if (lista[i].podaci.idKnjige === idKnjige) {
+      filtrirane.push(lista[i]);
+    }
+  }
+
+  var html = "<div class=\"recenzija-lista-okvir\">";
+  html += "<h3 class=\"recenzija-lista-naslov\">Book Ratings</h3>";
+
+  if (filtrirane.length === 0) {
+    html += "<p class=\"poruka-prazno\">No ratings for this book yet.</p>";
+  } else {
+    for (var j = 0; j < filtrirane.length; j++) {
+      var ocena = filtrirane[j].podaci;
+      var autorOcene = imeKorisnika(korisnici, ocena.idKorisnika);
+      html += "<article class=\"recenzija\">";
+      html += "<div class=\"recenzija-zaglavlje\">";
+      html += "<span class=\"recenzija-autor\">" + escapeHtml(autorOcene) + "</span>";
+      html += "<span class=\"recenzija-datum\">" + escapeHtml(formatirajDatum(ocena.datum)) + "</span>";
+      html += "</div>";
+      html += "<p class=\"recenzija-tekst\">Rating: " + escapeHtml(ocena.vrednost) + "/5</p>";
+      html += "</article>";
+    }
+  }
+
+  html += "</div>";
+  return html;
+}
+
+function prikaziFormuOceneKnjige(prijavljenId, postojecaOcenaKnjige) {
+  var html = "<div class=\"recenzija-forma\">";
+
+  if (!prijavljenId) {
+    html += "<p class=\"poruka-prazno\">You must be logged in to rate this book.</p>";
+    html += "<form class=\"forma\" action=\"#\" method=\"get\" onsubmit=\"return false;\">";
+    html += "<div class=\"polje\">";
+    html += "<label for=\"ocena-knjige-vrednost\">Your Rating</label>";
+    html += "<select id=\"ocena-knjige-vrednost\" disabled><option>Select a rating</option></select>";
+    html += "</div>";
+    html += "<div class=\"forma-akcije\">";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Save Rating</button>";
+    html += "</div></form>";
+  } else {
+    html += "<form class=\"forma\" action=\"#\" method=\"get\" onsubmit=\"return false;\">";
+    html += "<div class=\"polje\">";
+    html += "<label for=\"ocena-knjige-vrednost\">Your Rating</label>";
+    html += "<select id=\"ocena-knjige-vrednost\">";
+    html += "<option value=\"\">Select a rating</option>";
+    for (var i = 1; i <= 5; i++) {
+      var selected = Number(postojecaOcenaKnjige) === i ? " selected" : "";
+      html += "<option value=\"" + i + "\"" + selected + ">" + i + "</option>";
+    }
+    html += "</select>";
+    html += "</div>";
+    html += "<p class=\"greska sakriveno\" id=\"ocena-knjige-greska\"></p>";
+    html += "<div class=\"forma-akcije\">";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-sacuvaj-ocenu-knjige\">Save Rating</button>";
+    html += "</div></form>";
+  }
+
+  html += "</div>";
+  return html;
+}
+
+function poveziFormuOceneKnjige(idKnjige, prijavljenId, postojecaOcenaKnjigeId) {
+  var dugme = document.getElementById("dugme-sacuvaj-ocenu-knjige");
+  var select = document.getElementById("ocena-knjige-vrednost");
+  var greskaEl = document.getElementById("ocena-knjige-greska");
+
+  if (!dugme || !select) {
+    return;
+  }
+
+  dugme.addEventListener("click", function () {
+    var vrednost = Number(select.value);
+
+    if (vrednost < 1 || vrednost > 5) {
+      if (greskaEl) {
+        greskaEl.textContent = "Please select a rating from 1 to 5.";
+        greskaEl.classList.remove("sakriveno");
+      }
+      return;
+    }
+
+    if (greskaEl) {
+      greskaEl.classList.add("sakriveno");
+    }
+
+    var stariTekst = dugme.textContent;
+    dugme.textContent = "Saving...";
+    dugme.disabled = true;
+
+    var podatak = {
+      vrednost: vrednost,
+      datum: danasnjiDatum(),
+      idKnjige: idKnjige,
+      idKorisnika: prijavljenId
+    };
+
+    if (postojecaOcenaKnjigeId) {
+      izmeniUFirebase("oceneKnjiga", postojecaOcenaKnjigeId, podatak, function () {
+        ucitajDetaljKnjige();
+      }, function () {
+        if (greskaEl) {
+          greskaEl.textContent = "Error updating rating.";
+          greskaEl.classList.remove("sakriveno");
+        }
+        dugme.textContent = stariTekst;
+        dugme.disabled = false;
+      });
+    } else {
+      dodajUFirebase("oceneKnjiga", podatak, function () {
+        ucitajDetaljKnjige();
+      }, function () {
+        if (greskaEl) {
+          greskaEl.textContent = "Error saving rating.";
+          greskaEl.classList.remove("sakriveno");
+        }
+        dugme.textContent = stariTekst;
+        dugme.disabled = false;
+      });
+    }
+  });
 }
 
 function prikaziRecenzijeZaKnjigu(idKnjige, recenzije, korisnici) {
@@ -247,10 +392,10 @@ function prikaziRecenzijeZaKnjigu(idKnjige, recenzije, korisnici) {
   }
 
   var html = "<div class=\"recenzija-lista-okvir\">";
-  html += "<h3 class=\"recenzija-lista-naslov\">Претходне рецензије</h3>";
+  html += "<h3 class=\"recenzija-lista-naslov\">Previous Reviews</h3>";
 
   if (filtrirane.length === 0) {
-    html += "<p class=\"poruka-prazno\">Још нема рецензија за ову књигу.</p>";
+    html += "<p class=\"poruka-prazno\">No reviews for this book yet.</p>";
   } else {
     for (var j = 0; j < filtrirane.length; j++) {
       var rec = filtrirane[j].podaci;
@@ -273,24 +418,24 @@ function prikaziFormuRecenzije(prijavljenId, postojeciTekst) {
   var html = "<div class=\"recenzija-forma\">";
 
   if (!prijavljenId) {
-    html += "<p class=\"poruka-prazno\">Морате бити пријављени да бисте оставили рецензију. Користите дугме „Пријава“ у менију.</p>";
+    html += "<p class=\"poruka-prazno\">You must be logged in to leave a review. Use the Log In button in the menu.</p>";
     html += "<form class=\"forma\" action=\"#\" method=\"get\" onsubmit=\"return false;\">";
     html += "<div class=\"polje\">";
-    html += "<label for=\"recenzija-tekst\">Ваша рецензија</label>";
-    html += "<textarea id=\"recenzija-tekst\" rows=\"4\" placeholder=\"Поделите утиске...\" disabled></textarea>";
+    html += "<label for=\"recenzija-tekst\">Your Review</label>";
+    html += "<textarea id=\"recenzija-tekst\" rows=\"4\" placeholder=\"Share your thoughts...\" disabled></textarea>";
     html += "</div>";
     html += "<div class=\"forma-akcije\">";
-    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Објави рецензију</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Post Review</button>";
     html += "</div></form>";
   } else {
     html += "<form class=\"forma\" action=\"#\" method=\"get\" onsubmit=\"return false;\">";
     html += "<div class=\"polje\">";
-    html += "<label for=\"recenzija-tekst\">Ваша рецензија</label>";
-    html += "<textarea id=\"recenzija-tekst\" rows=\"4\" placeholder=\"Поделите утиске...\">" + escapeHtml(postojeciTekst) + "</textarea>";
+    html += "<label for=\"recenzija-tekst\">Your Review</label>";
+    html += "<textarea id=\"recenzija-tekst\" rows=\"4\" placeholder=\"Share your thoughts...\">" + escapeHtml(postojeciTekst) + "</textarea>";
     html += "</div>";
     html += "<p class=\"greska sakriveno\" id=\"recenzija-greska\"></p>";
     html += "<div class=\"forma-akcije\">";
-    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-objavi-recenziju\">Објави рецензију</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-objavi-recenziju\">Post Review</button>";
     html += "</div></form>";
   }
 
@@ -312,7 +457,7 @@ function poveziFormuRecenzije(idKnjige, prijavljenId, postojecaRecenzijaId) {
 
     if (!tekst) {
       if (greskaEl) {
-        greskaEl.textContent = "Унесите текст рецензије.";
+        greskaEl.textContent = "Please enter review text.";
         greskaEl.classList.remove("sakriveno");
       }
       return;
@@ -323,7 +468,7 @@ function poveziFormuRecenzije(idKnjige, prijavljenId, postojecaRecenzijaId) {
     }
 
     var stariTekst = dugme.textContent;
-    dugme.textContent = "Чување...";
+    dugme.textContent = "Saving...";
     dugme.disabled = true;
 
     var podatak = {
@@ -338,7 +483,7 @@ function poveziFormuRecenzije(idKnjige, prijavljenId, postojecaRecenzijaId) {
         ucitajDetaljKnjige();
       }, function () {
         if (greskaEl) {
-          greskaEl.textContent = "Грешка при измени рецензије.";
+          greskaEl.textContent = "Error updating review.";
           greskaEl.classList.remove("sakriveno");
         }
         dugme.textContent = stariTekst;
@@ -349,7 +494,7 @@ function poveziFormuRecenzije(idKnjige, prijavljenId, postojecaRecenzijaId) {
         ucitajDetaljKnjige();
       }, function () {
         if (greskaEl) {
-          greskaEl.textContent = "Грешка при чувању рецензије.";
+          greskaEl.textContent = "Error saving review.";
           greskaEl.classList.remove("sakriveno");
         }
         dugme.textContent = stariTekst;

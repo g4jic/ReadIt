@@ -6,13 +6,13 @@ function ucitajKatalogAutora() {
     return;
   }
 
-  kontejner.innerHTML = "<p class=\"poruka-prazno\">Учитавање аутора...</p>";
+  kontejner.innerHTML = "<p class=\"poruka-prazno\">Loading authors...</p>";
 
   ucitajSaFirebase("autori", function (autori) {
     katalogAutoriCache = autori || {};
     prikaziKatalogAutora(katalogAutoriCache, kontejner, "");
   }, function () {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању аутора. Проверите Firebase URL.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Error loading authors. Check the Firebase URL.</p>";
   });
 }
 
@@ -22,11 +22,11 @@ function prikaziKatalogAutora(autori, kontejner, terminZaPretragu) {
   lista.sort(function (a, b) {
     var imeA = punoImeAutora(a.podaci);
     var imeB = punoImeAutora(b.podaci);
-    return imeA.localeCompare(imeB, "sr");
+    return imeA.localeCompare(imeB, "en");
   });
 
   if (lista.length === 0) {
-    kontejner.innerHTML = "<p class=\"poruka-prazno\">Нема аутора који одговарају претрази.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-prazno\">No authors match your search.</p>";
     return;
   }
 
@@ -59,15 +59,15 @@ function ucitajDetaljAutora() {
 
   var idAutora = uzmiParametarIzUrl("id");
   if (!idAutora) {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Није пронађен ID аутора у адреси (?id=...).</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Author ID not found in the URL (?id=...).</p>";
     return;
   }
 
-  kontejner.innerHTML = "<p class=\"poruka-prazno\">Учитавање...</p>";
+  kontejner.innerHTML = "<p class=\"poruka-prazno\">Loading...</p>";
 
   ucitajSaFirebase("autori/" + idAutora, function (autor) {
     if (!autor) {
-      kontejner.innerHTML = "<p class=\"poruka-greska\">Аутор не постоји у бази.</p>";
+      kontejner.innerHTML = "<p class=\"poruka-greska\">Author not found in the database.</p>";
       return;
     }
 
@@ -77,7 +77,7 @@ function ucitajDetaljAutora() {
       });
     });
   }, function () {
-    kontejner.innerHTML = "<p class=\"poruka-greska\">Грешка при учитавању аутора.</p>";
+    kontejner.innerHTML = "<p class=\"poruka-greska\">Error loading author.</p>";
   });
 }
 
@@ -118,7 +118,7 @@ function prikaziKnjigeAutora(idAutora, knjige) {
   }
 
   if (!html) {
-    return "<p class=\"poruka-prazno\">Нема књига овог аутора у каталогу.</p>";
+    return "<p class=\"poruka-prazno\">No books by this author in the catalog.</p>";
   }
 
   return "<div class=\"autor-knjige-lista\">" + html + "</div>";
@@ -139,7 +139,7 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
   var statusKlasa = klasaStatusaAutora(autor.status);
   var ocenaInfo = izracunajProsekOcena(idAutora, ocene);
 
-  document.title = "Ридит - " + punoImeAutora(autor);
+  document.title = "Ridit - " + punoImeAutora(autor);
 
   var prijavljenId = localStorage.getItem("prijavljenKorisnik");
   var postojecaOcenaId = null;
@@ -163,16 +163,16 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
   html += "<div class=\"autor-hero-info\">";
   html += "<h1>" + escapeHtml(punoImeAutora(autor)) + "</h1>";
   html += "<p><span class=\"autor-status " + escapeHtml(statusKlasa) + "\">" + escapeHtml(autor.status || "") + "</span></p>";
-  html += "<p>Рођен(а): " + escapeHtml(formatirajDatum(autor.datumRodjenja)) + "</p>";
-  html += "<p>Телефон менаџера: " + escapeHtml(autor.kontaktTelefonMenadzera || "—") + "</p>";
+  html += "<p>Born: " + escapeHtml(formatirajDatum(autor.datumRodjenja)) + "</p>";
+  html += "<p>Manager phone: " + escapeHtml(autor.kontaktTelefonMenadzera || "—") + "</p>";
   html += "</div></div>";
 
   html += "<div class=\"autor-detalj-telo\">";
   html += "<p class=\"autor-biografija\">" + escapeHtml(autor.biografija) + "</p>";
 
   html += "<div class=\"autor-meta-lista\">";
-  html += "<div><strong>Награде:</strong> " + escapeHtml(formatirajBroj(autor.brojOsvojenihNagrada)) + "</div>";
-  html += "<div><strong>Продати примерци:</strong> " + escapeHtml(formatirajBroj(autor.brojProdatihPrimeraka)) + "</div>";
+  html += "<div><strong>Awards:</strong> " + escapeHtml(formatirajBroj(autor.brojOsvojenihNagrada)) + "</div>";
+  html += "<div><strong>Copies sold:</strong> " + escapeHtml(formatirajBroj(autor.brojProdatihPrimeraka)) + "</div>";
   html += "</div>";
 
   html += "<div class=\"ocena-kutija\">";
@@ -180,24 +180,24 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
   html += "<span class=\"ocena-broj\">" + escapeHtml(ocenaInfo.prosek.toFixed(1)) + "</span>";
   html += prikaziZvezdiceProsek(ocenaInfo.prosek);
   html += "</div>";
-  html += "<p class=\"ocena-info\">Просечна оцена (" + escapeHtml(ocenaInfo.broj) + " гласова)</p>";
+  html += "<p class=\"ocena-info\">Average rating (" + escapeHtml(ocenaInfo.broj) + " votes)</p>";
   html += "</div>";
 
   html += "<div id=\"kutija-ocena\">";
-  html += "<h3>Оцените аутора</h3>";
+  html += "<h3>Rate this author</h3>";
   
   if (!prijavljenId) {
-    html += "<p class=\"ocena-objasnjenje\">Морате бити пријављени да бисте оставили оцену. Користите дугме „Пријава“ у менију.</p>";
+    html += "<p class=\"ocena-objasnjenje\">You must be logged in to leave a rating. Use the Log In button in the menu.</p>";
     html += "<div class=\"zvezdice\" aria-hidden=\"true\">";
     for (var z = 1; z <= 5; z++) {
       html += "<span class=\"zvezdica\">★</span>";
     }
     html += "</div>";
     html += "<div class=\"forma-akcije\" style=\"margin-top:var(--razmak-m);\">";
-    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Сачувај оцену</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" disabled>Save Rating</button>";
     html += "</div>";
   } else {
-    html += "<p class=\"ocena-objasnjenje\" id=\"poruka-za-ocenu\">Изаберите број звездица:</p>";
+    html += "<p class=\"ocena-objasnjenje\" id=\"poruka-za-ocenu\">Select a star rating:</p>";
     html += "<div class=\"zvezdice interaktivne\" id=\"kontejner-zvezdica\" aria-hidden=\"true\">";
     for (var v = 1; v <= 5; v++) {
       var klasaZvezdice = v <= trenutnaVrednostOcene ? "zvezdica aktivna" : "zvezdica";
@@ -205,13 +205,13 @@ function prikaziDetaljAutora(idAutora, autor, knjige, ocene, kontejner) {
     }
     html += "</div>";
     html += "<div class=\"forma-akcije\" style=\"margin-top:var(--razmak-m);\">";
-    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-sacuvaj-ocenu\">Сачувај оцену</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-sacuvaj-ocenu\">Save Rating</button>";
     html += "</div>";
   }
   html += "</div>";
 
   html += "<section style=\"margin-top:var(--razmak-xl);\">";
-  html += "<h2>Књиге аутора</h2>";
+  html += "<h2>Author's Books</h2>";
   html += prikaziKnjigeAutora(idAutora, knjige);
   html += "</section>";
 
@@ -269,14 +269,14 @@ function poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVredno
   dugmeSacuvaj.addEventListener("click", function () {
     if (izabranaOcena === 0) {
       if (poruka) {
-        poruka.textContent = "Морате изабрати број звездица пре чувања.";
+        poruka.textContent = "You must select a star rating before saving.";
         poruka.style.color = "red";
       }
       return;
     }
 
     var dugmeTekst = dugmeSacuvaj.textContent;
-    dugmeSacuvaj.textContent = "Чување...";
+    dugmeSacuvaj.textContent = "Saving...";
     dugmeSacuvaj.disabled = true;
 
     var datum = danasnjiDatum();
@@ -293,7 +293,7 @@ function poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVredno
         ucitajDetaljAutora();
       }, function () {
         if (poruka) {
-          poruka.textContent = "Грешка при измени оцене.";
+          poruka.textContent = "Error updating rating.";
           poruka.style.color = "red";
         }
         dugmeSacuvaj.textContent = dugmeTekst;
@@ -304,7 +304,7 @@ function poveziZvezdice(idAutora, postojecaOcenaId, prijavljenId, trenutnaVredno
         ucitajDetaljAutora();
       }, function () {
         if (poruka) {
-          poruka.textContent = "Грешка при чувању оцене.";
+          poruka.textContent = "Error saving rating.";
           poruka.style.color = "red";
         }
         dugmeSacuvaj.textContent = dugmeTekst;
@@ -336,7 +336,7 @@ function primeniPretraguAutora() {
   for (var i = 0; i < listaSva.length; i++) {
     var autor = listaSva[i].podaci;
     var punoIme = punoImeAutora(autor).toLowerCase();
-    var status = (autor.status || "").toLowerCase();
+    var status = normalizujStatus(autor.status);
 
     var odgovaraIme = true;
     if (trazenoIme !== "") {

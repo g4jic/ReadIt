@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="sr-Cyrl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ридит - Администрација књига</title>
+  <title>Ridit - Book Administration</title>
   <link rel="icon" href="../slike/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,47 +21,47 @@
     <div class="navbar-sadrzaj">
       <a href="../index.html" class="logo">
         <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
-        <span>Ридит</span>
+        <span>Ridit</span>
       </a>
-      <button class="hamburger" type="button" aria-label="Отвори мени" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
       <nav>
         <ul class="nav-linkovi" id="nav-linkovi">
-          <li><a href="../index.html">Књиге</a></li>
-          <li><a href="Autori.html">Аутори</a></li>
-          <li><a href="profil.html">Мој профил</a></li>
-          <li><a href="administracijaKnjiga.html" class="aktivan">Админ књиге</a></li>
-          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="Autori.html">Authors</a></li>
+          <li><a href="profil.html">My Profile</a></li>
+          <li><a href="administracijaKnjiga.html" class="aktivan">Admin Books</a></li>
+          <li><a href="administracijaAutora.html">Admin Authors</a></li>
         </ul>
       </nav>
       <div class="nav-akcije" id="nav-akcije">
-        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Пријава</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Регистрација</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Log In</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Register</button>
       </div>
     </div>
   </header>
 
   <main>
     <div class="naslov-sekcije">
-      <h1>Администрација књига</h1>
-      <button type="button" class="dugme dugme-primarno" id="dugme-nova-knjiga">+ Нова књига</button>
+      <h1>Book Administration</h1>
+      <button type="button" class="dugme dugme-primarno" id="dugme-nova-knjiga">+ New Book</button>
     </div>
 
     <div class="tabela-wrapper">
       <table class="tabela">
         <thead>
           <tr>
-            <th>Слика</th>
-            <th>Назив</th>
-            <th>Аутор</th>
-            <th>Жанр</th>
-            <th>Стр.</th>
-            <th>Цена</th>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Pgs.</th>
+            <th>Price</th>
             <th>ISBN</th>
-            <th>Акције</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="admin-tabela-telo">
-          <tr><td colspan="8">Учитавање...</td></tr>
+          <tr><td colspan="8">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -72,49 +72,49 @@
   <div class="modal-pozadina" id="modal-knjiga-forma">
     <div class="modal modal-veliki">
       <div class="modal-zaglavlje">
-        <h2 id="admin-forma-naslov">Нова књига</h2>
+        <h2 id="admin-forma-naslov">New Book</h2>
         <button type="button" class="modal-zatvori" id="modal-knjiga-zatvori">&times;</button>
       </div>
       <div class="modal-telo">
         <p id="admin-modal-poruka" class="sakriveno"></p>
         <form class="forma" action="#" method="get" onsubmit="return false;">
           <div class="polje">
-            <label for="knjiga-naziv-input">Назив</label>
+            <label for="knjiga-naziv-input">Title</label>
             <input type="text" id="knjiga-naziv-input" />
           </div>
           <div class="polje">
-            <label for="knjiga-opis-input">Опис</label>
+            <label for="knjiga-opis-input">Description</label>
             <textarea id="knjiga-opis-input"></textarea>
           </div>
           <div class="polje">
-            <label for="knjiga-slike-input">URL-ови слика (одвојени зarezom)</label>
+            <label for="knjiga-slike-input">Image URLs (comma-separated)</label>
             <input type="text" id="knjiga-slike-input" placeholder="https://..." />
           </div>
           <div class="forma-red">
             <div class="polje">
-              <label for="knjiga-zanr-input">Жанр</label>
+              <label for="knjiga-zanr-input">Genre</label>
               <input type="text" id="knjiga-zanr-input" />
             </div>
             <div class="polje">
-              <label for="knjiga-format-input">Формат</label>
+              <label for="knjiga-format-input">Format</label>
               <select id="knjiga-format-input">
-                <option>Тврди повез</option>
-                <option>Меки повез</option>
+                <option>Hardcover</option>
+                <option>Paperback</option>
               </select>
             </div>
           </div>
           <div class="forma-red">
             <div class="polje">
-              <label for="knjiga-cena-input">Цена</label>
+              <label for="knjiga-cena-input">Price</label>
               <input type="number" id="knjiga-cena-input" min="0" />
             </div>
             <div class="polje">
-              <label for="knjiga-strana-input">Број страна</label>
+              <label for="knjiga-strana-input">Page Count</label>
               <input type="number" id="knjiga-strana-input" min="1" />
             </div>
           </div>
           <div class="polje">
-            <label for="knjiga-autor-input">Аутор</label>
+            <label for="knjiga-autor-input">Author</label>
             <select id="knjiga-autor-input"></select>
           </div>
           <div class="polje">
@@ -124,8 +124,8 @@
         </form>
       </div>
       <div class="modal-podnozje">
-        <button type="button" class="dugme dugme-outline" id="modal-knjiga-otkazi">Откажи</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-sacuvaj-knjiga">Сачувај</button>
+        <button type="button" class="dugme dugme-outline" id="modal-knjiga-otkazi">Cancel</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-sacuvaj-knjiga">Save</button>
       </div>
     </div>
   </div>
@@ -133,20 +133,20 @@
   <div class="modal-pozadina" id="modal-brisanje-knjige">
     <div class="modal">
       <div class="modal-zaglavlje">
-        <h2>Потврда брисања</h2>
+        <h2>Confirm Deletion</h2>
         <button type="button" class="modal-zatvori" id="modal-brisanje-zatvori">&times;</button>
       </div>
       <div class="modal-telo">
-        <p id="modal-brisanje-tekst">Да ли сте сигурни?</p>
+        <p id="modal-brisanje-tekst">Are you sure?</p>
       </div>
       <div class="modal-podnozje">
-        <button type="button" class="dugme dugme-outline" id="modal-brisanje-otkazi">Откажи</button>
-        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-potvrdi">Обриши</button>
+        <button type="button" class="dugme dugme-outline" id="modal-brisanje-otkazi">Cancel</button>
+        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-potvrdi">Delete</button>
       </div>
     </div>
   </div>
 
-  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p></footer>
 
   <div id="modali-kontejner"></div>
 

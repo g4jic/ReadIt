@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sr-Cyrl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ридит - Мој профил</title>
+  <title>Ridit - My Profile</title>
   <link rel="icon" href="../slike/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,60 +22,64 @@
     <div class="navbar-sadrzaj">
       <a href="../index.html" class="logo">
         <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
-        <span>Ридит</span>
+        <span>Ridit</span>
       </a>
-      <button class="hamburger" type="button" aria-label="Отвори мени" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
       <nav>
         <ul class="nav-linkovi" id="nav-linkovi">
-          <li><a href="../index.html">Књиге</a></li>
-          <li><a href="Autori.html">Аутори</a></li>
-          <li><a href="profil.html" class="aktivan">Мој профил</a></li>
-          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
-          <li><a href="administracijaAutora.html">Админ аутори</a></li>
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="Autori.html">Authors</a></li>
+          <li><a href="profil.html" class="aktivan">My Profile</a></li>
+          <li><a href="administracijaKnjiga.html">Admin Books</a></li>
+          <li><a href="administracijaAutora.html">Admin Authors</a></li>
         </ul>
       </nav>
       <div class="nav-akcije" id="nav-akcije">
-        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Пријава</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Регистрација</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Log In</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Register</button>
       </div>
     </div>
   </header>
 
   <main>
     <div class="naslov-sekcije">
-      <h1>Мој профил</h1>
+      <h1>My Profile</h1>
     </div>
 
-    <section class="profil-karta profil-karta-podaci" aria-label="Подаци о кориснику" id="profil-osnovni-podaci">
-      <p class="poruka-prazno">Учитавање профила...</p>
+    <section class="profil-karta profil-karta-podaci" aria-label="User information" id="profil-osnovni-podaci">
+      <p class="poruka-prazno">Loading profile...</p>
     </section>
 
-    <section class="profil-karta profil-karta-stub" aria-label="Рецензије" id="moje-recenzije-kontejner">
-      <p class="poruka-prazno">Учитавање рецензија...</p>
+    <section class="profil-karta profil-karta-stub" aria-label="Reviews" id="moje-recenzije-kontejner">
+      <p class="poruka-prazno">Loading reviews...</p>
     </section>
 
-    <section class="profil-karta profil-karta-stub" aria-label="Оцене аутора" id="moje-ocene-kontejner">
-      <p class="poruka-prazno">Учитавање оцена...</p>
+    <section class="profil-karta profil-karta-stub" aria-label="Book ratings" id="moje-ocene-knjiga-kontejner">
+      <p class="poruka-prazno">Loading book ratings...</p>
+    </section>
+
+    <section class="profil-karta profil-karta-stub" aria-label="Author ratings" id="moje-ocene-kontejner">
+      <p class="poruka-prazno">Loading ratings...</p>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p>
+    <p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p>
   </footer>
 
   <div class="modal-pozadina" id="modal-brisanje-profil">
     <div class="modal">
       <div class="modal-zaglavlje">
-        <h2>Потврда брисања</h2>
+        <h2>Confirm Deletion</h2>
         <button type="button" class="modal-zatvori" id="modal-brisanje-profil-zatvori">&times;</button>
       </div>
       <div class="modal-telo">
-        <p id="modal-brisanje-profil-tekst">Да ли сте сигурни?</p>
+        <p id="modal-brisanje-profil-tekst">Are you sure?</p>
         <p id="modal-brisanje-profil-greska" class="poruka-greska sakriveno" style="margin-top:var(--razmak-m);"></p>
       </div>
       <div class="modal-podnozje">
-        <button type="button" class="dugme dugme-outline" id="modal-brisanje-profil-otkazi">Откажи</button>
-        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-profil-potvrdi">Обриши</button>
+        <button type="button" class="dugme dugme-outline" id="modal-brisanje-profil-otkazi">Cancel</button>
+        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-profil-potvrdi">Delete</button>
       </div>
     </div>
   </div>

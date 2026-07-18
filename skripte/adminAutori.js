@@ -7,13 +7,13 @@ function ucitajAdminAutore() {
     return;
   }
 
-  tbody.innerHTML = "<tr><td colspan=\"7\">Учитавање...</td></tr>";
+  tbody.innerHTML = "<tr><td colspan=\"7\">Loading...</td></tr>";
 
   ucitajSaFirebase("autori", function (autori) {
     adminAutoriCache = autori || {};
     prikaziAdminTabeluAutora();
   }, function () {
-    tbody.innerHTML = "<tr><td colspan=\"7\">Грешка при учитавању аутора.</td></tr>";
+    tbody.innerHTML = "<tr><td colspan=\"7\">Error loading authors.</td></tr>";
   });
 }
 
@@ -22,11 +22,11 @@ function prikaziAdminTabeluAutora() {
   var lista = pretvoriUListu(adminAutoriCache);
 
   lista.sort(function (a, b) {
-    return punoImeAutora(a.podaci).localeCompare(punoImeAutora(b.podaci), "sr");
+    return punoImeAutora(a.podaci).localeCompare(punoImeAutora(b.podaci), "en");
   });
 
   if (lista.length === 0) {
-    tbody.innerHTML = "<tr><td colspan=\"7\">Нема аутора.</td></tr>";
+    tbody.innerHTML = "<tr><td colspan=\"7\">No authors found.</td></tr>";
     return;
   }
 
@@ -44,8 +44,8 @@ function prikaziAdminTabeluAutora() {
     html += "<td>" + escapeHtml(formatirajBroj(autor.brojProdatihPrimeraka)) + "</td>";
     html += "<td>" + escapeHtml(autor.kontaktTelefonMenadzera) + "</td>";
     html += "<td><div class=\"tabela-akcije\">";
-    html += "<button type=\"button\" class=\"dugme dugme-outline dugme-malo\" data-akcija=\"izmeni\" data-id=\"" + escapeHtml(stavka.id) + "\">Измени</button>";
-    html += "<button type=\"button\" class=\"dugme dugme-opasno dugme-malo\" data-akcija=\"obrisi\" data-id=\"" + escapeHtml(stavka.id) + "\">Обриши</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-outline dugme-malo\" data-akcija=\"izmeni\" data-id=\"" + escapeHtml(stavka.id) + "\">Edit</button>";
+    html += "<button type=\"button\" class=\"dugme dugme-opasno dugme-malo\" data-akcija=\"obrisi\" data-id=\"" + escapeHtml(stavka.id) + "\">Delete</button>";
     html += "</div></td></tr>";
   }
 
@@ -105,7 +105,7 @@ function popuniFormuAutora(id) {
 
   var naslovForme = document.getElementById("admin-forma-naslov");
   if (naslovForme) {
-    naslovForme.textContent = "Измена аутора: " + punoImeAutora(autor);
+    naslovForme.textContent = "Edit Author: " + punoImeAutora(autor);
   }
 
   otvoriModalAutora();
@@ -115,7 +115,7 @@ function otvoriNovogAutora() {
   isprazniFormuAutora();
   var naslovForme = document.getElementById("admin-forma-naslov");
   if (naslovForme) {
-    naslovForme.textContent = "Нови аутор";
+    naslovForme.textContent = "New Author";
   }
   otvoriModalAutora();
 }
@@ -173,30 +173,30 @@ function sacuvajFormuAutora() {
 
   var dugme = document.getElementById("dugme-sacuvaj-autor");
   var stariTekst = dugme.textContent;
-  dugme.textContent = "Чување...";
+  dugme.textContent = "Saving...";
   dugme.disabled = true;
 
   if (izabraniAutorId) {
     izmeniUFirebase("autori", izabraniAutorId, podatak, function () {
-      prikaziPoruku("admin-poruka", "Аутор је успешно измењен.", "uspeh");
+      prikaziPoruku("admin-poruka", "Author updated successfully.", "uspeh");
       zatvoriModalAutora();
       ucitajAdminAutore();
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     }, function () {
-      prikaziPoruku("admin-modal-poruka", "Грешка при измени аутора.", "greska");
+      prikaziPoruku("admin-modal-poruka", "Error updating author.", "greska");
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     });
   } else {
     dodajUFirebase("autori", podatak, function () {
-      prikaziPoruku("admin-poruka", "Аутор је успешно додат.", "uspeh");
+      prikaziPoruku("admin-poruka", "Author added successfully.", "uspeh");
       zatvoriModalAutora();
       ucitajAdminAutore();
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     }, function () {
-      prikaziPoruku("admin-modal-poruka", "Грешка при додавању аутора.", "greska");
+      prikaziPoruku("admin-modal-poruka", "Error adding author.", "greska");
       dugme.textContent = stariTekst;
       dugme.disabled = false;
     });
@@ -211,7 +211,7 @@ function otvoriDijalogBrisanjaAutora(id) {
 
   izabraniAutorId = id;
   var tekst = document.getElementById("modal-brisanje-tekst");
-  tekst.textContent = "Да ли сте сигурни да желите да обришете аутора „" + punoImeAutora(autor) + "“?";
+  tekst.textContent = "Are you sure you want to delete the author \"" + punoImeAutora(autor) + "\"?";
 
   document.getElementById("modal-brisanje-autora").classList.add("otvoren");
 }
@@ -223,14 +223,14 @@ function zatvoriDijalogBrisanjaAutora() {
 function potvrdiBrisanjeAutora() {
   var idZaBrisanje = izabraniAutorId;
   var dugme = document.getElementById("modal-brisanje-potvrdi");
-  var stariTekst = dugme ? dugme.textContent : "Обриши";
+  var stariTekst = dugme ? dugme.textContent : "Delete";
   if (dugme) {
-    dugme.textContent = "Брисање...";
+    dugme.textContent = "Deleting...";
     dugme.disabled = true;
   }
 
   obrisiIzFirebase("autori", idZaBrisanje, function () {
-    prikaziPoruku("admin-poruka", "Аутор је успешно обрисан.", "uspeh");
+    prikaziPoruku("admin-poruka", "Author deleted successfully.", "uspeh");
     izabraniAutorId = null;
     zatvoriDijalogBrisanjaAutora();
     ucitajAdminAutore();
@@ -239,7 +239,7 @@ function potvrdiBrisanjeAutora() {
       dugme.disabled = false;
     }
   }, function () {
-    prikaziPoruku("admin-poruka", "Грешка при брисању аутора.", "greska");
+    prikaziPoruku("admin-poruka", "Error deleting author.", "greska");
     izabraniAutorId = null;
     zatvoriDijalogBrisanjaAutora();
     if (dugme) {

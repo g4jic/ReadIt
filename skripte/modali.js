@@ -7,39 +7,39 @@ function napraviModale() {
   kontejner.innerHTML =
     "<div class=\"modal-pozadina\" id=\"modal-prijava\">" +
     "<div class=\"modal\"><div class=\"modal-zaglavlje\">" +
-    "<h2>Пријава</h2><button type=\"button\" class=\"modal-zatvori\" data-zatvori=\"modal-prijava\">&times;</button>" +
+    "<h2>Log In</h2><button type=\"button\" class=\"modal-zatvori\" data-zatvori=\"modal-prijava\">&times;</button>" +
     "</div><div class=\"modal-telo\">" +
     "<form class=\"forma\" id=\"forma-prijava\" onsubmit=\"return false;\">" +
-    "<div class=\"polje\"><label for=\"prijava-korisnicko\">Корисничко име</label>" +
+    "<div class=\"polje\"><label for=\"prijava-korisnicko\">Username</label>" +
     "<input type=\"text\" id=\"prijava-korisnicko\" /></div>" +
-    "<div class=\"polje\"><label for=\"prijava-lozinka\">Лозинка</label>" +
+    "<div class=\"polje\"><label for=\"prijava-lozinka\">Password</label>" +
     "<input type=\"password\" id=\"prijava-lozinka\" /></div>" +
     "<p class=\"greska sakriveno\" id=\"prijava-greska\"></p>" +
     "</form></div><div class=\"modal-podnozje\">" +
-    "<button type=\"button\" class=\"dugme dugme-outline\" data-zatvori=\"modal-prijava\">Откажи</button>" +
-    "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-potvrdi-prijava\">Пријави се</button>" +
+    "<button type=\"button\" class=\"dugme dugme-outline\" data-zatvori=\"modal-prijava\">Cancel</button>" +
+    "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-potvrdi-prijava\">Log In</button>" +
     "</div></div></div>" +
 
     "<div class=\"modal-pozadina\" id=\"modal-registracija\">" +
     "<div class=\"modal modal-veliki\"><div class=\"modal-zaglavlje\">" +
-    "<h2>Регистрација</h2><button type=\"button\" class=\"modal-zatvori\" data-zatvori=\"modal-registracija\">&times;</button>" +
+    "<h2>Register</h2><button type=\"button\" class=\"modal-zatvori\" data-zatvori=\"modal-registracija\">&times;</button>" +
     "</div><div class=\"modal-telo\">" +
     "<form class=\"forma\" id=\"forma-registracija\" onsubmit=\"return false;\">" +
     "<div class=\"forma-red\">" +
-    "<div class=\"polje\"><label for=\"reg-korisnicko\">Корисничко име</label><input type=\"text\" id=\"reg-korisnicko\" /></div>" +
-    "<div class=\"polje\"><label for=\"reg-lozinka\">Лозинка</label><input type=\"password\" id=\"reg-lozinka\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-korisnicko\">Username</label><input type=\"text\" id=\"reg-korisnicko\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-lozinka\">Password</label><input type=\"password\" id=\"reg-lozinka\" /></div>" +
     "</div><div class=\"forma-red\">" +
-    "<div class=\"polje\"><label for=\"reg-ime\">Име</label><input type=\"text\" id=\"reg-ime\" /></div>" +
-    "<div class=\"polje\"><label for=\"reg-prezime\">Презиме</label><input type=\"text\" id=\"reg-prezime\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-ime\">First Name</label><input type=\"text\" id=\"reg-ime\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-prezime\">Last Name</label><input type=\"text\" id=\"reg-prezime\" /></div>" +
     "</div><div class=\"polje\"><label for=\"reg-email\">E-mail</label><input type=\"email\" id=\"reg-email\" /></div>" +
     "<div class=\"forma-red\">" +
-    "<div class=\"polje\"><label for=\"reg-datum\">Датум рођења</label><input type=\"date\" id=\"reg-datum\" /></div>" +
-    "<div class=\"polje\"><label for=\"reg-zanimanje\">Занимање</label><input type=\"text\" id=\"reg-zanimanje\" /></div>" +
-    "</div><div class=\"polje\"><label for=\"reg-adresa\">Адреса</label><input type=\"text\" id=\"reg-adresa\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-datum\">Date of Birth</label><input type=\"date\" id=\"reg-datum\" /></div>" +
+    "<div class=\"polje\"><label for=\"reg-zanimanje\">Occupation</label><input type=\"text\" id=\"reg-zanimanje\" /></div>" +
+    "</div><div class=\"polje\"><label for=\"reg-adresa\">Address</label><input type=\"text\" id=\"reg-adresa\" /></div>" +
     "<p class=\"greska sakriveno\" id=\"registracija-greska\"></p>" +
     "</form></div><div class=\"modal-podnozje\">" +
-    "<button type=\"button\" class=\"dugme dugme-outline\" data-zatvori=\"modal-registracija\">Откажи</button>" +
-    "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-potvrdi-registracija\">Региструј се</button>" +
+    "<button type=\"button\" class=\"dugme dugme-outline\" data-zatvori=\"modal-registracija\">Cancel</button>" +
+    "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-potvrdi-registracija\">Register</button>" +
     "</div></div></div>";
 }
 
@@ -72,7 +72,7 @@ function azurirajNavigaciju() {
 
   if (prijavljenId) {
     var htmlUlogovan = "";
-    htmlUlogovan += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-odjava\">Одјава</button>";
+    htmlUlogovan += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-odjava\">Log Out</button>";
     navAkcije.innerHTML = htmlUlogovan;
 
     var dugmeOdjava = document.getElementById("dugme-odjava");
@@ -81,8 +81,8 @@ function azurirajNavigaciju() {
     }
   } else {
     var htmlGost = "";
-    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-prijava\">Пријава</button>";
-    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-registracija\">Регистрација</button>";
+    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-prijava\">Log In</button>";
+    htmlGost += "<button type=\"button\" class=\"dugme dugme-primarno\" id=\"dugme-registracija\">Register</button>";
     navAkcije.innerHTML = htmlGost;
 
     var dugmePrijava = document.getElementById("dugme-prijava");
@@ -107,7 +107,7 @@ function prijaviKorisnika() {
   var greskaEl = document.getElementById("prijava-greska");
 
   if (!korisnicko || !lozinka) {
-    greskaEl.textContent = "Унесите корисничко име и лозинку.";
+    greskaEl.textContent = "Please enter your username and password.";
     greskaEl.classList.remove("sakriveno");
     return;
   }
@@ -125,7 +125,7 @@ function prijaviKorisnika() {
     }
 
     if (pronadjenId) {
-      greskaEl.textContent = "Корисничко име и лозинка су исправни.";
+      greskaEl.textContent = "Username and password are correct.";
       greskaEl.className = "poruka-uspeh";
       greskaEl.classList.remove("sakriveno");
       document.getElementById("prijava-korisnicko").value = "";
@@ -135,7 +135,7 @@ function prijaviKorisnika() {
       zatvoriModal("modal-prijava");
       location.reload();
     } else {
-      greskaEl.textContent = "Погрешно корисничко име или лозинка.";
+      greskaEl.textContent = "Incorrect username or password.";
       greskaEl.classList.remove("sakriveno");
     }
   });
@@ -152,13 +152,13 @@ function validirajRegistraciju() {
   var zanimanje = document.getElementById("reg-zanimanje").value.trim();
 
   if (!korisnicko || !lozinka || !ime || !prezime || !email || !datumRodjenja || !adresa || !zanimanje) {
-    return "Сва поља су обавезна.";
+    return "All fields are required.";
   }
   if (!validirajLozinku(lozinka)) {
-    return "Лозинка мора имати најмање 6 карактера.";
+    return "Password must be at least 6 characters.";
   }
   if (!validirajEmail(email)) {
-    return "E-mail није исправан (нпр. korisnik@example.com).";
+    return "Invalid e-mail address (e.g. user@example.com).";
   }
   return "";
 }
@@ -180,7 +180,7 @@ function registrujKorisnika() {
 
     for (var i = 0; i < lista.length; i++) {
       if (lista[i].podaci.korisnickoIme === korisnicko) {
-        greskaEl.textContent = "Корисничко име је већ заузето.";
+        greskaEl.textContent = "Username is already taken.";
         greskaEl.classList.remove("sakriveno");
         return;
       }
@@ -213,7 +213,7 @@ function registrujKorisnika() {
       zatvoriModal("modal-registracija");
       location.reload();
     }, function () {
-      greskaEl.textContent = "Грешка приликом регистрације.";
+      greskaEl.textContent = "Registration failed.";
       greskaEl.classList.remove("sakriveno");
     });
   });

@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="sr-Cyrl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Ридит - Администрација аутора</title>
+  <title>Ridit - Author Administration</title>
   <link rel="icon" href="../slike/logo.png" type="image/png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,46 +21,46 @@
     <div class="navbar-sadrzaj">
       <a href="../index.html" class="logo">
         <img src="../slike/logo.png" alt="" class="logo-slika" width="40" height="40" decoding="async" />
-        <span>Ридит</span>
+        <span>Ridit</span>
       </a>
-      <button class="hamburger" type="button" aria-label="Отвори мени" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-linkovi">☰</button>
       <nav>
         <ul class="nav-linkovi" id="nav-linkovi">
-          <li><a href="../index.html">Књиге</a></li>
-          <li><a href="Autori.html">Аутори</a></li>
-          <li><a href="profil.html">Мој профил</a></li>
-          <li><a href="administracijaKnjiga.html">Админ књиге</a></li>
-          <li><a href="administracijaAutora.html" class="aktivan">Админ аутори</a></li>
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="Autori.html">Authors</a></li>
+          <li><a href="profil.html">My Profile</a></li>
+          <li><a href="administracijaKnjiga.html">Admin Books</a></li>
+          <li><a href="administracijaAutora.html" class="aktivan">Admin Authors</a></li>
         </ul>
       </nav>
       <div class="nav-akcije" id="nav-akcije">
-        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Пријава</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Регистрација</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-prijava">Log In</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-registracija">Register</button>
       </div>
     </div>
   </header>
 
   <main>
     <div class="naslov-sekcije">
-      <h1>Администрација аутора</h1>
-      <button type="button" class="dugme dugme-primarno" id="dugme-novi-autor">+ Нови аутор</button>
+      <h1>Author Administration</h1>
+      <button type="button" class="dugme dugme-primarno" id="dugme-novi-autor">+ New Author</button>
     </div>
 
     <div class="tabela-wrapper">
       <table class="tabela">
         <thead>
           <tr>
-            <th>Слика</th>
-            <th>Име и презиме</th>
-            <th>Статус</th>
-            <th>Награде</th>
-            <th>Продати прим.</th>
-            <th>Телефон менаџера</th>
-            <th>Акције</th>
+            <th>Image</th>
+            <th>Full Name</th>
+            <th>Status</th>
+            <th>Awards</th>
+            <th>Copies Sold</th>
+            <th>Manager Phone</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="admin-tabela-telo">
-          <tr><td colspan="7">Учитавање...</td></tr>
+          <tr><td colspan="7">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -71,7 +71,7 @@
   <div class="modal-pozadina" id="modal-autor-forma">
     <div class="modal modal-veliki">
       <div class="modal-zaglavlje">
-        <h2 id="admin-forma-naslov">Нови аутор</h2>
+        <h2 id="admin-forma-naslov">New Author</h2>
         <button type="button" class="modal-zatvori" id="modal-autor-zatvori">&times;</button>
       </div>
       <div class="modal-telo">
@@ -79,56 +79,56 @@
         <form class="forma" action="#" method="get" onsubmit="return false;">
           <div class="forma-red">
             <div class="polje">
-              <label for="autor-ime-input">Име</label>
+              <label for="autor-ime-input">First Name</label>
               <input type="text" id="autor-ime-input" />
             </div>
             <div class="polje">
-              <label for="autor-prezime-input">Презиме</label>
+              <label for="autor-prezime-input">Last Name</label>
               <input type="text" id="autor-prezime-input" />
             </div>
           </div>
           <div class="polje">
-            <label for="autor-biografija-input">Биографија</label>
+            <label for="autor-biografija-input">Biography</label>
             <textarea id="autor-biografija-input"></textarea>
           </div>
           <div class="polje">
-            <label for="autor-slike-input">URL-ови слика (одвојени зarezom)</label>
+            <label for="autor-slike-input">Image URLs (comma-separated)</label>
             <input type="text" id="autor-slike-input" placeholder="https://..." />
           </div>
           <div class="forma-red">
             <div class="polje">
-              <label for="autor-status-input">Статус</label>
+              <label for="autor-status-input">Status</label>
               <select id="autor-status-input">
-                <option value="">Изаберите статус</option>
-                <option value="Активан">Активан</option>
-                <option value="У пензији">У пензији</option>
-                <option value="Преминуо">Преминуо</option>
+                <option value="">Select status</option>
+                <option value="Active">Active</option>
+                <option value="Retired">Retired</option>
+                <option value="Deceased">Deceased</option>
               </select>
             </div>
             <div class="polje">
-              <label for="autor-datum-input">Датум рођења</label>
+              <label for="autor-datum-input">Date of Birth</label>
               <input type="date" id="autor-datum-input" />
             </div>
           </div>
           <div class="forma-red">
             <div class="polje">
-              <label for="autor-nagrade-input">Број награда</label>
+              <label for="autor-nagrade-input">Number of Awards</label>
               <input type="number" id="autor-nagrade-input" min="0" />
             </div>
             <div class="polje">
-              <label for="autor-primeraka-input">Продати примерци</label>
+              <label for="autor-primeraka-input">Copies Sold</label>
               <input type="number" id="autor-primeraka-input" min="0" />
             </div>
           </div>
           <div class="polje">
-            <label for="autor-telefon-input">Телефон менаџера</label>
+            <label for="autor-telefon-input">Manager Phone</label>
             <input type="text" id="autor-telefon-input" placeholder="+381 64 111-2222" />
           </div>
         </form>
       </div>
       <div class="modal-podnozje">
-        <button type="button" class="dugme dugme-outline" id="modal-autor-otkazi">Откажи</button>
-        <button type="button" class="dugme dugme-primarno" id="dugme-sacuvaj-autor">Сачувај</button>
+        <button type="button" class="dugme dugme-outline" id="modal-autor-otkazi">Cancel</button>
+        <button type="button" class="dugme dugme-primarno" id="dugme-sacuvaj-autor">Save</button>
       </div>
     </div>
   </div>
@@ -136,20 +136,20 @@
   <div class="modal-pozadina" id="modal-brisanje-autora">
     <div class="modal">
       <div class="modal-zaglavlje">
-        <h2>Потврда брисања</h2>
+        <h2>Confirm Deletion</h2>
         <button type="button" class="modal-zatvori" id="modal-brisanje-zatvori">&times;</button>
       </div>
       <div class="modal-telo">
-        <p id="modal-brisanje-tekst">Да ли сте сигурни?</p>
+        <p id="modal-brisanje-tekst">Are you sure?</p>
       </div>
       <div class="modal-podnozje">
-        <button type="button" class="dugme dugme-outline" id="modal-brisanje-otkazi">Откажи</button>
-        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-potvrdi">Обриши</button>
+        <button type="button" class="dugme dugme-outline" id="modal-brisanje-otkazi">Cancel</button>
+        <button type="button" class="dugme dugme-opasno" id="modal-brisanje-potvrdi">Delete</button>
       </div>
     </div>
   </div>
 
-  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ридит</a></strong></p></footer>
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p></footer>
 
   <div id="modali-kontejner"></div>
 
