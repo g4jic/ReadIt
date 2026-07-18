@@ -1,6 +1,6 @@
-# Ridit
+# ReadIt
 
-Ridit is a web application for browsing books and authors, writing reviews, rating titles, and managing catalog data through admin panels. It was built as a university web design project using vanilla HTML, CSS, and JavaScript with Firebase Realtime Database as the backend.
+ReadIt is a web application for browsing books and authors, writing reviews, rating titles, and managing catalog data through admin panels. It was built as a university web design project using vanilla HTML, CSS, and JavaScript with Firebase Realtime Database as the backend.
 
 ## Features
 
