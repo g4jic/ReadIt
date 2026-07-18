@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ridit - Book Administration</title>
+  <link rel="icon" href="../images/logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/books.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/navbar.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-content">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.png" alt="" class="logo-image" width="40" height="40" decoding="async" />
+        <span>Ridit</span>
+      </a>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="authors.html">Authors</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+          <li><a href="admin-books.html" class="active">Admin Books</a></li>
+          <li><a href="admin-authors.html">Admin Authors</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" id="nav-actions">
+        <button type="button" class="btn btn-primary" id="btn-login">Log In</button>
+        <button type="button" class="btn btn-primary" id="btn-register">Register</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-header">
+      <h1>Book Administration</h1>
+      <button type="button" class="btn btn-primary" id="btn-new-book">+ New Book</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Pgs.</th>
+            <th>Price</th>
+            <th>ISBN</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table-body">
+          <tr><td colspan="8">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p id="admin-message" class="hidden" style="margin-top:var(--space-md);"></p>
+  </main>
+
+  <div class="modal-backdrop" id="modal-book-form">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h2 id="admin-form-title">New Book</h2>
+        <button type="button" class="modal-close" id="modal-book-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="admin-modal-message" class="hidden"></p>
+        <form class="form" action="#" method="get" onsubmit="return false;">
+          <div class="field">
+            <label for="book-title-input">Title</label>
+            <input type="text" id="book-title-input" />
+          </div>
+          <div class="field">
+            <label for="book-description-input">Description</label>
+            <textarea id="book-description-input"></textarea>
+          </div>
+          <div class="field">
+            <label for="book-images-input">Image URLs (comma-separated)</label>
+            <input type="text" id="book-images-input" placeholder="https://..." />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="book-genre-input">Genre</label>
+              <input type="text" id="book-genre-input" />
+            </div>
+            <div class="field">
+              <label for="book-format-input">Format</label>
+              <select id="book-format-input">
+                <option>Hardcover</option>
+                <option>Paperback</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="book-price-input">Price</label>
+              <input type="number" id="book-price-input" min="0" />
+            </div>
+            <div class="field">
+              <label for="book-pages-input">Page Count</label>
+              <input type="number" id="book-pages-input" min="1" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="book-author-input">Author</label>
+            <select id="book-author-input"></select>
+          </div>
+          <div class="field">
+            <label for="book-isbn-input">ISBN</label>
+            <input type="text" id="book-isbn-input" placeholder="978-..." />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-book-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-save-book">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-delete-book">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Confirm Deletion</h2>
+        <button type="button" class="modal-close" id="modal-delete-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-delete-text">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-delete-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="modal-delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p></footer>
+
+  <div id="modals-container"></div>
+
+  <script src="../scripts/firebase.js"></script>
+  <script src="../scripts/helpers.js"></script>
+  <script src="../scripts/navbar.js"></script>
+  <script src="../scripts/modals.js"></script>
+  <script src="../scripts/admin-books.js"></script>
+</body>
+</html>

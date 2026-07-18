@@ -1,5 +1,5 @@
 var ISBN_REGEX = /^978(?:-?\d){10}$|^979(?:-?\d){10}$/;
-var TELEFON_REGEX = /^\+381 \d{2} \d{3}-\d{3,4}$/;
+var PHONE_REGEX = /^\+381 \d{2} \d{3}-\d{3,4}$/;
 var URL_REGEX = /^https?:\/\/.+/;
 var EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -14,12 +14,12 @@ function escapeHtml(tekst) {
     .replace(/"/g, "&quot;");
 }
 
-function uzmiParametarIzUrl(ime) {
+function getUrlParam(ime) {
   var parametri = new URLSearchParams(window.location.search);
   return parametri.get(ime);
 }
 
-function formatirajCenu(broj) {
+function formatPrice(broj) {
   var vrednost = Number(broj);
   if (isNaN(vrednost)) {
     return "0 RSD";
@@ -27,7 +27,7 @@ function formatirajCenu(broj) {
   return vrednost.toLocaleString("en-US") + " RSD";
 }
 
-function formatirajDatum(isoDatum) {
+function formatDate(isoDatum) {
   if (!isoDatum) {
     return "";
   }
@@ -38,7 +38,7 @@ function formatirajDatum(isoDatum) {
   return delovi[1] + "/" + delovi[2] + "/" + delovi[0];
 }
 
-function normalizujStatus(status) {
+function normalizeStatus(status) {
   if (!status) {
     return "";
   }
@@ -55,54 +55,54 @@ function normalizujStatus(status) {
   return lower;
 }
 
-function validirajIsbn(isbn) {
+function validateIsbn(isbn) {
   if (!isbn) {
     return false;
   }
   return ISBN_REGEX.test(isbn.trim());
 }
 
-function validirajTelefon(telefon) {
+function validatePhone(telefon) {
   if (!telefon) {
     return false;
   }
-  return TELEFON_REGEX.test(telefon.trim());
+  return PHONE_REGEX.test(telefon.trim());
 }
 
-function validirajUrl(url) {
+function validateUrl(url) {
   if (!url) {
     return false;
   }
   return URL_REGEX.test(url.trim());
 }
 
-function validirajSlike(slike) {
+function validateImages(slike) {
   if (!slike || slike.length === 0 || !slike[0]) {
     return false;
   }
   for (var i = 0; i < slike.length; i++) {
-    if (!validirajUrl(slike[i])) {
+    if (!validateUrl(slike[i])) {
       return false;
     }
   }
   return true;
 }
 
-function validirajEmail(email) {
+function validateEmail(email) {
   if (!email) {
     return false;
   }
   return EMAIL_REGEX.test(email.trim());
 }
 
-function validirajLozinku(lozinka) {
+function validatePassword(lozinka) {
   if (!lozinka) {
     return false;
   }
   return lozinka.length >= 6;
 }
 
-function validirajAutora(podatak) {
+function validateAuthor(podatak) {
   if (!podatak.ime || !podatak.ime.trim()) {
     return "Author first name is required.";
   }
@@ -135,16 +135,16 @@ function validirajAutora(podatak) {
   if (podatak.brojProdatihPrimeraka === "" || Number(podatak.brojProdatihPrimeraka) < 0) {
     return "Number of copies sold must be zero or greater.";
   }
-  if (!validirajSlike(podatak.slike)) {
+  if (!validateImages(podatak.slike)) {
     return "Enter at least one valid image URL (e.g. https://...).";
   }
-  if (!validirajTelefon(podatak.kontaktTelefonMenadzera)) {
+  if (!validatePhone(podatak.kontaktTelefonMenadzera)) {
     return "Manager phone must be in the format +381 XX XXX-XXXX (e.g. +381 64 123-4567).";
   }
   return "";
 }
 
-function validirajKnjigu(podatak) {
+function validateBook(podatak) {
   if (!podatak.naziv || !podatak.naziv.trim()) {
     return "Book title is required.";
   }
@@ -166,60 +166,60 @@ function validirajKnjigu(podatak) {
   if (!podatak.idAutora) {
     return "You must select an author.";
   }
-  if (!validirajSlike(podatak.slike)) {
+  if (!validateImages(podatak.slike)) {
     return "Enter at least one valid image URL (e.g. https://...).";
   }
-  if (!validirajIsbn(podatak.isbn)) {
+  if (!validateIsbn(podatak.isbn)) {
     return "ISBN must have 13 digits and start with 978 or 979 (e.g. 978-86-7543-123-4).";
   }
   return "";
 }
 
-function pretvoriUListu(objekat) {
+function toList(objekat) {
   var lista = [];
   if (!objekat) {
     return lista;
   }
   for (var id in objekat) {
     if (Object.prototype.hasOwnProperty.call(objekat, id)) {
-      lista.push({ id: id, podaci: objekat[id] });
+      lista.push({ id: id, data: objekat[id] });
     }
   }
   return lista;
 }
 
-function imeAutora(autori, idAutora) {
+function getAuthorName(autori, idAutora) {
   if (!autori || !idAutora || !autori[idAutora]) {
     return "Unknown author";
   }
-  return punoImeAutora(autori[idAutora]);
+  return getAuthorFullName(autori[idAutora]);
 }
 
-function punoImeAutora(autor) {
+function getAuthorFullName(autor) {
   if (!autor) {
     return "";
   }
   return (autor.ime || "") + " " + (autor.prezime || "");
 }
 
-function klasaStatusaAutora(status) {
+function getAuthorStatusClass(status) {
   if (!status) {
     return "";
   }
   var lower = status.toLowerCase();
   if (lower.indexOf("актив") !== -1 || lower.indexOf("active") !== -1) {
-    return "aktivan";
+    return "active";
   }
   if (lower.indexOf("пенз") !== -1 || lower.indexOf("retired") !== -1) {
-    return "penzija";
+    return "status-retired";
   }
   if (lower.indexOf("премин") !== -1 || lower.indexOf("deceased") !== -1) {
-    return "preminuo";
+    return "status-deceased";
   }
   return "";
 }
 
-function formatirajBroj(broj) {
+function formatNumber(broj) {
   var vrednost = Number(broj);
   if (isNaN(vrednost)) {
     return "0";
@@ -227,7 +227,7 @@ function formatirajBroj(broj) {
   return vrednost.toLocaleString("en-US");
 }
 
-function imeKorisnika(korisnici, idKorisnika) {
+function getUserName(korisnici, idKorisnika) {
   if (!korisnici || !idKorisnika || !korisnici[idKorisnika]) {
     return "User";
   }
@@ -235,24 +235,24 @@ function imeKorisnika(korisnici, idKorisnika) {
   return korisnik.ime + " " + korisnik.prezime;
 }
 
-function prikaziPoruku(elementId, tekst, tip) {
+function showMessage(elementId, text, type) {
   var element = document.getElementById(elementId);
   if (!element) {
     return;
   }
   element.textContent = tekst;
-  element.className = tip === "greska" ? "poruka-greska" : "poruka-uspeh";
-  element.classList.remove("sakriveno");
+  element.className = type === "error" ? "message-error" : "message-success";
+  element.classList.remove("hidden");
 }
 
-function sakrijPoruku(elementId) {
+function hideMessage(elementId) {
   var element = document.getElementById(elementId);
   if (element) {
-    element.classList.add("sakriveno");
+    element.classList.add("hidden");
   }
 }
 
-function oznaciTekst(tekst, termin) {
+function highlightText(tekst, termin) {
   if (!tekst) {
     return "";
   }
@@ -278,7 +278,7 @@ function oznaciTekst(tekst, termin) {
   return html;
 }
 
-function danasnjiDatum() {
+function todayDate() {
   var datum = new Date();
   return datum.toISOString().split("T")[0];
 }

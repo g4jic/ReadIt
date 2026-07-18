@@ -1,78 +1,78 @@
 var firebaseUrl = "https://web-dizajn-6d8a7-default-rtdb.europe-west1.firebasedatabase.app";
 
-function ucitajSaFirebase(putanja, onUspeh, onGreska) {
-  var zahtev = new XMLHttpRequest();
-  zahtev.open("GET", firebaseUrl + "/" + putanja + ".json");
-  zahtev.onreadystatechange = function () {
-    if (zahtev.readyState !== 4) {
+function loadFromFirebase(path, onSuccess, onError) {
+  var request = new XMLHttpRequest();
+  request.open("GET", firebaseUrl + "/" + path + ".json");
+  request.onreadystatechange = function () {
+    if (request.readyState !== 4) {
       return;
     }
-    if (zahtev.status === 200) {
-      var podaci = JSON.parse(zahtev.responseText);
-      if (onUspeh) {
-        onUspeh(podaci);
+    if (request.status === 200) {
+      var data = JSON.parse(request.responseText);
+      if (onSuccess) {
+        onSuccess(data);
       }
-    } else if (onGreska) {
-      onGreska(zahtev.status);
+    } else if (onError) {
+      onError(request.status);
     }
   };
-  zahtev.send();
+  request.send();
 }
 
-function dodajUFirebase(putanja, podaci, onUspeh, onGreska) {
-  var zahtev = new XMLHttpRequest();
-  zahtev.open("POST", firebaseUrl + "/" + putanja + ".json");
-  zahtev.setRequestHeader("Content-Type", "application/json");
-  zahtev.onreadystatechange = function () {
-    if (zahtev.readyState !== 4) {
+function addToFirebase(path, data, onSuccess, onError) {
+  var request = new XMLHttpRequest();
+  request.open("POST", firebaseUrl + "/" + path + ".json");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onreadystatechange = function () {
+    if (request.readyState !== 4) {
       return;
     }
-    if (zahtev.status === 200) {
-      var odgovor = JSON.parse(zahtev.responseText);
-      if (onUspeh) {
-        onUspeh(odgovor);
+    if (request.status === 200) {
+      var response = JSON.parse(request.responseText);
+      if (onSuccess) {
+        onSuccess(response);
       }
-    } else if (onGreska) {
-      onGreska(zahtev.status);
+    } else if (onError) {
+      onError(request.status);
     }
   };
-  zahtev.send(JSON.stringify(podaci));
+  request.send(JSON.stringify(data));
 }
 
-function izmeniUFirebase(putanja, id, podaci, onUspeh, onGreska) {
-  var zahtev = new XMLHttpRequest();
-  zahtev.open("PUT", firebaseUrl + "/" + putanja + "/" + id + ".json");
-  zahtev.setRequestHeader("Content-Type", "application/json");
-  zahtev.onreadystatechange = function () {
-    if (zahtev.readyState !== 4) {
+function updateInFirebase(path, id, data, onSuccess, onError) {
+  var request = new XMLHttpRequest();
+  request.open("PUT", firebaseUrl + "/" + path + "/" + id + ".json");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.onreadystatechange = function () {
+    if (request.readyState !== 4) {
       return;
     }
-    if (zahtev.status === 200) {
-      var odgovor = JSON.parse(zahtev.responseText);
-      if (onUspeh) {
-        onUspeh(odgovor);
+    if (request.status === 200) {
+      var response = JSON.parse(request.responseText);
+      if (onSuccess) {
+        onSuccess(response);
       }
-    } else if (onGreska) {
-      onGreska(zahtev.status);
+    } else if (onError) {
+      onError(request.status);
     }
   };
-  zahtev.send(JSON.stringify(podaci));
+  request.send(JSON.stringify(data));
 }
 
-function obrisiIzFirebase(putanja, id, onUspeh, onGreska) {
-  var zahtev = new XMLHttpRequest();
-  zahtev.open("DELETE", firebaseUrl + "/" + putanja + "/" + id + ".json");
-  zahtev.onreadystatechange = function () {
-    if (zahtev.readyState !== 4) {
+function deleteFromFirebase(path, id, onSuccess, onError) {
+  var request = new XMLHttpRequest();
+  request.open("DELETE", firebaseUrl + "/" + path + "/" + id + ".json");
+  request.onreadystatechange = function () {
+    if (request.readyState !== 4) {
       return;
     }
-    if (zahtev.status === 200) {
-      if (onUspeh) {
-        onUspeh();
+    if (request.status === 200) {
+      if (onSuccess) {
+        onSuccess();
       }
-    } else if (onGreska) {
-      onGreska(zahtev.status);
+    } else if (onError) {
+      onError(request.status);
     }
   };
-  zahtev.send();
+  request.send();
 }

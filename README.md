@@ -39,13 +39,15 @@ var firebaseUrl = "https://YOUR-PROJECT-default-rtdb.REGION.firebasedatabase.app
 
 4. Seed the database with collections: `knjige`, `autori`, `recenzije`, `ocene`, `oceneKnjiga`, `korisnici`.
 
+> **Note:** Firebase collection and field names remain in Serbian to match the existing database schema. All application code (files, functions, CSS classes, and UI) is in English.
+
 ## Team Split
 
 | Student | Responsibility |
 |---------|----------------|
-| **Student 1 (Andrej)** | Books page (`index.html`), book details, admin books (`administracijaKnjiga.html`) |
-| **Student 2 (Aleksa)** | Authors page (`Autori.html`), author details, admin authors (`administracijaAutora.html`) |
-| **Both** | My Profile (`profil.html`), login & registration modals |
+| **Student 1 (Andrej)** | Books page (`index.html`), book details, admin books (`admin-books.html`) |
+| **Student 2 (Aleksa)** | Authors page (`authors.html`), author details, admin authors (`admin-authors.html`) |
+| **Both** | My Profile (`profile.html`), login & registration modals |
 
 ## How to Run Locally
 
@@ -66,24 +68,31 @@ npx serve .
 ```
 ├── index.html                 # Book catalog (home page)
 ├── pages/
-│   ├── Autori.html            # Author catalog
-│   ├── detaljiKnjige.html     # Book details
-│   ├── detaljiAutora.html     # Author details
-│   ├── profil.html            # User profile
-│   ├── administracijaKnjiga.html
-│   └── administracijaAutora.html
+│   ├── authors.html            # Author catalog
+│   ├── book-details.html     # Book details
+│   ├── author-details.html     # Author details
+│   ├── profile.html            # User profile
+│   ├── admin-books.html
+│   └── admin-authors.html
 ├── scripts/
 │   ├── firebase.js            # Firebase REST helpers
-│   ├── pomocne.js             # Shared utilities & validation
+│   ├── helpers.js             # Shared utilities & validation
 │   ├── navbar.js              # Navigation & hamburger menu
-│   ├── modali.js              # Login & registration modals
-│   ├── knjige.js              # Book catalog & details logic
-│   ├── autori.js              # Author catalog & details logic
-│   ├── profil.js              # Profile page logic
-│   ├── adminKnjige.js         # Admin books CRUD
-│   └── adminAutori.js         # Admin authors CRUD
-├── styles/                   # CSS stylesheets
-└── images/                     # Images & logo
+│   ├── modals.js              # Login & registration modals
+│   ├── books.js              # Book catalog & details logic
+│   ├── authors.js              # Author catalog & details logic
+│   ├── profile.js              # Profile page logic
+│   ├── admin-books.js         # Admin books CRUD
+│   └── admin-authors.js         # Admin authors CRUD
+├── styles/
+│   ├── main.css               # Global styles & CSS variables
+│   ├── components.css         # Navbar, buttons, forms, modals, tables
+│   ├── books.css              # Book catalog & detail styles
+│   ├── authors.css            # Author catalog & detail styles
+│   ├── profile.css            # Profile page styles
+│   ├── navbar.css             # Navbar responsive tweaks
+│   └── responsive.css         # Breakpoints
+└── images/                    # Logo & static assets
 ```
 
 ## License

@@ -1,9 +1,9 @@
 @media (max-width: 1024px) {
-  body.nav-meni-otvoren {
+  body.nav-menu-open {
     overflow: hidden;
   }
 
-  body.nav-meni-otvoren::before {
+  body.nav-menu-open::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -11,21 +11,21 @@
     z-index: 99;
   }
 
-  .nav-linkovi {
+  .nav-links {
     z-index: 101;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .nav-linkovi a {
+  .nav-links a {
     display: block;
-    padding: var(--razmak-m) var(--razmak-s);
+    padding: var(--space-md) var(--space-sm);
     font-size: 0.95rem;
-    border-radius: var(--radijus);
+    border-radius: var(--radius);
   }
 
-  .nav-linkovi a:hover,
-  .nav-linkovi a.aktivan {
+  .nav-links a:hover,
+  .nav-links a.status-active {
     background: rgba(255, 255, 255, 0.12);
   }
 
@@ -35,8 +35,8 @@
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border-radius: var(--radijus);
-    transition: background var(--prelaz);
+    border-radius: var(--radius);
+    transition: background var(--transition);
   }
 
   .hamburger:hover,
@@ -45,7 +45,7 @@
     outline: none;
   }
 
-  .hamburger.otvoren {
+  .hamburger.open {
     background: rgba(255, 255, 255, 0.2);
   }
 }

@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ridit - Author Administration</title>
+  <link rel="icon" href="../images/logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/authors.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/navbar.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-content">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.png" alt="" class="logo-image" width="40" height="40" decoding="async" />
+        <span>Ridit</span>
+      </a>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="authors.html">Authors</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+          <li><a href="admin-books.html">Admin Books</a></li>
+          <li><a href="admin-authors.html" class="active">Admin Authors</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" id="nav-actions">
+        <button type="button" class="btn btn-primary" id="btn-login">Log In</button>
+        <button type="button" class="btn btn-primary" id="btn-register">Register</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-header">
+      <h1>Author Administration</h1>
+      <button type="button" class="btn btn-primary" id="btn-novi-autor">+ New Author</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Full Name</th>
+            <th>Status</th>
+            <th>Awards</th>
+            <th>Copies Sold</th>
+            <th>Manager Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table-body">
+          <tr><td colspan="7">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p id="admin-message" class="hidden" style="margin-top:var(--space-md);"></p>
+  </main>
+
+  <div class="modal-backdrop" id="modal-author-form">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h2 id="admin-form-title">New Author</h2>
+        <button type="button" class="modal-close" id="modal-author-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="admin-modal-message" class="hidden"></p>
+        <form class="form" action="#" method="get" onsubmit="return false;">
+          <div class="form-row">
+            <div class="field">
+              <label for="author-first-name-input">First Name</label>
+              <input type="text" id="author-first-name-input" />
+            </div>
+            <div class="field">
+              <label for="author-last-name-input">Last Name</label>
+              <input type="text" id="author-last-name-input" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="author-bio-input">Biography</label>
+            <textarea id="author-bio-input"></textarea>
+          </div>
+          <div class="field">
+            <label for="author-images-input">Image URLs (comma-separated)</label>
+            <input type="text" id="author-images-input" placeholder="https://..." />
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="author-status-input">Status</label>
+              <select id="author-status-input">
+                <option value="">Select status</option>
+                <option value="Active">Active</option>
+                <option value="Retired">Retired</option>
+                <option value="Deceased">Deceased</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="author-birth-date-input">Date of Birth</label>
+              <input type="date" id="author-birth-date-input" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="author-awards-input">Number of Awards</label>
+              <input type="number" id="author-awards-input" min="0" />
+            </div>
+            <div class="field">
+              <label for="author-copies-input">Copies Sold</label>
+              <input type="number" id="author-copies-input" min="0" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="author-phone-input">Manager Phone</label>
+            <input type="text" id="author-phone-input" placeholder="+381 64 111-2222" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-author-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-save-author">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-delete-author">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Confirm Deletion</h2>
+        <button type="button" class="modal-close" id="modal-delete-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-delete-text">Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-delete-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="modal-delete-confirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p></footer>
+
+  <div id="modals-container"></div>
+
+  <script src="../scripts/firebase.js"></script>
+  <script src="../scripts/helpers.js"></script>
+  <script src="../scripts/navbar.js"></script>
+  <script src="../scripts/modals.js"></script>
+  <script src="../scripts/admin-authors.js"></script>
+</body>
+</html>

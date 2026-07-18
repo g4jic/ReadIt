@@ -1,43 +1,43 @@
 @media (max-width: 1024px) {
-  main { padding: var(--razmak-l) var(--razmak-m); }
+  main { padding: var(--space-lg) var(--space-md); }
 
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
 
-  .knjiga-detalj {
+  .book-detail {
     grid-template-columns: 260px 1fr;
-    padding: var(--razmak-l);
-    gap: var(--razmak-l);
+    padding: var(--space-lg);
+    gap: var(--space-lg);
   }
 
-  .autor-hero {
-    padding: var(--razmak-l);
-    gap: var(--razmak-l);
+  .author-hero {
+    padding: var(--space-lg);
+    gap: var(--space-lg);
   }
-  .autor-hero-avatar {
+  .author-hero-avatar {
     width: 140px;
     height: 140px;
   }
 }
 
 @media (max-width: 1024px) {
-  .navbar-sadrzaj {
+  .navbar-content {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: auto auto;
-    row-gap: var(--razmak-s);
-    column-gap: var(--razmak-s);
+    row-gap: var(--space-sm);
+    column-gap: var(--space-sm);
     align-items: center;
     max-width: 100%;
     width: 100%;
-    padding: var(--razmak-s) var(--razmak-m);
-    padding-left: max(var(--razmak-m), env(safe-area-inset-left));
-    padding-right: max(var(--razmak-m), env(safe-area-inset-right));
+    padding: var(--space-sm) var(--space-md);
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
     box-sizing: border-box;
   }
 
-  .navbar-sadrzaj > .logo {
+  .navbar-content > .logo {
     grid-column: 1;
     grid-row: 1;
     min-width: 0;
@@ -45,14 +45,14 @@
     gap: 6px;
   }
 
-  .navbar-sadrzaj > .hamburger {
+  .navbar-content > .hamburger {
     grid-column: 2;
     grid-row: 1;
     justify-self: end;
     flex-shrink: 0;
   }
 
-  .navbar-sadrzaj > nav {
+  .navbar-content > nav {
     position: static;
     grid-column: 1 / -1;
     grid-row: 1;
@@ -65,16 +65,16 @@
     z-index: 101;
   }
 
-  .navbar-sadrzaj > nav .nav-linkovi {
+  .navbar-content > nav .nav-links {
     pointer-events: auto;
   }
 
-  .navbar-sadrzaj > .nav-akcije {
+  .navbar-content > .nav-actions {
     grid-column: 1 / -1;
     grid-row: 2;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--razmak-xs);
+    gap: var(--space-xs);
     width: 100%;
     max-width: 100%;
     min-width: 0;
@@ -84,7 +84,7 @@
     min-height: 0;
   }
 
-  .nav-akcije .dugme {
+  .nav-actions .btn {
     min-width: 0;
     padding: 8px 12px;
     font-size: 0.8rem;
@@ -94,17 +94,17 @@
     box-sizing: border-box;
   }
 
-  .nav-linkovi {
+  .nav-links {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    background: var(--boja-primarna-tamna);
+    background: var(--color-primary-dark);
     flex-direction: column;
     flex-wrap: nowrap;
     width: min(280px, 85vw);
-    padding: calc(var(--razmak-l) + env(safe-area-inset-top, 0px)) var(--razmak-m) var(--razmak-m);
-    gap: var(--razmak-xs);
+    padding: calc(var(--space-lg) + env(safe-area-inset-top, 0px)) var(--space-md) var(--space-md);
+    gap: var(--space-xs);
     transform: translateX(100%);
     transition: transform 0.25s ease;
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25);
@@ -113,11 +113,11 @@
     margin: 0;
   }
 
-  .nav-linkovi.otvoren {
+  .nav-links.open {
     transform: translateX(0);
   }
 
-  .nav-linkovi a {
+  .nav-links a {
     width: 100%;
   }
 }
@@ -128,157 +128,157 @@
   }
 
   main {
-    padding: var(--razmak-m);
-    padding-left: max(var(--razmak-m), env(safe-area-inset-left, 0px));
-    padding-right: max(var(--razmak-m), env(safe-area-inset-right, 0px));
+    padding: var(--space-md);
+    padding-left: max(var(--space-md), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--space-md), env(safe-area-inset-right, 0px));
     max-width: 100%;
   }
 
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.3rem; }
 
-  .navbar-sadrzaj > .logo {
+  .navbar-content > .logo {
     font-size: 1.2rem;
   }
 
-  .navbar-sadrzaj > .nav-akcije {
+  .navbar-content > .nav-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-content: stretch;
   }
 
-  .nav-akcije .dugme {
+  .nav-actions .btn {
     padding: 8px 8px;
     font-size: 0.75rem;
     white-space: normal;
     word-break: break-word;
   }
 
-  .nav-akcije .dugme:only-of-type {
+  .nav-actions .btn:only-of-type {
     grid-column: 1 / -1;
     justify-self: end;
     max-width: 16rem;
   }
 
-  .forma-red { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
 
-  .pretraga-traka {
+  .search-bar {
     flex-direction: column;
     align-items: stretch;
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  .pretraga-traka input,
-  .pretraga-traka select {
+  .search-bar input,
+  .search-bar select {
     flex: 1 1 auto;
     min-width: 0;
     width: 100%;
     max-width: 100%;
   }
 
-  .pretraga-traka .dugme {
+  .search-bar .btn {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  .mreza-knjiga {
+  .books-grid {
     grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
-    gap: var(--razmak-m);
+    gap: var(--space-md);
     min-width: 0;
     width: 100%;
   }
 
-  .knjiga-sadrzaj h3 { font-size: 1rem; }
+  .book-content h3 { font-size: 1rem; }
 
-  .knjiga-detalj {
+  .book-detail {
     grid-template-columns: 1fr;
-    padding: var(--razmak-m);
+    padding: var(--space-md);
   }
 
-  .knjiga-galerija { max-width: 260px; margin: 0 auto; }
+  .book-gallery { max-width: 260px; margin: 0 auto; }
 
-  .recenzije-sekcija { padding: var(--razmak-m); }
+  .reviews-section { padding: var(--space-md); }
 
-  .mreza-autora {
+  .authors-grid {
     grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
-    gap: var(--razmak-m);
+    gap: var(--space-md);
     min-width: 0;
     width: 100%;
   }
 
-  .autor-avatar { width: 100px; height: 100px; }
-  .autor-kartica { padding: var(--razmak-m); }
+  .author-avatar { width: 100px; height: 100px; }
+  .author-card { padding: var(--space-md); }
 
-  .autor-hero {
+  .author-hero {
     flex-direction: column;
     text-align: center;
-    padding: var(--razmak-l) var(--razmak-m);
+    padding: var(--space-lg) var(--space-md);
   }
 
-  .autor-hero-avatar {
+  .author-hero-avatar {
     width: 120px;
     height: 120px;
   }
 
-  .autor-detalj-telo { padding: var(--razmak-m); }
+  .author-detail-body { padding: var(--space-md); }
 
-  .autor-knjige-lista {
+  .author-books-list {
     grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
     min-width: 0;
   }
 
-  .tabela { font-size: 0.85rem; }
-  .tabela th, .tabela td { padding: 8px 10px; }
+  .table { font-size: 0.85rem; }
+  .table th, .table td { padding: 8px 10px; }
 
   .modal {
     max-height: 95vh;
-    border-radius: var(--radijus);
+    border-radius: var(--radius);
   }
 
-  .modal-zaglavlje, .modal-telo, .modal-podnozje {
-    padding: var(--razmak-m);
+  .modal-header, .modal-body, .modal-footer {
+    padding: var(--space-md);
   }
 
-  .forma-akcije { flex-direction: column-reverse; }
-  .forma-akcije .dugme { width: 100%; }
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions .btn { width: 100%; }
 
-  .naslov-sekcije { flex-direction: column; align-items: flex-start; }
+  .section-header { flex-direction: column; align-items: flex-start; }
 
-  .zvezdice { font-size: 1.4rem; }
+  .stars { font-size: 1.4rem; }
 }
 
 @media (max-width: 480px) {
-  .navbar-sadrzaj {
-    padding-left: var(--razmak-s);
-    padding-right: var(--razmak-s);
+  .navbar-content {
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
 
-  .nav-akcije .dugme {
+  .nav-actions .btn {
     font-size: 0.72rem;
     padding: 6px 8px;
   }
 
-  .mreza-knjiga {
+  .books-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--razmak-s);
+    gap: var(--space-sm);
   }
 
-  .mreza-autora {
+  .authors-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--razmak-s);
+    gap: var(--space-sm);
   }
 
-  .knjiga-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .book-meta { flex-direction: column; align-items: flex-start; gap: 4px; }
 
-  .knjiga-kartica {
+  .book-card {
     min-width: 0;
   }
 }
 
 @media (max-width: 360px) {
-  .logo-slika {
+  .logo-image {
     width: 32px;
     height: 32px;
   }
@@ -287,11 +287,11 @@
     font-size: 1.05rem;
   }
 
-  .navbar-sadrzaj > .nav-akcije {
+  .navbar-content > .nav-actions {
     grid-template-columns: 1fr;
   }
 
-  .nav-akcije .dugme:only-of-type {
+  .nav-actions .btn:only-of-type {
     justify-self: stretch;
     max-width: none;
   }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ridit - My Profile</title>
+  <link rel="icon" href="../images/logo.png" type="image/png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/components.css" />
+  <link rel="stylesheet" href="../styles/profile.css" />
+  <link rel="stylesheet" href="../styles/authors.css" />
+  <link rel="stylesheet" href="../styles/responsive.css" />
+  <link rel="stylesheet" href="../styles/navbar.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-content">
+      <a href="../index.html" class="logo">
+        <img src="../images/logo.png" alt="" class="logo-image" width="40" height="40" decoding="async" />
+        <span>Ridit</span>
+      </a>
+      <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html">Books</a></li>
+          <li><a href="authors.html">Authors</a></li>
+          <li><a href="profile.html" class="active">My Profile</a></li>
+          <li><a href="admin-books.html">Admin Books</a></li>
+          <li><a href="admin-authors.html">Admin Authors</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions" id="nav-actions">
+        <button type="button" class="btn btn-primary" id="btn-login">Log In</button>
+        <button type="button" class="btn btn-primary" id="btn-register">Register</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-header">
+      <h1>My Profile</h1>
+    </div>
+
+    <section class="profile-card profile-card-data" aria-label="User information" id="profile-basic-data">
+      <p class="message-empty">Loading profile...</p>
+    </section>
+
+    <section class="profile-card profile-card-section" aria-label="Reviews" id="my-reviews-container">
+      <p class="message-empty">Loading reviews...</p>
+    </section>
+
+    <section class="profile-card profile-card-section" aria-label="Book ratings" id="my-book-ratings-container">
+      <p class="message-empty">Loading book ratings...</p>
+    </section>
+
+    <section class="profile-card profile-card-section" aria-label="Author ratings" id="my-ratings-container">
+      <p class="message-empty">Loading ratings...</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 <strong><a href="../index.html">Ridit</a></strong></p>
+  </footer>
+
+  <div class="modal-backdrop" id="modal-delete-profile">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Confirm Deletion</h2>
+        <button type="button" class="modal-close" id="modal-delete-profile-zatvori">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-delete-profile-text">Are you sure?</p>
+        <p id="modal-delete-profile-error" class="message-error hidden" style="margin-top:var(--space-md);"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" id="modal-delete-profile-otkazi">Cancel</button>
+        <button type="button" class="btn btn-danger" id="modal-delete-profile-potvrdi">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modals-container"></div>
+
+  <script src="../scripts/firebase.js"></script>
+  <script src="../scripts/helpers.js"></script>
+  <script src="../scripts/navbar.js"></script>
+  <script src="../scripts/modals.js"></script>
+  <script src="../scripts/profile.js"></script>
+</body>
+</html>
