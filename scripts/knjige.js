@@ -69,7 +69,7 @@ function prikaziKatalog(knjige, autori, kontejner, terminNaziva) {
     var autorIme = imeAutora(autori, knjiga.idAutora);
     var nazivHtml = terminNaziva ? oznaciTekst(knjiga.naziv, terminNaziva) : escapeHtml(knjiga.naziv);
 
-    html += "<a href=\"stranice/detaljiKnjige.html?id=" + escapeHtml(stavka.id) + "\" class=\"knjiga-kartica\">";
+    html += "<a href=\"pages/detaljiKnjige.html?id=" + escapeHtml(stavka.id) + "\" class=\"knjiga-kartica\">";
     html += "<img src=\"" + escapeHtml(slika) + "\" alt=\"\" class=\"knjiga-slika\" />";
     html += "<div class=\"knjiga-sadrzaj\">";
     html += "<h3>" + nazivHtml + "</h3>";

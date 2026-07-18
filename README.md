@@ -20,7 +20,7 @@ Ridit is a web application for browsing books and authors, writing reviews, rati
 ## Firebase Setup
 
 1. Create a Firebase project and enable **Realtime Database**.
-2. Copy your database URL into `skripte/firebase.js`:
+2. Copy your database URL into `scripts/firebase.js`:
 
 ```javascript
 var firebaseUrl = "https://YOUR-PROJECT-default-rtdb.REGION.firebasedatabase.app";
@@ -50,7 +50,7 @@ var firebaseUrl = "https://YOUR-PROJECT-default-rtdb.REGION.firebasedatabase.app
 ## How to Run Locally
 
 1. Clone the repository.
-2. Set your Firebase URL in `skripte/firebase.js`.
+2. Set your Firebase URL in `scripts/firebase.js`.
 3. Serve the project with any static file server, for example:
 
 ```bash
@@ -65,14 +65,14 @@ npx serve .
 
 ```
 ├── index.html                 # Book catalog (home page)
-├── stranice/
+├── pages/
 │   ├── Autori.html            # Author catalog
 │   ├── detaljiKnjige.html     # Book details
 │   ├── detaljiAutora.html     # Author details
 │   ├── profil.html            # User profile
 │   ├── administracijaKnjiga.html
 │   └── administracijaAutora.html
-├── skripte/
+├── scripts/
 │   ├── firebase.js            # Firebase REST helpers
 │   ├── pomocne.js             # Shared utilities & validation
 │   ├── navbar.js              # Navigation & hamburger menu
@@ -82,8 +82,8 @@ npx serve .
 │   ├── profil.js              # Profile page logic
 │   ├── adminKnjige.js         # Admin books CRUD
 │   └── adminAutori.js         # Admin authors CRUD
-├── stilovi/                   # CSS stylesheets
-└── slike/                     # Images & logo
+├── styles/                   # CSS stylesheets
+└── images/                     # Images & logo
 ```
 
 ## License
